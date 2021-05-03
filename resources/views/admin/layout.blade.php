@@ -391,6 +391,12 @@
         </script>
     @enderror
 
+    @error('images.*')
+    <script>
+        toastr.error("The image must be a file of type: jpeg, jpg, png");
+    </script>
+@enderror
+
     @error('code')
         <script>
             toastr.error("The Code already exists");
