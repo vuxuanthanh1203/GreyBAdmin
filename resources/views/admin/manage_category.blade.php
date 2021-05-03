@@ -1,6 +1,6 @@
 @extends('admin/layout')
 
-@section('page_title', 'Add New Category')
+@section('page_title', 'Manage Category')
 @section('container')
 
 <div class="content">
@@ -10,13 +10,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h3 class="page-title">Add New Category</h3>
+                    <h3 class="page-title">Manage Category</h3>
                     <div class="page-title-right">
                         <ol class="breadcrumb p-0 m-0">
                             <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Product</a></li>
-                            <li class="breadcrumb-item"><a href="{{url('admin/category')}}">Category</a></li>
-                            <li class="breadcrumb-item active">New Category</li>
+                            <li class="breadcrumb-item active">Manage Category</li>
                         </ol>
                     </div>
                     <div class="clearfix"></div>

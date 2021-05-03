@@ -283,9 +283,10 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level mm-collapse" aria-expanded="false" style="height: 0px;">
-                                    <li><a href="{{url('admin/product')}}">Product</a></li>
+                                    <li><a href="{{url('admin/brand')}}">Brand</a></li>
                                     <li><a href="{{url('admin/category')}}">Category</a></li>
                                     <li><a href="{{url('admin/coupon')}}">Coupon</a></li>
+                                    <li><a href="{{url('admin/product')}}">Product</a></li>
                                     <li><a href="{{url('admin/size')}}">Size</a></li>
                                 </ul>
                             </li>
@@ -392,10 +393,16 @@
     @enderror
 
     @error('images.*')
-    <script>
-        toastr.error("The image must be a file of type: jpeg, jpg, png");
-    </script>
-@enderror
+        <script>
+            toastr.error("The image must be a file of type: jpeg, jpg, png");
+        </script>
+    @enderror
+
+    @error('image')
+        <script>
+            toastr.error("The image must be a file of type: jpeg, jpg, png");
+        </script>
+    @enderror
 
     @error('code')
         <script>
@@ -406,6 +413,12 @@
     @error('size')
         <script>
             toastr.error("The Size already exists");
+        </script>
+    @enderror
+
+    @error('name')
+        <script>
+            toastr.error("The Brand already exists");
         </script>
     @enderror
 

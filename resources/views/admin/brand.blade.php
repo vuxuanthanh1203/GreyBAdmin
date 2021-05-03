@@ -1,6 +1,6 @@
 @extends('admin/layout')
 
-@section('page_title', 'Product')
+@section('page_title', 'Brand')
 
 @section('container')
 
@@ -13,12 +13,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">
-                                <h3 class="page-title">Product</h3>
+                                <h3 class="page-title">Brand</h3>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb p-0 m-0">
                                         <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
                                         <li class="breadcrumb-item"><a href="#">Product Management</a></li>
-                                        <li class="breadcrumb-item active">Product</li>
+                                        <li class="breadcrumb-item active">Brand</li>
                                     </ol>
                                 </div>
                                 <div class="clearfix"></div>
@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                                <a href="{{url('admin/product/manage_product')}}" class="add-new">
+                                <a href="{{url('admin/brand/manage_brand')}}" class="add-new">
                                     <button class="btn btn-success col-md-2">Add New</button>
                                 </a>
                             <div class="card-body table-responsive">
@@ -56,11 +56,7 @@
                                                                     </th>
                                                                     <th class="sorting" tabindex="0"
                                                                         aria-controls="datatable" rowspan="1"
-                                                                        colspan="1" style="width: 50px;">Name
-                                                                    </th>
-                                                                    <th class="sorting" tabindex="0"
-                                                                        aria-controls="datatable" rowspan="1"
-                                                                        colspan="1" style="width: 50px;">Slug
+                                                                        colspan="1" style="width: 50px;">Brand
                                                                     </th>
                                                                     <th class="sorting" tabindex="0"
                                                                         aria-controls="datatable" rowspan="1"
@@ -80,35 +76,34 @@
                                                                 <tr role="row" class="odd product_content text-center">
                                                                     <td>{{$item->id}}</td>
                                                                     <td>{{$item->name}}</td>
-                                                                    <td>{{$item->slug}}</td>
                                                                     <td>
                                                                         @if($item->image!="")
-                                                                            <img width="70px" src="{{asset('storage/media/Products/'.$item->image)}}">
+                                                                            <img width="70px" src="{{asset('storage/media/Brands/'.$item->image)}}">
                                                                         @endif
                                                                     </td>
                                                                     <td>{{$item->created_at}}</td>
                                                                     <td>
-                                                                        <a href="{{url('admin/product/manage_product')}}/{{$item->id}}">
+                                                                        <a href="{{url('admin/brand/manage_brand')}}/{{$item->id}}">
                                                                             <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                                 <i class="ion ion-md-color-filter"></i>
                                                                             </button>
                                                                         </a>
 
                                                                         @if ($item->status==0)
-                                                                            <a href="{{url('admin/product/status/1')}}/{{$item->id}}">
+                                                                            <a href="{{url('admin/brand/status/1')}}/{{$item->id}}">
                                                                                 <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Deactive">
                                                                                     <i class="ion ion-md-eye-off"></i>
                                                                                 </button>
                                                                             </a>
                                                                         @elseif ($item->status==1)
-                                                                            <a href="{{url('admin/product/status/0')}}/{{$item->id}}">
+                                                                            <a href="{{url('admin/brand/status/0')}}/{{$item->id}}">
                                                                                 <button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Active">
                                                                                     <i class="ion ion-md-eye"></i>
                                                                                 </button>
                                                                             </a>
                                                                         @endif
 
-                                                                        <a href="{{url('admin/product/delete')}}/{{$item->id}}">
+                                                                        <a href="{{url('admin/brand/delete')}}/{{$item->id}}">
                                                                             <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                                                 <i class=" ion ion-md-close"></i>
                                                                             </button>

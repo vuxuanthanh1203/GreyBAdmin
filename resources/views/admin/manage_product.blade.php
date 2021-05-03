@@ -51,12 +51,15 @@
                         <div class="form-group">
                             <label for="image">Image<span class="text-danger">*</span></label>
                             <input type="file" name="image" id="image" class="form-control" aria-required="true" aria-invalid="false" style="display:block;" {{$image_required}}>
+                            @if($image!="")
+                                <img class="mt-2" width="200px" src="{{asset('storage/media/Products/'.$image)}}">
+                            @endif
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="category_id">Category<span class="text-danger">*</span></label>
                                 <select name="category_id" aria-required="true" class="form-control" id="category_id" required>
-                                    <option value="">Select Categories</option>
+                                    <option value="">Select Category</option>
                                     @foreach($category as $item)
                                         @if($category_id==$item->id)
                                             <option selected value="{{$item->id}}">
@@ -69,7 +72,17 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="brand">Brand<span class="text-danger">*</span></label>
-                                <input type="text" name="brand" value="{{$brand}}" aria-required="true" class="form-control" id="brand" required>
+                                <select name="brand" aria-required="true" class="form-control" id="brand" required>
+                                    <option value="">Select Brand</option>
+                                    @foreach($brands as $item)
+                                        @if($brand==$item->id)
+                                            <option selected value="{{$item->id}}">
+                                        @else
+                                            <option value="{{$item->id}}">
+                                        @endif
+                                        {{$item->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="model">Model<span class="text-danger">*</span></label>
@@ -160,7 +173,7 @@
                                             <label for="attr_image">Image<span class="text-danger">*</span></label>
                                             <input type="file" name="attr_image[]" id="attr_image" class="form-control" aria-required="true" aria-invalid="false" {{$image_required}} style="display:block;">
                                             @if($pAArr['attr_image']!="")
-                                                <img class="mt-2" width="200px" src="{{asset('storage/media/'.$pAArr['attr_image'])}}">
+                                                <img class="mt-2" width="200px" src="{{asset('storage/media/Products/'.$pAArr['attr_image'])}}">
                                             @endif
                                         </div>
                                         <div class="form-group col-md-3">
@@ -205,9 +218,9 @@
                                             <input type="hidden" name="piid[]" id="piid" value="{{$pIArr['id']}}">
                                             <div class="form-group col-md-4 product_images_{{$loop_count_num++}}">
                                                 <label for="images">Image<span class="text-danger">*</span></label>
-                                                <input type="file" name="images[]" id="images" class="form-control" aria-required="true" aria-invalid="false" required style="display:block;">
+                                                <input type="file" name="images[]" id="images" class="form-control" aria-required="true" aria-invalid="false" {{$image_required}} style="display:block;">
                                                 @if($pIArr['images']!="")
-                                                    <img class="mt-2" width="200px" src="{{asset('storage/media/'.$pIArr['images'])}}">
+                                                    <img class="mt-2" width="200px" src="{{asset('storage/media/Products/'.$pIArr['images'])}}">
                                                 @endif
                                             </div>
                                             <div class="form-group col-md-2">
