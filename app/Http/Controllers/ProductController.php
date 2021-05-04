@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -226,6 +227,10 @@ class ProductController extends Controller
 
     public function product_attr_delete(Request $request, $paid, $pid)
     {
+        $arrImage = DB::table('products_attr')->where(['id'=>$paid])->get();
+        if (Storage::exists('public/media/Products/'.$arrImage[0]->attr_image)) {
+            Storage::delete('public/media/Products/'.$arrImage[0]->attr_image);
+        }
         DB::table('products_attr')->where(['id'=>$paid])->delete();
 
         $request->session()->flash('message', 'Product Attribute deleted !');
@@ -234,6 +239,10 @@ class ProductController extends Controller
 
     public function product_images_delete(Request $request, $paid, $pid)
     {
+        $arrImage = DB::table('product_images')->where(['id'=>$paid])->get();
+        if (Storage::exists('public/media/Products/'.$arrImage[0]->images)) {
+            Storage::delete('public/media/Products/'.$arrImage[0]->images);
+        }
         DB::table('product_images')->where(['id'=>$paid])->delete();
 
         $request->session()->flash('message', 'Product Image Deleted !');

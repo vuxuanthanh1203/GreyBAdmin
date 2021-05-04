@@ -33,6 +33,8 @@
         <!-- end page title -->
     </div>
     <!-- end container-fluid -->
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>   
+
     <form class="parsley-examples" action="{{route('product.manage_product_process')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -303,6 +305,10 @@
     function remove_image_more(images_count) {
         jQuery('.product_images_'+images_count).remove();
     }
+
+    CKEDITOR.replace('short_desc');
+    CKEDITOR.replace('desc');
+    CKEDITOR.replace('technical_specification');
 </script>
 @endsection
             
