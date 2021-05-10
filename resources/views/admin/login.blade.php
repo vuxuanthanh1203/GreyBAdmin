@@ -34,16 +34,6 @@
                                         <label for="password">Password :</label>
                                         <input class="form-control" type="password" required="" name="password" placeholder="Enter your password">
                                     </div>
-
-                                    {{-- <div class="form-group mb-4">
-                                        <div class="checkbox checkbox-success">
-                                            <input id="remember" type="checkbox">
-                                            <label for="remember">
-                                                Remember me
-                                            </label>
-                                        </div>
-                                    </div> --}}
-                                    
                                     <div class="form-group row text-center mt-4 mb-4">
                                         <div class="col-12">
                                             <button class="btn btn-md btn-block btn-primary waves-effect waves-light" type="submit">Login</button>

@@ -48,7 +48,7 @@
                                                             class="table table-bordered text-center dt-responsive nowrap dataTable no-footer dtr-inline"
                                                             style="border-collapse: collapse; border-spacing: 0px; width: 100%;"
                                                             role="grid" aria-describedby="datatable_info">
-                                                            <thead>
+                                                            <thead class="thead-dark">
                                                                 <tr role="row">
                                                                     <th class="sorting" tabindex="0"
                                                                         aria-controls="datatable" rowspan="1"
@@ -88,7 +88,6 @@
                                                                                 <i class="ion ion-md-color-filter"></i>
                                                                             </button>
                                                                         </a>
-
                                                                         @if ($item->status==0)
                                                                             <a href="{{url('admin/brand/status/1')}}/{{$item->id}}">
                                                                                 <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Deactive">

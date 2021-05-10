@@ -29,9 +29,6 @@ class ProductController extends Controller
             $result['short_desc'] = $arr['0']->short_desc;
             $result['desc'] = $arr['0']->desc;
             $result['keywords'] = $arr['0']->keywords;
-            $result['technical_specification'] = $arr['0']->technical_specification;
-            $result['uses'] = $arr['0']->uses;
-            $result['warranty'] = $arr['0']->warranty;
             $result['status'] = $arr['0']->status;
             $result['id'] = $arr['0']->id; 
 
@@ -47,8 +44,6 @@ class ProductController extends Controller
                 $result['productImagesArr'] = $productImagesArr;
             }
 
-            // $result['productImagesArr']
-
         } else {
             $result['category_id'] = '';
             $result['name'] = '';
@@ -59,17 +54,12 @@ class ProductController extends Controller
             $result['short_desc'] = '';
             $result['desc'] = '';
             $result['keywords'] = '';
-            $result['technical_specification'] = '';
-            $result['uses'] = '';
-            $result['warranty'] = '';
             $result['status'] = '';
             $result['id'] = 0;
 
             $result['productAttrArr'][0]['id'] = '';
             $result['productAttrArr'][0]['products_id'] = '';
             $result['productAttrArr'][0]['sku'] = '';
-            $result['productAttrArr'][0]['mrp'] = '';
-            $result['productAttrArr'][0]['attr_image'] = '';
             $result['productAttrArr'][0]['price'] = '';
             $result['productAttrArr'][0]['qty'] = '';
             $result['productAttrArr'][0]['size_id'] = '';
@@ -78,10 +68,6 @@ class ProductController extends Controller
             $result['productImagesArr']['0']['images'] = '';
 
         }
-
-        // echo '<pre>';
-        // print_r( $result['productAttrArr']);
-        // die();
 
         $result['category'] = DB::table('categories')->where(['status'=>1])->get();
 
@@ -94,10 +80,6 @@ class ProductController extends Controller
 
     public function manage_product_process(Request $request)
     {
-        // echo '<pre>';
-        // print_r($request->post());
-        // die();
-
         if($request->post('id') > 0) {
             $image_validation = "mimes:jpeg,jpg,png";
         } else {
@@ -108,13 +90,11 @@ class ProductController extends Controller
             'name'=>'required',
             'image'=>$image_validation,
             'slug'=>'required|unique:products,slug,' .$request->post('id'),
-            'attr_image.*'=>'mimes:jpeg,jpg,png',
             'images.*'=>'mimes:jpeg,jpg,png'
         ]);
 
         $paidArr = $request->post('paid');
         $skuArr = $request->post('sku');
-        $mrpArr = $request->post('mrp');
         $priceArr = $request->post('price');
         $qtyArr = $request->post('qty');
         $size_idArr = $request->post('size_id');
@@ -151,9 +131,6 @@ class ProductController extends Controller
         $model->short_desc=$request->post('short_desc');
         $model->desc=$request->post('desc');
         $model->keywords=$request->post('keywords');
-        $model->technical_specification=$request->post('technical_specification');
-        $model->uses=$request->post('uses');
-        $model->warranty=$request->post('warranty');
         $model->status=1;
         $model->save();
         $pid = $model->id;
@@ -162,7 +139,6 @@ class ProductController extends Controller
         foreach ($skuArr as $key => $value) {
             $productAttrArr['products_id'] = $pid;
             $productAttrArr['sku'] = $skuArr[$key];
-            $productAttrArr['mrp'] = (int)$mrpArr[$key];
             $productAttrArr['price'] = (int)$priceArr[$key];
             $productAttrArr['qty'] = (int)$qtyArr[$key];
             
@@ -170,17 +146,6 @@ class ProductController extends Controller
                 $productAttrArr['size_id'] = 0;
             } else {
                 $productAttrArr['size_id'] = $size_idArr[$key];
-            }
-
-            if ($request->hasFile("attr_image.$key")) {
-                $rand = rand('111111111', '999999999');
-                $attr_image = $request->file("attr_image.$key");
-                $ext = $attr_image->extension();
-                $image_name = $rand.'.'.$ext;
-                $request->file("attr_image.$key")->storeAs('/public/media/Products', $image_name);
-                $productAttrArr['attr_image'] = $image_name;
-            } else {
-                $productAttrArr['attr_image'] = '';
             }
 
             if($paidArr[$key] != '') {

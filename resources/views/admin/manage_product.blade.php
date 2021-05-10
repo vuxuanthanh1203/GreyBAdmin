@@ -103,18 +103,6 @@
                             <label for="keywords">Keywords<span class="text-danger">*</span></label>
                             <textarea type="text" name="keywords" aria-required="true" class="form-control" id="keywords" required>{{$keywords}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="technical_specification">Technical Specification<span class="text-danger">*</span></label>
-                            <textarea type="text" name="technical_specification" aria-required="true" class="form-control" id="technical_specification" required>{{$technical_specification}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="uses">Uses<span class="text-danger">*</span></label>
-                            <textarea type="text" name="uses" aria-required="true" class="form-control" id="uses" required>{{$uses}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="warranty">Warranty<span class="text-danger">*</span></label>
-                            <textarea type="text" name="warranty" aria-required="true" class="form-control" id="warranty" required>{{$warranty}}</textarea>
-                        </div>
                     </div>
                     <!-- end card -->
                 </div>
@@ -140,10 +128,10 @@
                                             <label for="sku">SKU<span class="text-danger">*</span></label>
                                             <input type="text" name="sku[]" aria-required="true" class="form-control" id="sku" value="{{$pAArr['sku']}}" required>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        {{-- <div class="form-group col-md-3">
                                             <label for="mrp">MRP<span class="text-danger">*</span></label>
                                             <input type="text" name="mrp[]" aria-required="true" class="form-control" id="mrp" value="{{$pAArr['mrp']}}" required>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group col-md-3">
                                             <label for="price">Price<span class="text-danger">*</span></label>
                                             <input type="text" name="price[]" aria-required="true" class="form-control" id="price" value="{{$pAArr['price']}}" required>
@@ -152,8 +140,6 @@
                                             <label for="qty">Quantity<span class="text-danger">*</span></label>
                                             <input type="text" name="qty[]" aria-required="true" class="form-control" id="qty" value="{{$pAArr['qty']}}" required>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="form-group col-md-3">
                                             <label for="size_id">Size<span class="text-danger">*</span></label>
                                             <select name="size_id[]" class="form-control" id="size_id" required>
@@ -171,15 +157,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="attr_image">Image<span class="text-danger">*</span></label>
-                                            <input type="file" name="attr_image[]" id="attr_image" class="form-control" aria-required="true" aria-invalid="false" {{$image_required}} style="display:block;">
-                                            @if($pAArr['attr_image']!="")
-                                                <img class="mt-2" width="200px" src="{{asset('storage/media/Products/'.$pAArr['attr_image'])}}">
-                                            @endif
-                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="form-group col-md-3">
-                                            <label class="control-lable mb-1">&nbsp;&nbsp;</label>
                                             @if($loop_count_num==2)
                                                 <button type="button" class="btn btn-warning waves-effect waves-light" style="display: block; margin-top: 3px" onclick="add_more()">
                                                     <i class="fa fa-plus mr-1"></i>
@@ -270,19 +250,15 @@
 
         html += '<div class="form-group col-md-3"><label for="sku">SKU<span class="text-danger">*</span></label><input type="text" name="sku[]" aria-required="true" class="form-control" id="sku" required></div>';
         
-        html += '<div class="form-group col-md-3"><label for="mrp">MRP<span class="text-danger">*</span></label><input type="text" name="mrp[]" aria-required="true" class="form-control" id="mrp" required></div>';
-        
         html += '<div class="form-group col-md-3"><label for="price">Price<span class="text-danger">*</span></label><input type="text" name="price[]" aria-required="true" class="form-control" id="price" required></div>';
 
-        html += '<div class="form-group col-md-3"><label for="qty">Quantity<span class="text-danger">*</span></label><input type="text" name="qty[]" aria-required="true" class="form-control" id="qty" required></div></div>'
+        html += '<div class="form-group col-md-3"><label for="qty">Quantity<span class="text-danger">*</span></label><input type="text" name="qty[]" aria-required="true" class="form-control" id="qty" required></div>'
 
         var size_id_html = jQuery('#size_id').html();
         size_id_html = size_id_html.replace('selected','');
-        html += '<div class="row"><div class="form-group col-md-3"><label for="size_id">Size<span class="text-danger">*</span></label><select name="size_id[]" class="form-control" id="size_id">'+size_id_html+'</select></div>';
+        html += '<div class="form-group col-md-3"><label for="size_id">Size<span class="text-danger">*</span></label><select name="size_id[]" class="form-control" id="size_id">'+size_id_html+'</select></div></div>';
 
-        html += '<div class="form-group col-md-6"><label for="attr_image">Image<span class="text-danger">*</span></label><input type="file" name="attr_image[]" id="attr_image" class="form-control" aria-required="true" aria-invalid="false" required style="display:block;"></div>';
-
-        html += '<div class="form-group col-md-3"><label class="control-lable mb-1">&nbsp;&nbsp;</label><button type="button" class="btn btn-danger waves-effect waves-light" style="display: block; margin-top: 3px" onclick=remove_more("'+count+'")><i class="fa fa-minus mr-1"></i><span>Remove</span></button></div>';
+        html += '<div class="row"><div class="form-group col-md-3"><label class="control-lable mb-1">&nbsp;&nbsp;</label><button type="button" class="btn btn-danger waves-effect waves-light" style="display: block; margin-top: 3px" onclick=remove_more("'+count+'")><i class="fa fa-minus mr-1"></i><span>Remove</span></button></div>';
 
         html += '</div></div></div></div>';
         jQuery('#product_attr_box').append(html);

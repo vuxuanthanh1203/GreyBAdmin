@@ -5,6 +5,10 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\OrdersController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +28,12 @@ Route::get('/', function () {
 
 Route::get('admin', [AdminController::class, 'index']);
 Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
+Route::get('admin/profile/manage_profile/{id}', [AdminController::class, 'manage_profile']);
+Route::get('admin/change_password/{id}', [AdminController::class, 'change_password']);
+Route::post('admin/profile/profile_process', [AdminController::class, 'profile_process'])->name('admin.profile_process');
+Route::post('admin/change_password_process', [AdminController::class, 'change_password_process'])->name('admin.change_password_process');
+
+
 
 Route::group(['middleware'=>'admin_auth'],function(){
     // Category
@@ -68,6 +78,28 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/brand/delete/{id}', [BrandController::class, 'delete']);
     Route::get('admin/brand/manage_brand/{id}', [BrandController::class, 'manage_brand']);
     Route::get('admin/brand/status/{status}/{id}', [BrandController::class, 'status']);
+
+    // Customer
+    Route::get('admin/customer', [CustomerController::class, 'index']);
+    Route::get('admin/customer/show/{id}', [CustomerController::class, 'show']);
+    Route::get('admin/customer/status/{status}/{id}', [CustomerController::class, 'status']);
+
+    // Website
+    Route::get('admin/website', [WebsiteController::class, 'index']);
+    Route::get('admin/website/manage_website', [WebsiteController::class, 'manage_website']);
+    Route::post('admin/website/manage_website_process', [WebsiteController::class, 'manage_website_process'])->name('website.manage_website_process');
+    Route::get('admin/website/delete/{id}', [WebsiteController::class, 'delete']);
+    Route::get('admin/website/website_images_delete/{paid}/{pid}', [WebsiteController::class, 'website_images_delete']);
+    Route::get('admin/website/manage_website/{id}', [WebsiteController::class, 'manage_website']);
+    Route::get('admin/website/status/{status}/{id}', [WebsiteController::class, 'status']);
+
+    // Order
+    Route::get('admin/order', [OrdersController::class, 'index']);
+    Route::get('admin/order_detail/{id}', [OrdersController::class, 'order_detail']);
+    Route::get('admin/success', [OrdersController::class, 'success']);
+    Route::get('admin/cancel', [OrdersController::class, 'cancel']);
+    Route::get('admin/order/status/{status}/{id}', [OrdersController::class, 'status']);
+
 
     // Logout
     Route::get('admin/logout', function () {
