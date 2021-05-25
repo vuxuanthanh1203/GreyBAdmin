@@ -11,7 +11,10 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $result['data'] = Product::all();
+        $result['data'] = Product::leftJoin('brands','brands.id','=','products.brand_id')
+        ->leftJoin('categories','categories.id','=','products.category_id')
+        ->get(['products.*', 'categories.category_name', 'brands.brand_name']);
+        
         return view('admin/product', $result);
     }
 
@@ -24,8 +27,12 @@ class ProductController extends Controller
             $result['name'] = $arr['0']->name;
             $result['slug'] = $arr['0']->slug;
             $result['image'] = $arr['0']->image;
-            $result['brand'] = $arr['0']->brand;
-            $result['model'] = $arr['0']->model;
+            $result['code'] = $arr['0']->code;
+            $result['mrp'] = $arr['0']->mrp;
+            $result['price'] = $arr['0']->price;
+            $result['brand_id'] = $arr['0']->brand_id;
+            // $result['model'] = $arr['0']->model;
+            $result['type'] = $arr['0']->type;
             $result['short_desc'] = $arr['0']->short_desc;
             $result['desc'] = $arr['0']->desc;
             $result['keywords'] = $arr['0']->keywords;
@@ -49,8 +56,12 @@ class ProductController extends Controller
             $result['name'] = '';
             $result['slug'] = '';
             $result['image'] = '';
-            $result['brand'] = '';
-            $result['model'] = '';
+            $result['code'] = '';
+            $result['mrp'] = '';
+            $result['price'] = '';
+            $result['brand_id'] = '';
+            $result['type'] = '';
+            // $result['model'] = '';
             $result['short_desc'] = '';
             $result['desc'] = '';
             $result['keywords'] = '';
@@ -60,7 +71,8 @@ class ProductController extends Controller
             $result['productAttrArr'][0]['id'] = '';
             $result['productAttrArr'][0]['products_id'] = '';
             $result['productAttrArr'][0]['sku'] = '';
-            $result['productAttrArr'][0]['price'] = '';
+            // $result['productAttrArr'][0]['mrp'] = '';
+            // $result['productAttrArr'][0]['price'] = '';
             $result['productAttrArr'][0]['qty'] = '';
             $result['productAttrArr'][0]['size_id'] = '';
 
@@ -74,6 +86,8 @@ class ProductController extends Controller
         $result['sizes'] = DB::table('sizes')->where(['status'=>1])->get();
 
         $result['brands'] = DB::table('brands')->where(['status'=>1])->get();
+
+        $result['types'] = DB::table('types')->get();
 
         return view('admin/manage_product', $result);
     }
@@ -90,12 +104,14 @@ class ProductController extends Controller
             'name'=>'required',
             'image'=>$image_validation,
             'slug'=>'required|unique:products,slug,' .$request->post('id'),
+            'code'=>'required|unique:products,code,' .$request->post('id'),
             'images.*'=>'mimes:jpeg,jpg,png'
         ]);
 
         $paidArr = $request->post('paid');
         $skuArr = $request->post('sku');
-        $priceArr = $request->post('price');
+        // $mrpArr = $request->post('mrp');
+        // $priceArr = $request->post('price');
         $qtyArr = $request->post('qty');
         $size_idArr = $request->post('size_id');
         foreach ($skuArr as $key => $value) {
@@ -126,11 +142,16 @@ class ProductController extends Controller
         $model->category_id=$request->post('category_id');
         $model->name=$request->post('name');
         $model->slug=$request->post('slug');
-        $model->brand=$request->post('brand');
-        $model->model=$request->post('model');
+        $model->code=$request->post('code');
+        $model->mrp=$request->post('mrp');
+        $model->price=$request->post('price');
+        $model->brand_id=$request->post('brand_id');
+        // $model->model=$request->post('model');
+        $model->type=$request->post('type');
         $model->short_desc=$request->post('short_desc');
         $model->desc=$request->post('desc');
         $model->keywords=$request->post('keywords');
+
         $model->status=1;
         $model->save();
         $pid = $model->id;
@@ -139,7 +160,8 @@ class ProductController extends Controller
         foreach ($skuArr as $key => $value) {
             $productAttrArr['products_id'] = $pid;
             $productAttrArr['sku'] = $skuArr[$key];
-            $productAttrArr['price'] = (int)$priceArr[$key];
+            // $productAttrArr['mrp'] = (int)$mrpArr[$key];
+            // $productAttrArr['price'] = (int)$priceArr[$key];
             $productAttrArr['qty'] = (int)$qtyArr[$key];
             
             if ($size_idArr[$key]=='') {

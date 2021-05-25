@@ -81,7 +81,7 @@
                                                                     <td>{{$item->id}}</td>
                                                                     <td>{{$item->title}}</td>
                                                                     <td>{{$item->code}}</td>
-                                                                    <td>{{$item->value}}</td>
+                                                                    <td>{{$item->value}} %</td>
                                                                     <td>{{$item->created_at}}</td>
                                                                     <td>
                                                                         <a href="{{url('admin/coupon/manage_coupon')}}/{{$item->id}}">

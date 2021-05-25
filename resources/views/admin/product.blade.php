@@ -52,7 +52,11 @@
                                                                 <tr role="row">
                                                                     <th class="sorting" tabindex="0"
                                                                         aria-controls="datatable" rowspan="1"
-                                                                        colspan="1" style="width: 50px;">ID
+                                                                        colspan="1" style="width: 50px;">Code
+                                                                    </th>
+                                                                    <th class="sorting" tabindex="0"
+                                                                        aria-controls="datatable" rowspan="1"
+                                                                        colspan="1" style="width: 50px;">Image
                                                                     </th>
                                                                     <th class="sorting" tabindex="0"
                                                                         aria-controls="datatable" rowspan="1"
@@ -60,14 +64,11 @@
                                                                     </th>
                                                                     <th class="sorting" tabindex="0"
                                                                         aria-controls="datatable" rowspan="1"
-                                                                        colspan="1" style="width: 50px;">Slug
+                                                                        colspan="1" style="width: 50px;">Category
                                                                     </th>
                                                                     <th class="sorting" tabindex="0"
                                                                         aria-controls="datatable" rowspan="1"
-                                                                        colspan="1" style="width: 50px;">Image
-                                                                    </th>
-                                                                    <th rowspan="1" colspan="1" style="width: 50px;">
-                                                                        Created At
+                                                                        colspan="1" style="width: 50px;">Brand
                                                                     </th>
                                                                     <th rowspan="1" colspan="1" style="width: 50px;">
                                                                         Action
@@ -78,15 +79,15 @@
                                                             <tbody>
                                                                 @foreach($data as $item)
                                                                 <tr role="row" class="odd product_content text-center">
-                                                                    <td>{{$item->id}}</td>
-                                                                    <td>{{$item->name}}</td>
-                                                                    <td>{{$item->slug}}</td>
+                                                                    <td style="text-transform: uppercase">{{$item->code}}</td>
                                                                     <td>
                                                                         @if($item->image!="")
                                                                             <img width="70px" src="{{asset('storage/media/Products/'.$item->image)}}">
                                                                         @endif
                                                                     </td>
-                                                                    <td>{{$item->created_at}}</td>
+                                                                    <td>{{$item->name}}</td>
+                                                                    <td>{{$item->category_name}}</td>
+                                                                    <td>{{$item->brand_name}}</td>
                                                                     <td>
                                                                         <a href="{{url('admin/product/manage_product')}}/{{$item->id}}">
                                                                             <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">

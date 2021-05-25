@@ -59,6 +59,20 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
+                                <label for="code">Code<span class="text-danger">*</span></label>
+                                <input type="text" name="code" value="{{$code}}" aria-required="true" class="form-control" id="code" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="mrp">MRP<span class="text-danger">*</span></label>
+                                <input type="number" name="mrp" value="{{$mrp}}" aria-required="true" class="form-control" id="mrp" required min="0">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="price">Price<span class="text-danger">*</span></label>
+                                <input type="number" name="price" value="{{$price}}" aria-required="true" class="form-control" id="price" required min="0">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
                                 <label for="category_id">Category<span class="text-danger">*</span></label>
                                 <select name="category_id" aria-required="true" class="form-control" id="category_id" required>
                                     <option value="">Select Category</option>
@@ -73,22 +87,32 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="brand">Brand<span class="text-danger">*</span></label>
-                                <select name="brand" aria-required="true" class="form-control" id="brand" required>
+                                <label for="brand_id">Brand<span class="text-danger">*</span></label>
+                                <select name="brand_id" aria-required="true" class="form-control" id="brand_id" required>
                                     <option value="">Select Brand</option>
                                     @foreach($brands as $item)
-                                        @if($brand==$item->id)
+                                        @if($brand_id==$item->id)
                                             <option selected value="{{$item->id}}">
                                         @else
                                             <option value="{{$item->id}}">
                                         @endif
-                                        {{$item->name}}</option>
+                                        {{$item->brand_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="model">Model<span class="text-danger">*</span></label>
-                                <input type="text" name="model" value="{{$model}}" aria-required="true" class="form-control" id="model" required>
+                                <label for="type">Type<span class="text-danger">*</span></label>
+                                <select name="type" aria-required="true" class="form-control" id="type" required>
+                                    <option value="">Select Type</option>
+                                    @foreach($types as $item)
+                                        @if($type==$item->id)
+                                            <option selected value="{{$item->id}}">
+                                        @else
+                                            <option value="{{$item->id}}">
+                                        @endif
+                                        {{$item->type}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -124,23 +148,23 @@
                                 <div class="card-body">
                                     <input type="hidden" name="paid[]" id="paid" value="{{$pAArr['id']}}">
                                     <div class="row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-2">
                                             <label for="sku">SKU<span class="text-danger">*</span></label>
                                             <input type="text" name="sku[]" aria-required="true" class="form-control" id="sku" value="{{$pAArr['sku']}}" required>
                                         </div>
-                                        {{-- <div class="form-group col-md-3">
+                                        {{-- <div class="form-group col-md-2">
                                             <label for="mrp">MRP<span class="text-danger">*</span></label>
                                             <input type="text" name="mrp[]" aria-required="true" class="form-control" id="mrp" value="{{$pAArr['mrp']}}" required>
-                                        </div> --}}
-                                        <div class="form-group col-md-3">
+                                        </div>
+                                        <div class="form-group col-md-2">
                                             <label for="price">Price<span class="text-danger">*</span></label>
                                             <input type="text" name="price[]" aria-required="true" class="form-control" id="price" value="{{$pAArr['price']}}" required>
-                                        </div>
-                                        <div class="form-group col-md-3">
+                                        </div> --}}
+                                        <div class="form-group col-md-4">
                                             <label for="qty">Quantity<span class="text-danger">*</span></label>
                                             <input type="text" name="qty[]" aria-required="true" class="form-control" id="qty" value="{{$pAArr['qty']}}" required>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="size_id">Size<span class="text-danger">*</span></label>
                                             <select name="size_id[]" class="form-control" id="size_id" required>
                                                 <option value="">Select</option>
@@ -157,17 +181,18 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-3">
+                                    {{-- </div>
+                                    <div class="row"> --}}
+                                        <div class="form-group col-md-2">
+                                            <label for="size_id">&nbsp;&nbsp;&nbsp;</label>
                                             @if($loop_count_num==2)
-                                                <button type="button" class="btn btn-warning waves-effect waves-light" style="display: block; margin-top: 3px" onclick="add_more()">
+                                                <button type="button" class="btn btn-warning waves-effect waves-light" style="display: block" onclick="add_more()">
                                                     <i class="fa fa-plus mr-1"></i>
                                                     <span>Add</span>
                                                 </button>
                                             @else
                                             <a href="{{url('admin/product/product_attr_delete')}}/{{$pAArr['id']}}/{{$id}}">
-                                                <button type="button" class="btn btn-danger waves-effect waves-light" style="display: block; margin-top: 3px" onclick="remove_more({{$loop_count_prev}})">
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" style="display: block" onclick="remove_more({{$loop_count_prev}})">
                                                     <i class="fa fa-minus mr-1"></i>
                                                     <span>Remove</span>
                                                 </button>
@@ -248,17 +273,19 @@
         count++;
         var html = '<div class="col-md-12"><div class="card" id="product_attr_'+count+'"><div class="card-body"><input type="hidden" name="paid[]" id="paid"><div class="row">';
 
-        html += '<div class="form-group col-md-3"><label for="sku">SKU<span class="text-danger">*</span></label><input type="text" name="sku[]" aria-required="true" class="form-control" id="sku" required></div>';
-        
-        html += '<div class="form-group col-md-3"><label for="price">Price<span class="text-danger">*</span></label><input type="text" name="price[]" aria-required="true" class="form-control" id="price" required></div>';
+        html += '<div class="form-group col-md-2"><label for="sku">SKU<span class="text-danger">*</span></label><input type="text" name="sku[]" aria-required="true" class="form-control" id="sku" required></div>';
 
-        html += '<div class="form-group col-md-3"><label for="qty">Quantity<span class="text-danger">*</span></label><input type="text" name="qty[]" aria-required="true" class="form-control" id="qty" required></div>'
+        // html += '<div class="form-group col-md-2"><label for="mrp">MRP<span class="text-danger">*</span></label><input type="text" name="mrp[]" aria-required="true" class="form-control" id="mrp" required></div>';
+        
+        // html += '<div class="form-group col-md-2"><label for="price">Price<span class="text-danger">*</span></label><input type="text" name="price[]" aria-required="true" class="form-control" id="price" required></div>';
+
+        html += '<div class="form-group col-md-4"><label for="qty">Quantity<span class="text-danger">*</span></label><input type="text" name="qty[]" aria-required="true" class="form-control" id="qty" required></div>'
 
         var size_id_html = jQuery('#size_id').html();
         size_id_html = size_id_html.replace('selected','');
-        html += '<div class="form-group col-md-3"><label for="size_id">Size<span class="text-danger">*</span></label><select name="size_id[]" class="form-control" id="size_id">'+size_id_html+'</select></div></div>';
+        html += '<div class="form-group col-md-4"><label for="size_id">Size<span class="text-danger">*</span></label><select name="size_id[]" class="form-control" id="size_id">'+size_id_html+'</select></div>';
 
-        html += '<div class="row"><div class="form-group col-md-3"><label class="control-lable mb-1">&nbsp;&nbsp;</label><button type="button" class="btn btn-danger waves-effect waves-light" style="display: block; margin-top: 3px" onclick=remove_more("'+count+'")><i class="fa fa-minus mr-1"></i><span>Remove</span></button></div>';
+        html += '<div class="form-group col-md-2"><label class="control-lable mb-1">&nbsp;&nbsp;</label><button type="button" class="btn btn-danger waves-effect waves-light" style="display: block; margin-top: 3px" onclick=remove_more("'+count+'")><i class="fa fa-minus mr-1"></i><span>Remove</span></button></div>';
 
         html += '</div></div></div></div>';
         jQuery('#product_attr_box').append(html);

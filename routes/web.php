@@ -9,6 +9,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\OrdersController;
 
+use App\Http\Controllers\Front\FrontController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +24,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [FrontController::class, 'index']);
+Route::get('product/{id}',[FrontController::class,'product']);
+Route::post('add_to_cart', [FrontController::class, 'add_to_cart']);
+Route::get('cart', [FrontController::class, 'cart']);
+Route::get('login', [FrontController::class, 'login']);
+Route::post('login_process', [FrontController::class, 'login_process'])->name('login.login_process');
+Route::get('/checkout', [FrontController::class, 'checkout']);
+Route::get('logout', function () {
+    session()->forget('FRONT_USER_LOGIN');
+    session()->forget('FRONT_USER_ID');
+    session()->forget('FRONT_USER_NAME');
+    session()->forget('USER_TEMP_ID');
+    return redirect('/');
 });
+
+
+
 
 Route::get('admin', [AdminController::class, 'index']);
 Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
