@@ -44,6 +44,42 @@
                             <label for="value">Value<span class="text-danger">*</span></label>
                             <input type="text" name="value" value="{{$value}}" aria-required="true" class="form-control" id="value" required="">
                         </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="value" class="control-label mb-1">Type</label>
+                                    <select id="type" name="type" class="form-control" required>
+                                        @if($type=='Value')
+                                            <option value="Value" selected>Value</option>
+                                            <option value="Per">Per</option>
+                                        @elseif($type=='Per')
+                                            <option value="Value">Value</option>
+                                            <option value="Per" selected>Per</option>
+                                        @else
+                                            <option value="Value">Value</option>
+                                            <option value="Per">Per</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="title" class="control-label mb-1">Min Order Amt</label>
+                                    <input id="min_order_amt" value="{{$min_order_amt}}" name="min_order_amt" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="code" class="control-label mb-1">IS One Time</label>
+                                    <select id="is_one_time" name="is_one_time" class="form-control" required>
+                                        @if($is_one_time=='1')
+                                            <option value="1" selected>Yes</option>
+                                            <option value="0">No</option>
+                                        @else
+                                            <option value="1">Yes</option>
+                                            <option value="0" selected>No</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group text-right mb-0">
                             <a href="{{url('admin/coupon')}}">
                                 <button type="button" class="btn btn-primary waves-effect waves-light">

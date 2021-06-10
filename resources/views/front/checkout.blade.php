@@ -5,7 +5,7 @@
 <div id="checkout">
     <div class="grid wide">
         <div class="container">
-            <form action="" id="form-checkout" class="row">
+            <form action="" id="frmPlaceOrder" class="row">
                 <div class="main-checkout col l-8 c-12 m-12">
                     <div class="main-content">
                         <div class="section-header">
@@ -13,18 +13,18 @@
                         </div>
                         <div class="section-content">
                             <div class="infor-cus">
-                                <h3>1. Nhập thông tin</h3>
+                                <h3>1. Nhập thông tin khách hàng</h3>
                                 @if(session()->has('FRONT_USER_LOGIN') == null)
                                 <p>Bạn có đã tài khoản? <a href="{{url('/login')}}">Đăng nhập ngay</a></p>
                                 @endif
                             </div>
                             <div class="input-infor">
                                 <div class="input-infor-name">
-                                    <input type="text" name="fullname" id="fullname" placeholder="Họ và tên" value="{{$customers['name']}}" required>
+                                    <input type="text" name="name" id="fullname" placeholder="Họ và tên" value="{{$customers['name']}}" required>
                                 </div>
                                 <div class="input-infor-email">
                                     <input type="email" name="email" id="email" placeholder="Email" value="{{$customers['email']}}" required>
-                                    <input type="tel" name="tel" id="tel" placeholder="Số điện thoại" value="{{$customers['mobile']}}" required>
+                                    <input type="tel" name="mobile" id="tel" placeholder="Số điện thoại" value="{{$customers['mobile']}}" required>
                                 </div>
                                 <div class="input-infor-address">
                                     <input type="text" name="address" id="address" placeholder="Địa chỉ" value="{{$customers['address']}}" required>
@@ -34,7 +34,7 @@
                         <div class="section-notice">
                             <div class="input-notice">
                                 <h3>Ghi chú đơn hàng</h3>
-                                <textarea name="description" id="cus-description" cols="30" rows="5" placeholder="Ghi chú"></textarea>
+                                <textarea name="note" id="cus-description" cols="30" rows="5" placeholder="Ghi chú"></textarea>
                             </div>
                         </div>
                         <div class="section-payment-method">
@@ -43,9 +43,9 @@
                             </div>
                             <div class="payment-method">
                                 <div class="method-cod">
-                                    <label for="radio1" class="radio-label">
+                                    <label for="cod" class="radio-label">
                                         <div class="radio-input">
-                                            <input type="radio" name="paymentMethod">
+                                            <input type="radio" id="cod" name="payment_type" value="COD" required>
                                         </div>
                                         <img src="assets/font/Icon/Vector.png" alt="">
                                         <div class="radio-primary">
@@ -54,22 +54,26 @@
                                         </div>
                                     </label>
                                 </div>
-                                <div class="method-banking">
-                                    <label for="radio2" class="radio-label">
+                                {{-- <div class="method-banking">
+                                    <label for="atm" class="radio-label">
                                         <div class="radio-input">
-                                            <input type="radio" name="paymentMethod">
+                                            <input type="radio" id="atm" name="payment_type" value="ATM">
+                                            <div id="paypal-button" class="paypalbtn"></div>
                                         </div>
                                         <img src="assets/font/Icon/Vector2.png" alt="">
                                         <div class="radio-primary">
                                             <span>Thanh toán chuyển khoản</span>
                                         </div>
                                     </label>
-                                </div>                        
+                                </div>                         --}}
                             </div>
                         </div>
-                        <button class="submit" type="submit">Đặt hàng</button>
-                        <div class="section-footer">
-                            <a href="{{url('/cart')}}">QUAY LẠI GIỎ HÀNG</a>
+                        
+                        <div class="checkout-btn">
+                            <input class="submit" id="btnPlaceOrder" type="submit" value="Đặt hàng">
+                            <div class="section-footer">
+                                <a href="{{url('/cart')}}">QUAY LẠI GIỎ HÀNG</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,8 +109,8 @@
                     <div class="order-discount">
                         <div class="discount-content">
                             <div class="discount-code">
-                                <input type="text" class="input-code" placeholder="Nhập mã giảm giá">
-                                <button class="apply-code">Áp dụng</button>
+                                <input type="text" class="input-code" name="coupon_code" id="coupon_code" placeholder="Nhập mã giảm giá">
+                                <input type="button" class="apply-code" onclick="applyCouponCode()" value="Áp dụng">
                             </div>
                             <div class="order-summary">
                                 <div>
@@ -126,7 +130,7 @@
                                 </div>
                                 <div class="order-box-totals">
                                     <strong>Tổng tiền:</strong>
-                                    <strong class="totals-price2">1,200,000đ</strong>
+                                    <strong class="totals-price2">{{$totalPrice}} đ</strong>
                                 </div>
                             </div>
                         </div>
@@ -141,6 +145,7 @@
                         <a href="cart.html">QUAY LẠI GIỎ HÀNG</a>
                     </div>
                 </div>
+                @csrf
             </form>
         </div>
     </div>

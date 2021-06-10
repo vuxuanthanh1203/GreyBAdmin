@@ -18,12 +18,12 @@ class BrandController extends Controller
         if ($id > 0) {
             $arr = Brand::where(['id'=>$id])->get();
             
-            $result['name'] = $arr['0']->name;
+            $result['brand_name'] = $arr['0']->brand_name;
             $result['image'] = $arr['0']->image;
             $result['status'] = $arr['0']->status;
             $result['id'] = $arr['0']->id; 
         } else {
-            $result['name'] = '';
+            $result['brand_name'] = '';
             $result['image'] = '';
             $result['status'] = '';
             $result['id'] = '';
@@ -34,7 +34,7 @@ class BrandController extends Controller
     public function manage_brand_process(Request $request)
     {
         $request->validate([
-            'name'=>'required|unique:brands,name,' .$request->post('id'),
+            'brand_name'=>'required|unique:brands,brand_name,' .$request->post('id'),
             'image'=>"mimes:jpeg,jpg,png"
         ]);
 
@@ -54,7 +54,7 @@ class BrandController extends Controller
             $model->image = $image_name;
         }
 
-        $model->name=$request->post('name');
+        $model->brand_name=$request->post('brand_name');
         $model->status=1;
         $model->save();
 

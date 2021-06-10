@@ -116,22 +116,19 @@
                         </ul>
                     </div>
                     <ul class="nav col l-9-5">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{url('/')}}">Home</a></li>
                         <li>
-                            <a href="" class="desktop-link">Sneakers</a>
+                            <a href="{{url('category/sneakers')}}" class="desktop-link">Sneakers</a>
                             <ul class="subnav">
-                                <li><a href="">Converse</a></li>
-                                <li><a href="">Vans</a></li>
-                                <li><a href="">New Balance</a></li>
-                                <li><a href="">Puma</a></li>
-                                <li><a href="">Slipper</a></li>
-                                <li><a href="">Fla+MLB</a></li>
-                                <li><a href="">Kid Shoes</a></li>
+                                <li><a href="{{url('brand/converse')}}">Converse</a></li>
+                                <li><a href="{{url('brand/vans')}}">Vans</a></li>
+                                <li><a href="{{url('brand/puma')}}">Puma</a></li>
+                                <li><a href="{{url('brand/fila')}}">Fila</a></li>
                             </ul>
                         </li>
-                        <li><a href="">Backpacks</a></li>
-                        <li><a href="">Accessories</a></li>
-                        <li class="animation">
+                        <li><a href="{{url('category/backpacks')}}">Backpacks</a></li>
+                        <li><a href="{{url('category/tshirt')}}">Tshirt</a></li>
+                        {{-- <li class="animation">
                             <a href="" class="desktop-link">Sale</a>
                             <ul class="subnav">
                                 <li><a href="">Vans</a></li>
@@ -141,9 +138,8 @@
                                 <li><a href="">Sale Other</a></li>
                                 <li><a href="">Accessories</a></li>
                             </ul>
-                        </li>
-                        <li><a href="">Collections</a></li>
-                        <li><a href="">Blog</a></li>
+                        </li> --}}
+                        <li><a href="{{url('category/accessories')}}">Accessories</a></li>
                     </ul>
                     <div class="mobile-between-nav col c-6 m-6">
                         <a href="">
@@ -274,6 +270,49 @@
     <script src="{{asset('admin_assets/js/pages/toastr.init.js')}}"></script>
     <script src="{{asset('front_assets/js/slider.js')}}"></script>
     <script src="{{asset('front_assets/js/main.js')}}"></script>
+    {{-- <div id="paypal-button"></div> --}}
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+    paypal.Button.render({
+        // Configure environment
+        env: 'sandbox',
+        client: {
+        sandbox: 'AfBG-j0eRLS4hgi5eYPaOwT7u6Y7KX-1xCKSl8nnv7iwzHSGjE6K7IqADdqw36dh-SEmZcQTl0sFXm3s',
+        production: 'demo_production_client_id'
+        },
+        // Customize button (optional)
+        locale: 'en_US',
+        style: {
+        size: 'large',
+        color: 'gold',
+        shape: 'pill',
+        },
+
+        // Enable Pay Now checkout flow (optional)
+        commit: true,
+
+        // Set up a payment
+        payment: function(data, actions) {
+        return actions.payment.create({
+            transactions: [{
+            amount: {
+                total: '0.01',
+                currency: 'USD'
+            }
+            }]
+        });
+        },
+        // Execute the payment
+        onAuthorize: function(data, actions) {
+        return actions.payment.execute().then(function() {
+            // Show a confirmation message to the buyer
+            window.alert('Cảm ơn bạn đã mua hàng !');
+            window.location.href="/order_placed";
+        });
+        }
+    }, '#paypal-button');
+
+    </script>
 </body>
 
 </html>

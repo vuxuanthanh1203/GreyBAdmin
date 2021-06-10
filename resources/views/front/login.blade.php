@@ -7,11 +7,11 @@
             <!-- <div class="formAccount"> -->
             <div class="formAccount col l-6 c-12 m-12">
                 <h2 class="section-title">Đăng Nhập</h2>
-                <p>Bạn chưa có tài khoản? Đăng ký để trở thành thành viên <a href="#" style="font-weight: 600;border-bottom: 1px solid;padding-bottom: 5px;">tại đây</a></p>
+                <p>Bạn chưa có tài khoản? Đăng ký để trở thành thành viên <a href="{{url('registration')}}" style="font-weight: 600;border-bottom: 1px solid;padding-bottom: 5px;">tại đây</a></p>
                 <div class="form-login">
                     <form method="post" id="frmLogin">
                         <div>
-                            <input type="email" name="login_email" id="email" placeholder="Email hoặc tên đăng nhập" class="inputAccount" required>
+                            <input type="email" name="login_email" id="email" placeholder="email@example.com" class="inputAccount" required>
                         </div>
                         <div>                                    
                             <input type="password" name="login_password" id="password" placeholder="Mật khẩu" class="inputAccount" required>
@@ -20,7 +20,7 @@
                             <div class="col l-6 m-6 s-12 btn-remember">
                                 <label for="rememberme" class="rememberme">
                                     <input type="checkbox" name="" id="rememberme" style="display: inline-block">
-                                    <span> Remember me </span>
+                                    <span> Ghi nhớ đăng nhập </span>
                                 </label>
                             </div>
                             <a class="col l-6 m-6 s-12" href="#" style="display: block;text-align: right; color: #111111; padding: 0 10px">

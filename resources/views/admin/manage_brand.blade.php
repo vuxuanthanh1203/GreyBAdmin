@@ -43,7 +43,7 @@
                         <input type="hidden" name="id" value="{{$id}}">
                         <div class="form-group">
                             <label for="name">Name<span class="text-danger">*</span></label>
-                            <input type="text" name="name" value="{{$name}}" aria-required="true" required="" class="form-control" id="name">
+                            <input type="text" name="brand_name" value="{{$brand_name}}" aria-required="true" required="" class="form-control" id="name">
                         </div>
                         <div class="form-group">
                             <label for="image">Image<span class="text-danger">*</span></label>

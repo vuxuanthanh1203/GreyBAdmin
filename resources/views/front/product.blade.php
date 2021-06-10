@@ -54,6 +54,14 @@
                             </select>
                         </form>
                     </div>
+                    {{-- <div class="quantity">
+                        <p>Số lượng</p>
+                        <form action="">
+                            <button class="btn minus-btn disabled" type="button">-</button>
+                            <input type="text" name="qty" id="qty" class="size-quantity" value="" min="1" max="10">
+                            <button class="btn plus-btn" type="button">+</button>
+                        </form>
+                    </div> --}}
                     <div class="buy-addcart row">
                         <h2 class="cart-product" onclick="add_to_cart('{{$product[0]->id}}','{{$product_attr[$product[0]->id][0]->size_id}}')">THÊM VÀO GIỎ</h2>
                         <h2 class="buy-product">MUA NGAY</h2>
@@ -164,5 +172,5 @@
     <input type="hidden" id="pqty" name="pqty"/>
     <input type="hidden" id="product_id" name="product_id"/>           
     @csrf
-  </form>
+</form>
 @endsection

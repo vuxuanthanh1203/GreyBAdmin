@@ -11,6 +11,27 @@
         <button class="owl-prev icon-angle-left" onclick="prev()"></button>
         <button class="owl-next icon-angle-right" onclick="next()"></button>
     </div> --}}
+    <div id="slider">
+        <div class="slideshow-container">
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+              <img src="{{asset('front_assets/img/All_Img/ia_300000013.jpg')}}" style="width:100%">
+            </div>
+      
+            <div class="mySlides fade">
+              <img src="{{asset('front_assets/img/All_Img/ia_300000014.jpg')}}" style="width:100%">
+            </div>
+      
+            <div class="mySlides fade">
+              <img src="{{asset('front_assets/img/All_Img/ia_300000015.jpg')}}" style="width:100%">
+            </div>
+      
+            <!-- Next and previous buttons -->
+            <button class="owl-prev icon-angle-left" onclick="plusSlides(-1)"></button>
+            <button class="owl-next icon-angle-right" onclick="plusSlides(1)"></button>
+            
+        </div>
+    </div>
     <div id="content">
             <div class="new-product grid wide">
                 <div class="title">
@@ -36,7 +57,7 @@
             </div>
             <div class="sale-product grid wide">
                 <div class="title">
-                    <h2>SALE</h2>
+                    <h2>NEW</h2>
                 </div>
                 <div class="list-product row">
                     @foreach ($home_products_new as $item)
@@ -69,15 +90,15 @@
                                 <img src="{{asset('storage/media/Products/'.$item->image)}}" alt="">
                             </a>
                         </div>
-                        <a href="/puma-slim-softfoam-leather-black-p12816578.html" class="d-block pt-2 tp_product_name">
+                        <a href="{{url('product/'.$item->slug)}}" class="d-block pt-2 tp_product_name">
                             <h1>{{$item->name}}</h1>
                         </a>
                         <span class="special-price">
                             <span class="tp_product_price">
-                                <h1>299,000 <sup>đ</sup></h1>
+                                <h1>{{$item->price}} <sup>đ</sup></h1>
                             </span>
                             <span>
-                                <h1>800,000<sup>đ</sup></h1>
+                                <h1>{{$item->mrp}}<sup>đ</sup></h1>
                             </span>
                         </span>
                         <div class="product_detail_show">
@@ -156,7 +177,7 @@
             </div>
             <div class="best-seller grid wide">
                 <div class="title">
-                    <h2> BEST SELLER</h2>
+                    <h2> HOT </h2>
                 </div>
                 <div class="list-product row">
                     @foreach ($home_products_hot as $item)
@@ -171,15 +192,15 @@
                                 </div>
                             </div>
                             <div class="button-add">
-                                <button onclick="toggleproduct();" class="tp_button">
+                                {{-- <button onclick="toggleproduct();" class="tp_button"> --}}
+                                <button class="tp_button">
                                     <span>
                                         <a href="#">Mua ngay</a>
                                     </span>
                                 </button>
-                                <button title="Xem chi tiết" class="action tp_button"
-                                    onclick="location.href='/puma-slim-softfoam-leather-black-p12816578.html'">
+                                <button title="Xem chi tiết" class="action tp_button">
                                     <span>
-                                        <a href="#">Xem chi tiết</a>
+                                        <a href="{{url('product/'.$item->slug)}}">Xem chi tiết</a>
                                     </span>
                                 </button>
                             </div>
@@ -189,15 +210,15 @@
                                 <img src="{{asset('storage/media/Products/'.$item->image)}}" alt="">
                             </a>
                         </div>
-                        <a href="/puma-slim-softfoam-leather-black-p12816578.html" class="d-block pt-2 tp_product_name">
+                        <a href="{{url('product/'.$item->slug)}}" class="d-block pt-2 tp_product_name">
                             <h1>{{$item->name}}</h1>
                         </a>
                         <span class="special-price">
                             <span class="tp_product_price">
-                                <h1>299,000 <sup>đ</sup></h1>
+                                <h1>{{$item->price}} <sup>đ</sup></h1>
                             </span>
                             <span>
-                                <h1>800,000<sup>đ</sup></h1>
+                                <h1>{{$item->mrp}}<sup>đ</sup></h1>
                             </span>
                         </span>
                     </div>
@@ -281,7 +302,7 @@
             </div>
             <div class="new-arrival grid wide">
                 <div class="title">
-                    <h2>NEW ARRIVALS</h2>
+                    <h2>SALE</h2>
                 </div>
                 <div class="list-product row">
                     @foreach ($home_products_sale as $item)
@@ -296,15 +317,15 @@
                                 </div>
                             </div>
                             <div class="button-add">
-                                <button onclick="toggleproduct();" class="tp_button">
+                                {{-- <button onclick="toggleproduct();" class="tp_button"> --}}
+                                <button class="tp_button">
                                     <span>
                                         <a href="#">Mua ngay</a>
                                     </span>
                                 </button>
-                                <button title="Xem chi tiết" class="action tp_button"
-                                    onclick="location.href='/puma-slim-softfoam-leather-black-p12816578.html'">
+                                <button title="Xem chi tiết" class="action tp_button">
                                     <span>
-                                        <a href="#">Xem chi tiết</a>
+                                        <a href="{{url('product/'.$item->slug)}}">Xem chi tiết</a>
                                     </span>
                                 </button>
                             </div>
@@ -314,15 +335,15 @@
                                 <img src="{{asset('storage/media/Products/'.$item->image)}}" alt="">
                             </a>
                         </div>
-                        <a href="/puma-slim-softfoam-leather-black-p12816578.html" class="d-block pt-2 tp_product_name">
+                        <a href="{{url('product/'.$item->slug)}}" class="d-block pt-2 tp_product_name">
                             <h1>{{$item->name}}</h1>
                         </a>
                         <span class="special-price">
                             <span class="tp_product_price">
-                                <h1>299,000 <sup>đ</sup></h1>
+                                <h1>{{$item->price}} <sup>đ</sup></h1>
                             </span>
                             <span>
-                                <h1>800,000<sup>đ</sup></h1>
+                                <h1>{{$item->mrp}}<sup>đ</sup></h1>
                             </span>
                         </span>
                     </div>

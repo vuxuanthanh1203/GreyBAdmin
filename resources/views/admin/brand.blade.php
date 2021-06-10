@@ -75,7 +75,7 @@
                                                                 @foreach($data as $item)
                                                                 <tr role="row" class="odd product_content text-center">
                                                                     <td>{{$item->id}}</td>
-                                                                    <td>{{$item->name}}</td>
+                                                                    <td>{{$item->brand_name}}</td>
                                                                     <td>
                                                                         @if($item->image!="")
                                                                             <img width="70px" src="{{asset('storage/media/Brands/'.$item->image)}}">

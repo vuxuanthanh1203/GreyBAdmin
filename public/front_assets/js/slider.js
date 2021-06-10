@@ -1,3 +1,46 @@
+const sizes = document.querySelectorAll('.size');
+
+function changeSize(){
+	sizes.forEach(size => size.classList.remove('active'));
+	this.classList.add('active');
+}
+
+sizes.forEach(size => size.addEventListener('click',changeSize));
+
+var slideIndex = 0;
+showSlides();
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides2(slideIndex += n);
+}
+
+function showSlides2(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  
+  slides[slideIndex-1].style.display = "block";
+}
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 5000);
+}
+
 // 'js/mian.js'
 
 // var slider_img = document.querySelector('.slider-img');
@@ -17,7 +60,7 @@
 // }
 
 // function setImg(){
-// 	return slider_img.setAttribute('src', "/assets/img/All_Img/"+images[i]);
+// 	return slider_img.setAttribute('src', "/front_assets/img/All_Img/"+images[i]);
 	
 // }
 // setInterval(next,5000);
@@ -26,30 +69,23 @@
 
 //Cart_wrapper
 
-// const imgs =document.querySelectorAll('.img-select a');
-// const imgBtns =[...imgs];
-// let imgId = 1;
-// imgBtns.forEach((imgItem) =>{
-// 	imgItem.addEventListener('click',(event) =>{
-// 		event.preventDefault();
-// 		imgId = imgItem.dataset.id;
-// 		slideImage();
-// 	});
-// });
-// function slideImage(){
-// 	const displayWidth = document.querySelector('.img-showcase img:first-child').width;
-// 	document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1)*displayWidth}px)`;
-// }
-// window.addEventListener('resize',slideImage);
-
-const sizes = document.querySelectorAll('.size');
-
-function changeSize(){
-	sizes.forEach(size => size.classList.remove('active'));
-	this.classList.add('active');
+const imgs =document.querySelectorAll('.img-select a');
+const imgBtns =[...imgs];
+let imgId = 1;
+imgBtns.forEach((imgItem) =>{
+	imgItem.addEventListener('click',(event) =>{
+		event.preventDefault();
+		imgId = imgItem.dataset.id;
+		slideImage();
+	});
+});
+function slideImage(){
+	const displayWidth = document.querySelector('.img-showcase img:first-child').width;
+	document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1)*displayWidth}px)`;
 }
+window.addEventListener('resize',slideImage);
 
-sizes.forEach(size => size.addEventListener('click',changeSize));
+
 
 // const img_showcase = document.querySelectorAll(' .img-showcase');
 // const magnifying_img = document.querySelectorAll(' .magnifying_img');
@@ -130,43 +166,43 @@ function clickme(smallImg) {
 // }
 
 //plus button
-// document.querySelector(".plus-btn").addEventListener("click", function() {
-// 	//getting value of input
-// 	valueCount = document.getElementById("quantity").value;
+document.querySelector(".plus-btn").addEventListener("click", function() {
+	//getting value of input
+	valueCount = document.getElementById("qty").value;
 
-// 	//input value increment by 1
-// 	valueCount++;
+	//input value increment by 1
+	valueCount++;
 
-// 	//setting increment input value
-// 	document.getElementById("quantity").value = valueCount;
+	//setting increment input value
+	document.getElementById("qty").value = valueCount;
 
-// 	if (valueCount > 1) {
-// 		document.querySelector(".minus-btn").removeAttribute("disabled");
-// 		document.querySelector(".minus-btn").classList.remove("disabled")
-// 	}
+	if (valueCount > 1) {
+		document.querySelector(".minus-btn").removeAttribute("disabled");
+		document.querySelector(".minus-btn").classList.remove("disabled")
+	}
 
-// 	//calling price function
-// 	priceTotal()
-// })
+	//calling price function
+	// priceTotal()
+})
 
 //plus button
-// document.querySelector(".minus-btn").addEventListener("click", function() {
-// 	//getting value of input
-// 	valueCount = document.getElementById("quantity").value;
+document.querySelector(".minus-btn").addEventListener("click", function() {
+	//getting value of input
+	valueCount = document.getElementById("qty").value;
 
-// 	//input value increment by 1
-// 	valueCount--;
+	//input value increment by 1
+	valueCount--;
 
-// 	//setting increment input value
-// 	document.getElementById("quantity").value = valueCount
+	//setting increment input value
+	document.getElementById("qty").value = valueCount
 
-// 	if (valueCount == 1) {
-// 		document.querySelector(".minus-btn").setAttribute("disabled", "disabled")
-// 	}
+	if (valueCount == 1) {
+		document.querySelector(".minus-btn").setAttribute("disabled", "disabled")
+	}
 
-// 	//calling price function
-// 	priceTotal()
-// })
+	//calling price function
+	priceTotal()
+})
 
 ///Accordion=================================================================
 const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");

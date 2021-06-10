@@ -67,7 +67,7 @@
                                                                         colspan="1" style="width: 50px;">Value
                                                                     </th>
                                                                     <th rowspan="1" colspan="1" style="width: 50px;">
-                                                                        Created At
+                                                                        Type
                                                                     </th>
                                                                     <th rowspan="1" colspan="1" style="width: 50px;">
                                                                         Action
@@ -81,8 +81,8 @@
                                                                     <td>{{$item->id}}</td>
                                                                     <td>{{$item->title}}</td>
                                                                     <td>{{$item->code}}</td>
-                                                                    <td>{{$item->value}} %</td>
-                                                                    <td>{{$item->created_at}}</td>
+                                                                    <td>{{$item->value}}</td>
+                                                                    <td>{{$item->type}}</td>
                                                                     <td>
                                                                         <a href="{{url('admin/coupon/manage_coupon')}}/{{$item->id}}">
                                                                             <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
