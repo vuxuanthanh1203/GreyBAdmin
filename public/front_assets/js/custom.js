@@ -32,7 +32,6 @@ function showColor(size){
   }
 
 function add_to_cart(id, size_str_id){
-    // jQuery('#add_to_cart_msg').html('');
     var size_id = jQuery('#size_id').val();
 
     if(size_str_id==0){
@@ -42,7 +41,6 @@ function add_to_cart(id, size_str_id){
       setTimeout(() => {
         toastr.error('Bạn chưa chọn size !!!');
         },500)
-        // jQuery('#add_to_cart_msg').html('Please select size');
     }
     else{
         jQuery('#product_id').val(id);
@@ -52,7 +50,6 @@ function add_to_cart(id, size_str_id){
           data:jQuery('#frmAddToCart').serialize(),
           type:'post',
           success:function(result){
-            // alert('Product '+result.msg)
             setTimeout(() => {
               toastr.success(result.msg);
               },500)
@@ -73,7 +70,6 @@ function deleteCartProduct(pid,size,attr_id){
     jQuery('#size_id').val(size);
     jQuery('#qty').val(0)
     add_to_cart(pid,size);
-    //jQuery('#total_price_'+attr_id).html('Rs '+qty*price);
     jQuery('#cart_box'+attr_id).hide();
   }
 
@@ -124,7 +120,6 @@ function applyCouponCode() {
 }
 
 jQuery('#frmPlaceOrder').submit(function(e){
-  // jQuery('#order_place_msg').html("Please wait...");
   e.preventDefault();
   jQuery.ajax({
     url:'/place_order',
@@ -170,6 +165,45 @@ jQuery('#frmRegistration').submit(function(e){
             jQuery('#'+key+'_error').html(val[0]);
           });
         }
+    }
+  });
+});
+
+jQuery('#frmForgot').submit(function(e){
+  e.preventDefault();
+  jQuery.ajax({
+    url:'/forgot_password',
+    data:jQuery('#frmForgot').serialize(),
+    type:'post',
+    success:function(result){
+      if(result.status=="success"){
+        setTimeout(() => {
+          toastr.success(result.msg);
+          },500)
+      }
+      if(result.status=="error"){
+        setTimeout(() => {
+          toastr.error(result.msg);
+          },500)
+      }
+    }
+  });
+});
+
+
+jQuery('#frmUpdatePassword').submit(function(e){
+  e.preventDefault();
+  jQuery.ajax({
+    url:'/forgot_password_change_process',
+    data:jQuery('#frmUpdatePassword').serialize(),
+    type:'post',
+    success:function(result){
+      jQuery('#frmUpdatePassword')[0].reset();
+      if(result.status=="success"){
+        setTimeout(() => {
+          toastr.success(result.msg);
+          },500)
+      }
     }
   });
 });

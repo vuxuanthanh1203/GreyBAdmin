@@ -1,319 +1,535 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zxx">
 
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreyB</title>
-    <link rel="stylesheet" href="{{asset('front_assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('front_assets/css/grid.css')}}">
-    <link rel="stylesheet" href="{{asset('front_assets/css/responsive.css')}}">
-    <link rel="stylesheet" href="{{asset('front_assets/font/icofont/icofont.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front_assets/font/fontello/css/next.css')}}">
-    <link rel="icon" href="{{asset('front_assets/font/Icon/ia_300000109.png')}}" type="image" sizes="16x16">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HONO - Multi Purpose HTML Template</title>
+
+    <!-- ::::::::::::::Favicon icon::::::::::::::-->
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/png">
+
+    <!-- ::::::::::::::All CSS Files here :::::::::::::: -->
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/ionicons.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/simple-line-icons.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/jquery-ui.min.css')}}">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/animate.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/nice-select.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/venobox.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/jquery.lineProgressbar.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/aos.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/toastr.min.css')}}">
+    
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{asset('assets/sass/style.css')}}">
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/vendor.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/plugins.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
+
 </head>
 
 <body>
-    <div id="main">
-        <div id="header">
-            <div class="header grid wide">
-                <div class="row">
-                    <div class="header-logo col l-2 c-2 m-2">
-                        <a href="{{url('/')}}">
-                            <img class="header_logo" src="{{asset('front_assets/font/Icon/ia_300000109.png')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="header-phones col l-3 c-3 m-3">
-                        <div class="circle-icon">
-                            <img class="icons-header" src="{{asset('front_assets/font/Icon/phone-8x.png')}}" alt="">
+    <!-- Start Header Area -->
+    <header class="header-section d-none d-xl-block">
+        <div class="header-wrapper">
+            <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-between">
+                            <!-- Start Header Logo -->
+                            <div class="header-logo">
+                                <div class="logo">
+                                    <a href="{{url('/')}}"><img src="{{asset('assets/images/logo/logo.png')}}" alt=""></a>
+                                </div>
+                            </div>
+                            <!-- End Header Logo -->
+
+                            <!-- Start Header Main Menu -->
+                            <div class="main-menu menu-color--black menu-hover-color--golden">
+                                <nav>
+                                    <ul>
+                                        <li><a href="{{url('/')}}">Home</a></li>
+                                        <li class="has-dropdown">
+                                            <a href="{{url('category/sneakers')}}" class="desktop-link">Sneakers <i class="fa fa-angle-down"></i></a>
+                                            <!-- Sub Menu -->
+                                            <ul class="sub-menu">
+                                                <li><a href="{{url('brand/converse')}}">Converse</a></li>
+                                                <li><a href="{{url('brand/vans')}}">Vans</a></li>
+                                                <li><a href="{{url('brand/puma')}}">Puma</a></li>
+                                                <li><a href="{{url('brand/fila')}}">Fila</a></li>
+                                            </ul>
+                                        </li>
+                                        
+                                        <li><a href="{{url('category/backpacks')}}">Backpacks</a></li>
+                                        <li><a href="{{url('category/tshirt')}}">Tshirt</a></li>
+                                        <li><a href="{{url('category/accessories')}}">Accessories</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- End Header Main Menu Start -->
+
+                            <!-- Start Header Action Link -->
+                            <ul class="header-action-link action-color--black action-hover-color--golden">
+                                <li>
+                                    <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                                        <i class="icon-heart"></i>
+                                        <span class="item-count">3</span>
+                                    </a>
+                                </li>
+                                @php
+                                $getAddToCartTotalItem=getAddToCartTotalItem();
+                                $totalCartItem=count($getAddToCartTotalItem);
+                                $totalPrice=0;
+                                @endphp
+                                <li>
+                                    <a href="#offcanvas-add-cart" class="offcanvas-toggle">
+                                        <i class="icon-bag"></i>
+                                        <span class="item-count">{{$totalCartItem}}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#search">
+                                        <i class="icon-magnifier"></i>
+                                    </a>
+                                </li>
+                                <li style="margin-left:5px;">
+                                    <a href="#">
+                                        <i class="icon-user"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- End Header Action Link -->
                         </div>
-                        <div class="header-phone">
-                            <h3>hỗ trợ gọi ngay</h3>
-                            <a href="">0988.62.3060</a>
-                        </div>
-                    </div>
-                    <div class="header-address col l-5 c-5 m-5">
-                        <div class="circle-icon">
-                            <img class="icons-header" src="{{asset('front_assets/font/Icon/map.png')}}" alt="">
-                        </div>
-                        <div class="header__address">
-                            <h3>địa chỉ liên hệ</h3>
-                            <a href="">370 Thái Hà, P. Trung Liệt, Q. Đống Đa, Hà Nội</a>
-                        </div>
-                    </div>
-                    <div class="header-like-login-cart col l-2 c-2 m-2">
-                        <div class="icon-header">
-                            <img src="{{asset('front_assets/font/Icon/heart-regular.svg')}}" alt="">
-                        </div>
-                        @if(session()->has('FRONT_USER_LOGIN') != null)
-                            {{-- <a href="{{url('/profile')}}" class="icon-header"> --}}
-                            <a href="{{url('/logout')}}" class="icon-header">
-                                <img src="{{asset('front_assets/font/Icon/user-regular.png')}}" alt="">
-                            </a>
-                        @else
-                            <a href="{{url('/login')}}" class="icon-header">
-                                <img src="{{asset('front_assets/font/Icon/user-regular.png')}}" alt="">
-                            </a>
-                        @endif
-                        <a href="{{url('/cart')}}" class="icon-header">
-                            <img src="{{asset('front_assets/font/Icon/cart-best.png')}}" alt="">
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Begin: Nav -->
-        <div id="nav">
-            <div class="grid wide">
-                <div class="row ">
-                    <div class="mobile-left-nav col c-3 m-3">
-                        <input type="checkbox" id="show-menu">
-                        <label for="show-menu" class="menu-icon"><i class="icofont-navigation-menu icofont-2x"></i></label>
-                        <a href="#" class="user-mobile">
-                            <!-- <div class="icon-header">
-                                <img src="{{asset('front_assets/font/Icon/heart_white.png')}}" alt="">
-                            </div> -->
-                                <img src="{{asset('front_assets/font/Icon/user-regular-white.png')}}" alt="">
-                        </a>
-                        <ul class="nav-mobile">
-                            <li><a href="#">Home</a></li>
+    </header>
+    <!-- Start Header Area -->
+
+    <!-- Start Mobile Header -->
+    <div class="mobile-header mobile-header-bg-color--golden section-fluid d-lg-block d-xl-none">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex align-items-center justify-content-between">
+                    <!-- Start Mobile Left Side -->
+                    <div class="mobile-header-left">
+                        <ul class="mobile-menu-logo">
                             <li>
-                                <a href="" class="mobile-link">Sneakers</a>
-                                <input type="checkbox" id="show-sneakers">
-                                <label class=" label" for="show-sneakers"></label>
-                                <ul class="subnav">
-                                    <li><a href="">Converse</a></li>
-                                    <li><a href="">Vans</a></li>
-                                    <li><a href="">New Balance</a></li>
-                                    <li><a href="">Puma</a></li>
-                                    <li><a href="">Slipper</a></li>
-                                    <li><a href="">Fla+MLB</a></li>
-                                    <li><a href="">Kid Shoes</a></li>
-                                </ul>
+                                <a href="{{url('/')}}">
+                                    <div class="logo">
+                                        <img src="{{asset('assets/images/logo/logo.png')}}" alt="">
+                                    </div>
+                                </a>
                             </li>
-                            <li><a href="">Backpacks</a></li>
-                            <li><a href="">Accessories</a></li>
-                            <li class="animation">
-                                <a href="" class="mobile-link">Sale</a>
-                                <input type="checkbox" id="show-sale">
-                                <label class=" label" for="show-sale"></label>
-                                <ul class="subnav">
-                                    <li><a href="">Vans</a></li>
-                                    <li><a href="">Converse</a></li>
-                                    <li><a href="">New Balance</a></li>
-                                    <li><a href="">Puma</a></li>
-                                    <li><a href="">Sale Other</a></li>
-                                    <li><a href="">Accessories</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="">Collections</a></li>
-                            <li><a href="">Blog</a></li>
                         </ul>
                     </div>
-                    <ul class="nav col l-9-5">
+                    <!-- End Mobile Left Side -->
+
+                    <!-- Start Mobile Right Side -->
+                    <div class="mobile-right-side">
+                        <ul class="header-action-link action-color--black action-hover-color--golden">
+                            <li>
+                                <a href="#search">
+                                    <i class="icon-magnifier"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                                    <i class="icon-heart"></i>
+                                    <span class="item-count">3</span>
+                                </a>
+                            </li>
+                            @php
+                            $getAddToCartTotalItem=getAddToCartTotalItem();
+                            $totalCartItem=count($getAddToCartTotalItem);
+                            $totalPrice=0;
+                            @endphp
+                            <li>
+                                <a href="#offcanvas-add-cart" class="offcanvas-toggle">
+                                    <i class="icon-bag"></i>
+                                    <span class="item-count">{{$totalCartItem}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-user"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#mobile-menu-offcanvas" class="offcanvas-toggle offside-menu">
+                                    <i class="icon-menu"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Mobile Right Side -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Header -->
+
+    <!--  Start Offcanvas Mobile Menu Section -->
+    <div id="mobile-menu-offcanvas" class="offcanvas offcanvas-rightside offcanvas-mobile-menu-section">
+        <!-- Start Offcanvas Header -->
+        <div class="offcanvas-header text-right">
+            <button class="offcanvas-close"><i class="ion-android-close"></i></button>
+        </div> <!-- End Offcanvas Header -->
+        <!-- Start Offcanvas Mobile Menu Wrapper -->
+        <div class="offcanvas-mobile-menu-wrapper">
+            <!-- Start Mobile Menu  -->
+            <div class="mobile-menu-bottom">
+                <!-- Start Mobile Menu Nav -->
+                <div class="offcanvas-menu">
+                    <ul>
                         <li><a href="{{url('/')}}">Home</a></li>
                         <li>
-                            <a href="{{url('category/sneakers')}}" class="desktop-link">Sneakers</a>
-                            <ul class="subnav">
+                            <a href="#"><span>Sneakers</span></a>
+                            <ul class="mobile-sub-menu">
                                 <li><a href="{{url('brand/converse')}}">Converse</a></li>
                                 <li><a href="{{url('brand/vans')}}">Vans</a></li>
                                 <li><a href="{{url('brand/puma')}}">Puma</a></li>
                                 <li><a href="{{url('brand/fila')}}">Fila</a></li>
                             </ul>
                         </li>
+                        
                         <li><a href="{{url('category/backpacks')}}">Backpacks</a></li>
                         <li><a href="{{url('category/tshirt')}}">Tshirt</a></li>
-                        {{-- <li class="animation">
-                            <a href="" class="desktop-link">Sale</a>
-                            <ul class="subnav">
-                                <li><a href="">Vans</a></li>
-                                <li><a href="">Converse</a></li>
-                                <li><a href="">New Balance</a></li>
-                                <li><a href="">Puma</a></li>
-                                <li><a href="">Sale Other</a></li>
-                                <li><a href="">Accessories</a></li>
-                            </ul>
-                        </li> --}}
                         <li><a href="{{url('category/accessories')}}">Accessories</a></li>
                     </ul>
-                    <div class="mobile-between-nav col c-6 m-6">
-                        <a href="">
-                            <img src="{{asset('front_assets/font/Icon/grebwhite.png')}}" alt="">
-                            </a>
-                    </div>
-                    <!-- Begin:Search button -->
-                    <div class="mobile-right-nav col c-3 m-3">
-                        <a href="#" class="cart-mobile">
-                            <!-- <div class="icon-header">
-                                <img src="{{asset('front_assets/font/Icon/heart_white.png')}}" alt="">
-                            </div> -->
-                                <img src="{{asset('front_assets/font/Icon/cart-best-white.png')}}" alt="">
-                        </a>
-                        <input type="checkbox" id="show-search">
-                        <label for="show-search" class="search-icon"><i class="icofont-search-1 icofont-1x"></i></label>
-                        <form action="" class="search-button-mobile col l-2-5">
-                            <table class="elementsnav">
-                                <tr>
-                                    <td>
-                                        <input class="search" type="text" placeholder="Tìm kiếm">
-                                    </td>
-                                    <td class="search-pc">
-                                        <button type="submit" class="go-icon">
-                                            <a href=""><i class="icon-search-1"></i></a>
-                                        </button>
-                                    </td>
-                                    <td class="search-mobile">
-                                        <button type="submit" class="go-icon">
-                                            <a href=""><i class="icofont-search-1 icofont-1x"></i></a>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                    <form action="" class="search-button col l-2-5">
-                        <table class="elementsnav">
-                            <tr>
-                                <td>
-                                    <input class="search" type="text" placeholder="Tìm kiếm">
-                                </td>
-                                <td class="search-pc">
-                                    <button type="submit" class="go-icon">
-                                        <a href=""><i class="icon-search-1"></i></a>
-                                    </button>
-                                </td>
-                                <td class="search-mobile">
-                                    <button type="submit" class="go-icon">
-                                        <a href=""><i class="icofont-search-1 icofont-1x"></i></a>
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-                <!-- End:Search button  -->
-            </div>
-        </div>
-        <!-- End: Nav -->
-        
-        @section('container')
-        @show
+                </div> <!-- End Mobile Menu Nav -->
+            </div> <!-- End Mobile Menu -->
 
-        <div id="top-footer"></div>
-        <div id="footer">
-            <div class="grid wide">
-                <div class="footer-content row sm-gutter">
-                    <div class="column column1 col l-3 c-12 m-12 sm-12">
-                        <a href="">
-                            <img class="logo-footer" src="{{asset('front_assets/font/Icon/ICON Black.jpg')}}" alt="">
+            <!-- Start Mobile contact Info -->
+            <div class="mobile-contact-info">
+                <div class="logo">
+                    {{-- <a href="index.html"><img src="{{asset('assets/images/logo/logo_white.png')}}" alt=""></a> --}}
+                </div>
+
+                <address class="address">
+                    <span>Address: 370 Thai Ha, Trung Liet, Dong Da, Ha Noi</span>
+                    <span>Call Us: 0988.62.3060</span>
+                    <span>Email: cskh@greyb.vn</span>
+                </address>
+
+                <ul class="social-link">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <!-- End Mobile contact Info -->
+
+        </div> <!-- End Offcanvas Mobile Menu Wrapper -->
+    </div> <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
+
+    <!-- Start Offcanvas Addcart Section -->
+    <div id="offcanvas-add-cart" class="offcanvas offcanvas-rightside offcanvas-add-cart-section">
+        <!-- Start Offcanvas Header -->
+        <div class="offcanvas-header text-right">
+            <button class="offcanvas-close"><i class="ion-android-close"></i></button>
+        </div> <!-- End Offcanvas Header -->
+
+        <!-- Start  Offcanvas Addcart Wrapper -->
+        @if($totalCartItem>0)
+        <div class="offcanvas-add-cart-wrapper">
+            <h4 class="offcanvas-title">Shopping Cart</h4>
+            <ul class="offcanvas-cart">
+                @foreach($getAddToCartTotalItem as $cartItem)
+                @php
+                $totalPrice=$totalPrice+($cartItem->qty*$cartItem->price)
+                @endphp
+                <li class="offcanvas-cart-item-single">
+                    <div class="offcanvas-cart-item-block">
+                        <a href="{{url('product/'.$cartItem->slug)}}" class="offcanvas-cart-item-image-link">
+                            <img src="{{asset('storage/media/Products/'.$cartItem->image)}}" alt=""
+                                class="offcanvas-cart-image">
                         </a>
-                        <a href="">
-                            <img src="{{asset('front_assets/font/Icon/map white.png')}}" alt="">
-                            <h2>370 Thái Hà, P. Trung Liệt, Q.Đống Đa, Hà Nội</h2>
+                        <div class="offcanvas-cart-item-content">
+                            <a href="{{url('product/'.$cartItem->slug)}}" class="offcanvas-cart-item-link">{{$cartItem->name}}</a>
+                            <div class="offcanvas-cart-item-details">
+                                <span class="offcanvas-cart-item-details-quantity">{{$cartItem->qty}} x </span>
+                                <span class="offcanvas-cart-item-details-price">{{number_format($cartItem->price)}} VND</span>
+                            </div>
+                            <div class="home-cart-size-wrap">
+                                <span class="home-cart-size-title">Size: </span>
+                                <span class="home-cart-size-size">{{$cartItem->size}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="offcanvas-cart-item-delete text-right">
+                        <a href="#" class="offcanvas-cart-item-delete"><i class="fa fa-trash-o"></i></a>
+                    </div> --}}
+                </li>                
+                @endforeach   
+            </ul>
+            <div class="offcanvas-cart-total-price">
+                <span class="offcanvas-cart-total-price-text">Subtotal:</span>
+                <span class="offcanvas-cart-total-price-value">{{number_format($totalPrice)}} VND</span>
+            </div>
+            <ul class="offcanvas-cart-action-button">
+                <li><a href="{{url('/cart')}}" class="btn btn-block btn-golden">View Cart</a></li>
+                <li><a href="{{url('/checkout')}}" class=" btn btn-block btn-golden mt-5">Checkout</a></li>
+            </ul>
+        </div> 
+        @endif
+        <!-- End  Offcanvas Addcart Wrapper -->
+
+    </div> <!-- End  Offcanvas Addcart Section -->
+
+    <!-- Start Offcanvas Mobile Menu Section -->
+    <div id="offcanvas-wishlish" class="offcanvas offcanvas-rightside offcanvas-add-cart-section">
+        <!-- Start Offcanvas Header -->
+        <div class="offcanvas-header text-right">
+            <button class="offcanvas-close"><i class="ion-android-close"></i></button>
+        </div> <!-- ENd Offcanvas Header -->
+
+        <!-- Start Offcanvas Mobile Menu Wrapper -->
+        <div class="offcanvas-wishlist-wrapper">
+            <h4 class="offcanvas-title">Wishlist</h4>
+            <ul class="offcanvas-wishlist">
+                <li class="offcanvas-wishlist-item-single">
+                    <div class="offcanvas-wishlist-item-block">
+                        <a href="#" class="offcanvas-wishlist-item-image-link">
+                            <img src="{{asset('assets/images/product/default/home-1/default-1.jpg')}}" alt=""
+                                class="offcanvas-wishlist-image">
                         </a>
-                        <a class="footer__email" href="">
-                            <img class="email" src="{{asset('front_assets/font/Icon/Email white.png')}}" alt="">
-                            <h2>greybear1412@gmail.com</h2>
+                        <div class="offcanvas-wishlist-item-content">
+                            <a href="#" class="offcanvas-wishlist-item-link">Car Wheel</a>
+                            <div class="offcanvas-wishlist-item-details">
+                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
+                                <span class="offcanvas-wishlist-item-details-price">$49.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offcanvas-wishlist-item-delete text-right">
+                        <a href="#" class="offcanvas-wishlist-item-delete"><i class="fa fa-trash-o"></i></a>
+                    </div>
+                </li>
+                <li class="offcanvas-wishlist-item-single">
+                    <div class="offcanvas-wishlist-item-block">
+                        <a href="#" class="offcanvas-wishlist-item-image-link">
+                            <img src="{{asset('assets/images/product/default/home-2/default-1.jpg')}}" alt=""
+                                class="offcanvas-wishlist-image">
                         </a>
-                        <a href="">
-                            <img src="{{asset('front_assets/font/Icon/phone white.png')}}" alt="">
-                            <h2>0988.62.3060</h2>
+                        <div class="offcanvas-wishlist-item-content">
+                            <a href="#" class="offcanvas-wishlist-item-link">Car Vails</a>
+                            <div class="offcanvas-wishlist-item-details">
+                                <span class="offcanvas-wishlist-item-details-quantity">3 x </span>
+                                <span class="offcanvas-wishlist-item-details-price">$500.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offcanvas-wishlist-item-delete text-right">
+                        <a href="#" class="offcanvas-wishlist-item-delete"><i class="fa fa-trash-o"></i></a>
+                    </div>
+                </li>
+                <li class="offcanvas-wishlist-item-single">
+                    <div class="offcanvas-wishlist-item-block">
+                        <a href="#" class="offcanvas-wishlist-item-image-link">
+                            <img src="{{asset('assets/images/product/default/home-3/default-1.jpg')}}" alt=""
+                                class="offcanvas-wishlist-image">
                         </a>
+                        <div class="offcanvas-wishlist-item-content">
+                            <a href="#" class="offcanvas-wishlist-item-link">Shock Absorber</a>
+                            <div class="offcanvas-wishlist-item-details">
+                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
+                                <span class="offcanvas-wishlist-item-details-price">$350.00</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="column column2 col l-2 c-12 m-12 sm-12">
-                        <h1>HỖ TRỢ</h1>
-                        <ul>
-                            <li><a href="">Kiểm tra đơn hàng</a></li>
-                            <li><a href="">Đăng nhập</a></li>
-                            <li><a href="">Đăng ký</a></li>
-                            <li><a href="">Giỏ hàng</a></li>
-                        </ul>
+                    <div class="offcanvas-wishlist-item-delete text-right">
+                        <a href="#" class="offcanvas-wishlist-item-delete"><i class="fa fa-trash-o"></i></a>
                     </div>
-                    <div class="column column3 col l-2-5 c-12 m-12 sm-12">
-                        <h1>CHÍNH SÁCH</h1>
-                        <ul>
-                            <li><a href="/chinh-sach-giao-hang-n82741.html">Chính sách vận chuyển</a></li>
-                            <li><a href="/chinh-sach-doi-hang-n48540.html">Chính sách đổi trả</a></li>
-                            <li><a href="/chinh-sach-thanh-toan-n82742.html">Chính sách thanh toán</a></li>
-                            <li><a href="/huong-dan-mua-hang-online-n82740.html">Quy định sử dụng</a></li>
-                        </ul>
-                    </div>
-                    <div class="column column4 col l-2-5 c-12 m-12 sm-12">
-                        <h1>GỬI EMAIL</h1>
-                        Gửi email nhận khuyến mãi
-                        <form class="input-email" action="">
-                            <input type="email" name="email" class="text-input">
-                            <button type="submit"><img src="{{asset('front_assets/font/Icon/paper plane.png')}}" alt=""></button>
-                        </form>
-                    </div>
-                    <div class="column column5 col l-2">
-                        <h1>KẾT NỐI</h1>
-                        <ul>
-                            <li><a href=""><img src="{{asset('front_assets/font/Icon/Facebook White.png')}}" alt=""></a></li>
-                            <li><a href=""><img src="{{asset('front_assets/font/Icon/Youtube White.png')}}" alt=""></a></li>
-                            <li><a href=""><img src="{{asset('front_assets/font/Icon/Instagram white.png')}}" alt=""></a></li>
-                        </ul>
+                </li>
+            </ul>
+            <ul class="offcanvas-wishlist-action-button">
+                <li><a href="#" class="btn btn-block btn-golden">View wishlist</a></li>
+            </ul>
+        </div> <!-- End Offcanvas Mobile Menu Wrapper -->
+
+    </div> <!-- End Offcanvas Mobile Menu Section -->
+
+    <!-- Start Offcanvas Search Bar Section -->
+    <div id="search" class="search-modal">
+        <button type="button" class="close">×</button>
+        <form>
+            <input type="search" placeholder="type keyword(s) here" />
+            <button type="submit" class="btn btn-lg btn-golden">Search</button>
+        </form>
+    </div>
+    <!-- End Offcanvas Search Bar Section -->
+
+    <!-- Offcanvas Overlay -->
+    <div class="offcanvas-overlay"></div>
+
+    @section('container')
+    @show
+
+    <!-- Start Footer Section -->
+    <footer class="footer-section footer-bg">
+        <div class="footer-wrapper">
+            <!-- Start Footer Top -->
+            <div class="footer-top" data-aos="fade-up" data-aos-delay="0">
+                <div class="container">
+                    <div class="row mb-n6">
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <!-- Start Footer Single Item -->
+                            <div class="footer-widget-single-item footer-widget-color--golden">
+                                <h5 class="title">INFORMATION</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="#">Delivery Information</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Single Item -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <!-- Start Footer Single Item -->
+                            <div class="footer-widget-single-item footer-widget-color--golden">
+                                <h5 class="title">MY ACCOUNT</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="#">My account</a></li>
+                                    <li><a href="#">Wishlist</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Frequently Questions</a></li>
+                                    <li><a href="#">Order History</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Single Item -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <!-- Start Footer Single Item -->
+                            <div class="footer-widget-single-item footer-widget-color--golden">
+                                <h5 class="title">CATEGORIES</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="#">Decorative</a></li>
+                                    <li><a href="#">Kitchen utensils</a></li>
+                                    <li><a href="#">Chair & Bar stools</a></li>
+                                    <li><a href="#">Sofas and Armchairs</a></li>
+                                    <li><a href="#">Interior lighting</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Single Item -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <!-- Start Footer Single Item -->
+                            <div class="footer-widget-single-item footer-widget-color--golden">
+                                <div class="footer-about">
+                                    <div class="col-12">
+                                        <div class="footer-social">
+                                            <h4 class="title">FOLLOW US</h4>
+                                            <ul class="footer-social-link">
+                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="footer-newsletter">
+                                            <h4 class="title">DON'T MISS OUT ON THE LATEST</h4>
+                                            <div class="form-newsletter">
+                                                <form action="#" method="post">
+                                                    <div class="form-fild-newsletter-single-item input-color--golden">
+                                                        <input type="email" placeholder="Your email address..." required>
+                                                        <button type="submit">SUBSCRIBE!</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Footer Single Item -->
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- End Footer Top -->
+            
+           
+
+            <!-- Start Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div
+                        class="row justify-content-between align-items-center align-items-center flex-column flex-md-row mb-n6">
+                        <div class="col-auto mb-6">
+                            <div class="footer-copyright">
+                                <p class="copyright-text">&copy; 2021 <a href="{{url('/')}}">VTC Academy</a>. Made with <i
+                                        class="fa fa-heart text-danger"></i> by <a href="#">WD06 - Group 3</a> </p>
+
+                            </div>
+                        </div>
+                        <div class="col-auto mb-6">
+                            <div class="footer-payment">
+                                <div class="image">
+                                    {{-- <img src="{{asset('assets/images/company-logo/payment.png')}}" alt=""> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start Footer Bottom -->
         </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> --}}
-    {{-- <!-- <script src="{{asset('front_assets/zoomsl.js')}}"></script> --> --}}
+    </footer>
+    <!-- End Footer Section -->
+
+    <!-- material-scrolltop button -->
+    <button class="material-scrolltop" type="button"></button>
+
+    
+
+    <!-- ::::::::::::::All JS Files here :::::::::::::: -->
+    <!-- Global Vendor, plugins JS -->
+    <script src="{{asset('assets/js/vendor/modernizr-3.11.2.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/popper.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/jquery-ui.min.js')}}"></script>
+
+    <!--Plugins JS-->
+    <script src="{{asset('assets/js/plugins/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/material-scrolltop.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/jquery.zoom.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/venobox.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/jquery.waypoints.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/jquery.lineProgressbar.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/aos.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/jquery.instagramFeed.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/ajax-mail.js')}}"></script>
     <script src="{{asset('admin_assets/libs/toastr/toastr.min.js')}}"></script>
     <script src="{{asset('admin_assets/js/pages/toastr.init.js')}}"></script>
-    <script src="{{asset('front_assets/js/slider.js')}}"></script>
-    <script src="{{asset('front_assets/js/main.js')}}"></script>
-    {{-- <div id="paypal-button"></div> --}}
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-    <script>
-    paypal.Button.render({
-        // Configure environment
-        env: 'sandbox',
-        client: {
-        sandbox: 'AfBG-j0eRLS4hgi5eYPaOwT7u6Y7KX-1xCKSl8nnv7iwzHSGjE6K7IqADdqw36dh-SEmZcQTl0sFXm3s',
-        production: 'demo_production_client_id'
-        },
-        // Customize button (optional)
-        locale: 'en_US',
-        style: {
-        size: 'large',
-        color: 'gold',
-        shape: 'pill',
-        },
+    <script src="{{asset('assets/js/toastr.min.js')}}"></script>
 
-        // Enable Pay Now checkout flow (optional)
-        commit: true,
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <script src="{{asset('assets/js/vendor/vendor.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/plugins.min.js')}}"></script>
 
-        // Set up a payment
-        payment: function(data, actions) {
-        return actions.payment.create({
-            transactions: [{
-            amount: {
-                total: '0.01',
-                currency: 'USD'
-            }
-            }]
-        });
-        },
-        // Execute the payment
-        onAuthorize: function(data, actions) {
-        return actions.payment.execute().then(function() {
-            // Show a confirmation message to the buyer
-            window.alert('Cảm ơn bạn đã mua hàng !');
-            window.location.href="/order_placed";
-        });
-        }
-    }, '#paypal-button');
-
-    </script>
+    <!-- Main JS -->
+    <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 
 </html>
-<!-- ================Done -->

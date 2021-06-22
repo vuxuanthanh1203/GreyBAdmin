@@ -1,28 +1,52 @@
 @extends('front/layout')
 
 @section('container')
-<div id="content_cart">
-    <div class="grid wide">
-        <div class="row">
-            @if(isset($list[0]))
-            <form action="">
-                <div class="content_cart">
-                    <div class="row">
-                        <div class="page-title">
-                            <h1 class="title-head">Giỏ hàng của bạn</h1>
-                            {{-- <p>Có <span style="font-weight: 600">2</span> sản phẩm trong giỏ hàng</p> --}}
-                        </div>
-                        <div class="col l-8 right_cart">
-                            <table class="table">
+<!-- ...:::: Start Breadcrumb Section:::... -->
+<div class="breadcrumb-section breadcrumb-bg-color--golden">
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="breadcrumb-title">Cart</h3>
+                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                        <nav aria-label="breadcrumb">
+                            <ul>
+                                <li><a href="{{url('/')}}">Home</a></li>
+                                <li><a href="{{url('category/sneakers')}}">Shop</a></li>
+                                <li class="active" aria-current="page">Cart</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- ...:::: End Breadcrumb Section:::... -->
+
+<!-- ...:::: Start Cart Section:::... -->
+@if(isset($list[0]))
+<form action="">
+<div class="cart-section">
+    <!-- Start Cart Table -->
+    <div class="cart-table-wrapper" data-aos="fade-up" data-aos-delay="0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table_desc">
+                        <div class="table_page table-responsive">
+                            <table>
+                                <!-- Start Cart Table Head -->
                                 <thead>
-                                    <tr class="tt">
-                                        <td class="image">Hình ảnh</td>
-                                        <td class="infoTable">Thông tin</td>
-                                        <td>Số lượng</td>
-                                        <td>Giá tiền</td>
-                                        <td></td>
+                                    <tr>
+                                        <th class="product_remove">Delete</th>
+                                        <th class="product_thumb">Image</th>
+                                        <th class="product_name">Product</th>
+                                        <th class="product_name">Size</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product_quantity">Quantity</th>
+                                        <th class="product_total">Total</th>
                                     </tr>
-                                </thead>
+                                </thead> <!-- End Cart Table Head -->
                                 @php
                                     $totalPrice = 0;
                                 @endphp
@@ -30,96 +54,108 @@
                                 @php
                                     $totalPrice += ($data->price * $data->qty)
                                 @endphp
-                                <tbody id="wishlist-row40" class="cart">
+                                <tbody>
+                                    <!-- Start Cart Single Item-->
                                     <tr class="idProduct" id="cart_box{{$data->attr_id}}">
-                                        <td class="imageWislist">
+                                        <td class="product_remove">
+                                            <a href="javascript:void(0)" onclick="deleteCartProduct('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}')"><i class="fa fa-trash-o"></i></a>
+                                        </td>
+                                        <td class="product_thumb">
                                             <a href="/product/{{$data->slug}}">
-                                                <img src="{{asset('storage/media/Products/'. $data->image)}}" alt="product-img">
+                                                <img src="{{asset('storage/media/Products/'. $data->image)}}" alt="">
                                             </a>
                                         </td>
-                                        <td class="nameWislist">
+                                        <td class="product_name">
                                             <a href="/product/{{$data->slug}}">{{$data->name}}</a>
-                                            <p>Size: {{$data->size}}</p>
                                         </td>
-                                        <td class="quantityProduct">
-                                            <div class="input-groupBtn">
-                                                <input id="qty{{$data->attr_id}}" type="number" value="{{$data->qty}}" min='1' onchange="updateQty('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}','{{$data->price}}')">
-                                            </div>
+                                        <td class="product_name">
+                                            <p>{{$data->size}}</p>
                                         </td>
-                                        <td class="cart-price">
-                                            <div class="priceWislist">
-                                                <span class="priceNew onlyPrice tp_product_price" id="total_price_{{$data->attr_id}}">{{$data->price * $data->qty}} đ</span>
-                                            </div>
+                                        <td class="product_name">{{number_format($data->price)}} VND</td>
+                                        <td class="product_quantity">
+                                            <label>Quantity</label> 
+                                            <input id="qty{{$data->attr_id}}" min="1" max="100" value="{{$data->qty}}" type="number" onchange="updateQty('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}','{{$data->price}}')">
                                         </td>
-                                        <td class="actitonWislist">
-                                            <a class="remove-item-cart" href="javascript:void(0)"  onclick="deleteCartProduct('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}')"><i class="icofont-close-line"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        <td class="product_total" id="total_price_{{$data->attr_id}}">{{number_format($data->price * $data->qty)}} VND</td>
+                                    </tr> <!-- End Cart Single Item-->
                                 </tbody>
                                 @endforeach  
                             </table>
                         </div>
-
-                        {{-- <div class="content_cart_mobile grid wide">
-                            <div class="listProductWislist row ">
-                                <div class="idProduct">
-                                    <div class="wislistItem row">
-                                        <div class="img_product_cart col c-3 m-5 sm-5">
-                                            <a href="/product/{{$data->slug}}">
-                                                <img src="{{asset('storage/media/Products/'. $data->image)}}" alt="product-img" class="img__product">
-                                            </a>
-
-                                        </div>
-                                        <div class="content_product_cart col c-9 m-7 sm-7">
-                                            <a href="" class="productname">
-                                                <h1>{{$data->name}}</h1>
-                                            </a>
-                                            <h3 class="size">{{$data->size}}</h3>
-                                            <h3 class="count">
-                                                <input id="qty{{$data->attr_id}}" type="number" value="{{$data->qty}}" min='1' onchange="updateQty('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}','{{$data->price}}')">
-                                            </h3>
-                                            <h3 class="total" id="total_price_{{$data->attr_id}}">{{$data->price * $data->qty}} đ</h3>
-                                            <a class="delete" href="" onclick="deleteCartProduct('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}')">Xóa</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        {{-- <div class="cart_submit">
+                            <button class="btn btn-md btn-golden" type="submit">update cart</button>
                         </div> --}}
-                        <div id="totals" class="col l-4 c-12 m-12 left_cart">
-                            <div class="orderWrapp">
-                                <div class="each-row">
-                                    <h3>Tóm tắt đơn hàng</h3>
-                                </div>
-                                <div class="each-row">
-                                    <div class="box-style">
-                                        <span class="text-label">Tạm tính: </span>
-                                        <strong class="totals">{{$totalPrice}} đ</strong>
-                                    </div>
-                                </div>
-                                <div class="each-row">
-                                    <div class="box-style">
-                                        <span class="text-label" style="font-weight: 600">Tổng tiền: </span>
-                                        <strong class="totals1">{{$totalPrice}} đ</strong>
-                                    </div>
-                                </div>
-                                <div class="each-row">
-                                    <a class="btn-large btn-checkout" title="Tiến hành đặt hàng" href="{{url('/checkout')}}">Tiến hành đặt hàng</a>
-                                    <a class="btn-large btn-buy" title="Mua thêm sản phẩm" href="/">Mua thêm sản phẩm</a>
-                                </div>
-                            </div>
-                            </div>
                     </div>
                 </div>
-            </form>
-            @else
-                <div class="cart-empty">
-                    <h3>Không có sản phẩm nào trong giỏ hàng</h3>
-                </div>
-            @endif
+            </div>
         </div>
     </div>
-</div>
+</div> <!-- End Cart Table -->
+</form>
+@else
+ <!-- ...::::Start About Us Center Section:::... -->
+<div class="empty-cart-section section-fluid">
+    <div class="emptycart-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-3">
+                    <div class="emptycart-content text-center">
+                        <div class="image">
+                            <img class="img-fluid" src="assets/images/emprt-cart/empty-cart.png" alt="">
+                        </div>
+                        <h4 class="title">Your Cart is Empty</h4>
+                        <h6 class="sub-title">Sorry Mate... No item Found inside your cart!</h6>
+                        <a href="shop-grid-sidebar-left.html" class="btn btn-lg btn-golden">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- ...::::End  About Us Center Section:::... -->
+@endif
+    <!-- Start Coupon Start -->
+    <div class="coupon_area" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    {{-- <div class="coupon_code left" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Coupon</h3>
+                        <div class="coupon_inner">
+                            <p>Enter your coupon code if you have one.</p>
+                            <input class="mb-2" placeholder="Coupon code" type="text">
+                            <button type="submit" class="btn btn-md btn-golden">Apply coupon</button>
+                        </div>
+                    </div> --}}
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="coupon_code right" data-aos="fade-up" data-aos-delay="400">
+                        <h3>Cart Totals</h3>
+                        <div class="coupon_inner">
+                            <div class="cart_subtotal">
+                                <p>Subtotal</p>
+                                <p class="cart_amount">{{number_format($totalPrice)}} VND</p>
+                            </div>
+                            <div class="cart_subtotal ">
+                                <p>Shipping</p>
+                                <p class="cart_amount">0 VND</p>
+                            </div>
+                            <a href="#">Free Ship</a>
+
+                            <div class="cart_subtotal">
+                                <p>Total</p>
+                                <p class="cart_amount">{{number_format($totalPrice)}} VND</p>
+                            </div>
+                            <div class="checkout_btn">
+                                <a href="{{url('/checkout')}}" class="btn btn-md btn-golden">Proceed to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Coupon Start -->
+</div> <!-- ...:::: End Cart Section:::... -->
+
 
 <input type="hidden" id="qty" value="1"/>
 <form id="frmAddToCart">

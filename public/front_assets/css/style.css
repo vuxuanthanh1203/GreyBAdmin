@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+.verify h1 {
+    color: #185137 !important;
+    text-align: center;
+    margin: 30px 0;
+}
+
+input#rememberme {
+    display: inline-block !important;
+}
+
 .confirm-order {
     text-align: center;
     margin: 30px 0;
@@ -811,6 +821,7 @@ input[type=number] {
     height:42px;
     max-width:100%;
     margin-top:0.7%;
+    text-align: center;
 }
 #nav .nav-mobile{
     height:42px;
@@ -1734,6 +1745,8 @@ button{
     height:37px;
     line-height: 37px;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
 }
 #productdetail .quantity{
     margin-bottom: 22px;

@@ -63,7 +63,7 @@
                                 <input type="text" name="code" value="{{$code}}" aria-required="true" class="form-control" id="code" required>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="mrp">MRP<span class="text-danger">*</span></label>
+                                <label for="mrp">Historical cost<span class="text-danger">*</span></label>
                                 <input type="number" name="mrp" value="{{$mrp}}" aria-required="true" class="form-control" id="mrp" required min="0">
                             </div>
                             <div class="form-group col-md-4">

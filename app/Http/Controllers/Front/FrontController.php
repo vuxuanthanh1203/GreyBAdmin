@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Crypt;
+use Mail;
 
 class FrontController extends Controller
 {
@@ -22,7 +23,7 @@ class FrontController extends Controller
         $result['home_products_new']=DB::table('products')
                 ->where(['status'=>1])
                 ->where(['type'=>1])
-                ->limit(8)
+                ->limit(10)
                 ->get();
 
 
@@ -71,8 +72,9 @@ class FrontController extends Controller
     
     public function product(Request $request,$slug) {
         $result['product']= DB::table('products')
-            ->where(['status'=>1])
-            ->where(['slug'=>$slug])
+            ->leftJoin('categories','categories.id','=','products.category_id')
+            ->where(['products.status'=>1])
+            ->where(['products.slug'=>$slug])
             ->get();
 
         foreach($result['product'] as $list1){
@@ -97,7 +99,7 @@ class FrontController extends Controller
             ->get();
 
         // echo "<pre>";
-        // print_r($result['product_attr'][$list1->id][0]);
+        // print_r($result['product_attr'][$list1->id]);
         // die();
         
         return view('front.product',$result);
@@ -249,12 +251,12 @@ class FrontController extends Controller
                 DB::table('cart')
                     ->where(['id'=>$update_id])
                     ->delete();
-                $msg="Đã xóa sản phẩm";
+                $msg="Product removed";
             }else{
                 DB::table('cart')
                     ->where(['id'=>$update_id])
                     ->update(['qty'=>$pqty]);
-                $msg="Cập nhật giỏ hàng thành công";
+                $msg="Cart update successful";
             }
         }else{
             $id=DB::table('cart')->insertGetId([
@@ -265,7 +267,7 @@ class FrontController extends Controller
                 'qty'=>$pqty,
                 'added_on'=>date('Y-m-d h:i:s')
             ]);
-            $msg="Thêm giỏ hàng thành công";
+            $msg="Add to cart successfully";
         }
 
         return response()->json(['msg'=>$msg]);
@@ -319,6 +321,7 @@ class FrontController extends Controller
        if(!$valid->passes()){
             return response()->json(['status'=>'error','error'=>$valid->errors()->toArray()]);
        }else{
+            $rand_id=rand(111111111,999999999);
             $arr=[
                 "name"=>$request->name,
                 "email"=>$request->email,
@@ -326,15 +329,42 @@ class FrontController extends Controller
                 "mobile"=>$request->mobile,
                 "address"=>$request->address,
                 "status"=>1,
+                "is_verify"=>0,
+                "rand_id"=>$rand_id,
                 "created_at"=>date('Y-m-d h:i:s'),
                 "updated_at"=>date('Y-m-d h:i:s')
             ];
             $query=DB::table('customers')->insert($arr);
             if($query){
-                return response()->json(['status'=>'success','msg'=>"Đăng ký thành công"]);
+
+                $data=['name'=>$request->name,'rand_id'=>$rand_id];
+                $user['to']=$request->email;
+                Mail::send('front/email_verification',$data,function($messages) use ($user){
+                    $messages->to($user['to']);
+                    $messages->subject('Email Id Verification');
+                });
+
+                return response()->json(['status'=>'success','msg'=>"Sign Up Success. Please check your email to verify your account"]);
             }
 
        }
+    }
+
+    public function email_verification(Request $request,$id)
+    {
+        $result=DB::table('customers')  
+            ->where(['rand_id'=>$id])
+            ->where(['is_verify'=>0])
+            ->get(); 
+
+        if(isset($result[0])){
+            DB::table('customers')  
+            ->where(['id'=>$result[0]->id])
+            ->update(['is_verify'=>1,'rand_id'=>'']);
+        return view('front.verification');
+        }else{
+            return redirect('/');
+        }
     }
 
     public function login_process(Request $request)
@@ -345,14 +375,24 @@ class FrontController extends Controller
             ->get(); 
         
         if(isset($result[0])){
-            // $db_pwd=Crypt::decrypt($result[0]->password);
-            $db_pwd=$result[0]->password;
+            $db_pwd=Crypt::decrypt($result[0]->password);
+            // $db_pwd=$result[0]->password;
+            $status=$result[0]->status;
+            $is_verify=$result[0]->is_verify;
+
+            if($is_verify==0){
+                return response()->json(['status'=>"error",'msg'=>'Please verify your email address!']); 
+            }
+            if($status==0){
+                return response()->json(['status'=>"error",'msg'=>'Your account has been disabled!']); 
+            }
+
             if($db_pwd==$request->login_password){
                 $request->session()->put('FRONT_USER_LOGIN',true);
                 $request->session()->put('FRONT_USER_ID',$result[0]->id);
                 $request->session()->put('FRONT_USER_NAME',$result[0]->name);
                 $status="success";
-                $msg="Đăng nhập thành công";
+                $msg="Logged in successfully";
                 
                 $getUserTempId=getUserTempId();
                 DB::table('cart')  
@@ -360,13 +400,71 @@ class FrontController extends Controller
                     ->update(['user_id'=>$result[0]->id,'user_type'=>'Reg']);
             }else{
                 $status="error";
-                $msg="Mật Khẩu không chính xác !!!";
+                $msg="Incorrect password !!!";
             }
         }else{
             $status="error";
-            $msg="Email không tồn tại !!!";
+            $msg="Email does not exist !!!";
         }
        return response()->json(['status'=>$status,'msg'=>$msg]); 
+    }
+
+    public function get_password(Request $request) {
+        return view('front.get_password');
+    }
+
+    public function forgot_password(Request $request)
+    {
+        $result=DB::table('customers')  
+            ->where(['email'=>$request->forgot_email])
+            ->get(); 
+        $rand_id=rand(111111111,999999999);
+        if(isset($result[0])){
+
+            DB::table('customers')  
+                ->where(['email'=>$request->forgot_email])
+                ->update(['is_forgot_password'=>1,'rand_id'=>$rand_id]);
+
+            $data=['name'=>$result[0]->name,'rand_id'=>$rand_id];
+            $user['to']=$request->forgot_email;
+            Mail::send('front/forgot_email',$data,function($messages) use ($user){
+                $messages->to($user['to']);
+                $messages->subject("Forgot Password");
+            });
+            return response()->json(['status'=>'success','msg'=>'Please check your email for the password']); 
+        }else{
+            return response()->json(['status'=>'error','msg'=>'Email is not registered']); 
+        }
+    }
+
+    public function forgot_password_change(Request $request,$id)
+    {
+        $result=DB::table('customers')  
+            ->where(['rand_id'=>$id])
+            ->where(['is_forgot_password'=>1])
+            ->get(); 
+
+        if(isset($result[0])){
+            $request->session()->put('FORGOT_PASSWORD_USER_ID',$result[0]->id);
+        
+            return view('front.forgot_password_change');
+        }else{
+            return redirect('/');
+        }
+    }
+
+    public function forgot_password_change_process(Request $request)
+    {
+        DB::table('customers')  
+            ->where(['id'=>$request->session()->get('FORGOT_PASSWORD_USER_ID')])
+            ->update(
+                [
+                    'is_forgot_password'=>0,
+                    'password'=>Crypt::encrypt($request->password)   ,
+                    'rand_id'=>''
+                ]
+            ); 
+        return response()->json(['status'=>'success','msg'=>'Change password successfully']);     
     }
 
     public function checkout(Request $request)
@@ -391,6 +489,9 @@ class FrontController extends Controller
                 $result['customers']['address']='';
             }
 
+        //     echo "<pre>";
+        // print_r($result);
+        // die();
             return view('front.checkout',$result);
         }else{
             return redirect('/');
@@ -399,10 +500,62 @@ class FrontController extends Controller
 
     public function apply_coupon_code(Request $request)
     {
-        $arr=apply_coupon_code($request->coupon_code);
-        $arr=json_decode($arr,true);
+        
+        $totalPrice=0;
+        $value = 0;
+        $type = "";
+        $result=DB::table('coupons')  
+            ->where(['code'=>$request->coupon_code])
+            ->get(); 
+        
+        if(isset($result[0])){
+            $value=$result[0]->value;
+            $type=$result[0]->type;
+            $getAddToCartTotalItem=getAddToCartTotalItem();
+            
+            foreach($getAddToCartTotalItem as $list){
+                $totalPrice=$totalPrice+($list->qty*$list->price);
+            }  
+            if($result[0]->status==1){
+                if($result[0]->is_one_time==1){
+                    $status="error";
+                    $msg="Coupon code already used";    
+                }else{
+                    $min_order_amt=$result[0]->min_order_amt;
+                    if($min_order_amt>0){
+                        if($min_order_amt<$totalPrice){
+                            $status="success";
+                            $msg="Coupon code applied";
+                        }else{
+                            $status="error";
+                            $msg="Cart amount must be greater then $min_order_amt";
+                        }
+                    }else{
+                         $status="success";
+                         $msg="Coupon code applied";
+                    }
+                }
+            }else{
+                $status="error";
+                $msg="Coupon code deactivated";   
+            }
+            
+        }else{
+           $status="error";
+           $msg="Please enter valid coupon code";
+        }
+        
+       
+        if($status=='success'){
+            if($type=='Value'){
+                $totalPrice=$totalPrice-$value;
+            }if($type=='Per'){
+                $newPrice=($value/100)*$totalPrice;
+                $totalPrice=round($totalPrice-$newPrice);
+            }
+        }
 
-        return response()->json(['status'=>$arr['status'],'msg'=>$arr['msg'],'totalPrice'=>$arr['totalPrice']]);        
+        return response()->json(['status'=>$status,'msg'=>$msg,'totalPrice'=>$totalPrice, 'couponValue'=>$value, 'couponType'=>$type]);      
     }
 
     public function place_order(Request $request)
@@ -416,7 +569,7 @@ class FrontController extends Controller
             ]);
     
             if(!$valid->passes()){
-                return response()->json(['status'=>'error','msg'=>"Địa chỉ email đã tồn tại"]);
+                return response()->json(['status'=>'error','msg'=>"Email address already exists"]);
 
             }else{
                 $arr=[
@@ -427,11 +580,11 @@ class FrontController extends Controller
                     "password"=>Crypt::encrypt($rand_id),
                     "mobile"=>$request->mobile,
                     "status"=>1,
-                    // "is_verify"=>1,
-                    // "rand_id"=>$rand_id,
+                    "is_verify"=>1,
+                    "rand_id"=>$rand_id,
                     "created_at"=>date('Y-m-d h:i:s'),
                     "updated_at"=>date('Y-m-d h:i:s'),
-                    // "is_forgot_password"=>0
+                    "is_forgot_password"=>0
                 ];
 
                 $user_id=DB::table('customers')->insertGetId($arr);
@@ -499,10 +652,10 @@ class FrontController extends Controller
 
 
             $status="success";
-            $msg="Đặt hàng thành công";
+            $msg="Order Success";
         }else{
             $status="error";
-            $msg="Xin hãy thử lại sau một vài giây";
+            $msg="Please try again in a few seconds";
         }
         return response()->json(['status'=>$status,'msg'=>$msg]); 
     }
