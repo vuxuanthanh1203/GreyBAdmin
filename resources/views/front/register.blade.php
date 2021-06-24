@@ -1,45 +1,76 @@
 @extends('front/layout')
+@section('page_title', 'Register')
 
 @section('container')
-<div id="login">
-    <div class="grid wide">
-        <div class="login row sm-gutter">
-            <!-- <div class="formAccount"> -->
-            <div class="formAccount col l-6 c-12 m-12">
-                <h2 class="section-title">Đăng Ký</h2>
-                <p>Bạn chưa có tài khoản? Đăng ký ngay!</p>
-                <div class="form-login">
-                    <form method="post" id="frmRegistration">
-                        <div> 
-                            <input type="text" name="name" id="name" placeholder="Họ và tên của bạn" class="inputAccount" required>
-                            <div id="name_error" class="field_error"></div>                                   
-                        </div> 
-                        <div>
-                            <input type="email" name="email" id="email" placeholder="email@example.com" class="inputAccount" required>
-                            <div id="email_error" class="field_error"></div>
-                        </div>
-                        <div>
-                            <input type="password" name="password" id="password" placeholder="Mật khẩu" class="inputAccount" required>
-                            <div id="password_error" class="field_error"></div>                                     
-                        </div> 
-                        <div>   
-                            <input type="text" name="mobile" id="mobile" placeholder="Số điện thoại" class="inputAccount" required>
-                            <div id="mobile_error" class="field_error"></div>                                 
-                        </div> 
-                        <div>     
-                            <input type="text" name="address" id="address" placeholder="Địa chỉ" class="inputAccount" required>
-                            <div id="address_error" class="field_error"></div>                               
-                        </div> 
-                                             
-                        <div class="wrapbtn">
-                            <button type="submit" id="btnRegistration" class="account">ĐĂNG KÝ</button>
-                        </div>
-                        @csrf
-                    </form>
-                </div>                       
-
+<!-- ...:::: Start Breadcrumb Section:::... -->
+<div class="breadcrumb-section breadcrumb-bg-color--golden">
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="breadcrumb-title">Registration</h3>
+                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                        <nav aria-label="breadcrumb">
+                            <ul>
+                                <li><a href="{{url('/')}}">Home</a></li>
+                                <li><a href="{{url('category/sneakers')}}">Shop</a></li>
+                                <li class="active" aria-current="page">Registration</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</div> <!-- ...:::: End Breadcrumb Section:::... -->
+
+ <!-- ...:::: Start Customer Login Section :::... -->
+ <div class="customer-login">
+    <div class="container">
+        <div class="row">
+            <!--login area start-->
+            <div class="col-lg-3 col-md-3"></div>
+            <!--login area start-->
+
+            <!--register area start-->
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form register" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Register Form</h3>
+                    <form id="frmRegistration">
+                        <div class="default-form-box">
+                            <label>Full Name <span>*</span></label>
+                            <input type="text" name="name" id="name" required>
+                            <div id="name_error" class="field_error"></div>
+                        </div>
+                        <div class="default-form-box">
+                            <label>Email address <span>*</span></label>
+                            <input type="email" name="email" id="email" required>
+                            <div id="email_error" class="field_error"></div>
+                        </div>
+                        <div class="default-form-box">
+                            <label>Passwords <span>*</span></label>
+                            <input type="password" name="password" id="password" required>
+                            <div id="password_error" class="field_error"></div>
+                        </div>
+                        <div class="default-form-box">
+                            <label>Phone Number <span>*</span></label>
+                            <input type="text" name="mobile" id="mobile" required>
+                            <div id="mobile_error" class="field_error"></div>                                 
+                        </div>
+                        <div class="default-form-box">
+                            <label>Address <span>*</span></label>
+                            <input type="text" name="address" id="address" required>
+                            <div id="address_error" class="field_error"></div>                               
+                        </div>
+                        <div class="login_submit">
+                            <button class="btn btn-md btn-black-default-hover" id="btnRegistration" type="submit">Register</button>
+                        </div>
+                        @csrf
+                    </form>
+                </div>
+            </div>
+            <!--register area end-->
+        </div>
+    </div>
+</div> <!-- ...:::: End Customer Login Section :::... -->
 @endsection

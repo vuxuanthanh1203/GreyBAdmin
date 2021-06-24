@@ -1,4 +1,5 @@
 @extends('front/layout')
+@section('page_title', 'Product Details')
 
 @section('container')
 <!-- ...:::: Start Breadcrumb Section:::... -->

@@ -134,9 +134,18 @@ class FrontController extends Controller
             $query=$query->orderBy('products.price','asc');
             $sort_txt="Price - ASC";
         }
+        // if($request->get('filter_price_start')!==null && $request->get('filter_price_end')!==null){
+        //     $filter_price_start=$request->get('filter_price_start');
+        //     $filter_price_end=$request->get('filter_price_end');
 
-        $query=$query->distinct()->select('products.*');
-        $query=$query->get();
+        //     if($filter_price_start>0 && $filter_price_end>0){
+        //         $query=$query->whereBetween('products_attr.price',[$filter_price_start,$filter_price_end]);
+        //     }
+        // }  
+
+        // $query=$query->distinct()->select('products.*');
+        // $query=$query->get();
+        $query=DB::table('products')->paginate(9);
         $result['product']=$query;
         foreach($result['product'] as $list1){
             $query1=DB::table('products_attr');
@@ -158,6 +167,9 @@ class FrontController extends Controller
         $result['slug']=$slug;
         $result['sort']=$sort;
         $result['sort_txt']=$sort_txt;
+        // $result['filter_price_start']=$filter_price_start;
+        // $result['filter_price_end']=$filter_price_end;
+        
         
         return view('front.category',$result);
     }
@@ -192,8 +204,9 @@ class FrontController extends Controller
             $sort_txt="Price - ASC";
         }
 
-        $query=$query->distinct()->select('products.*');
-        $query=$query->get();
+        // $query=$query->distinct()->select('products.*');
+        // $query=$query->get();
+        $query=DB::table('products')->paginate(9);
         $result['product']=$query;
         foreach($result['product'] as $list1){
             $query1=DB::table('products_attr');
@@ -330,6 +343,7 @@ class FrontController extends Controller
                 "address"=>$request->address,
                 "status"=>1,
                 "is_verify"=>0,
+                "is_forgot_password"=>0,
                 "rand_id"=>$rand_id,
                 "created_at"=>date('Y-m-d h:i:s'),
                 "updated_at"=>date('Y-m-d h:i:s')
@@ -669,5 +683,96 @@ class FrontController extends Controller
         }
     }
     
+    public function order(Request $request)
+    {
+        $result['orders']=DB::table('orders')
+        ->select('orders.*','orders_status.orders_status')
+        ->leftJoin('orders_status','orders_status.id','=','orders.orders_status')
+        ->where(['orders.customers_id'=>$request->session()->get('FRONT_USER_ID')])
+        ->orderBy('orders.created_at')
+        ->get();    
+        return view('front.order',$result);
+
+    }
+
+    public function order_detail(Request $request,$id)
+    {
+        $result['orders_details']=
+                DB::table('orders_details')
+                ->select('orders.*', 'orders_details.price','orders_details.qty','products.name as pname', 'products.slug as pslug', 'products.price as pprice', 'products.image as pimage','sizes.size','orders_status.orders_status')
+                ->leftJoin('orders','orders.id','=','orders_details.orders_id')
+                ->leftJoin('products_attr','products_attr.id','=','orders_details.products_attr_id')
+                ->leftJoin('products','products.id','=','products_attr.products_id')
+                ->leftJoin('sizes','sizes.id','=','products_attr.size_id')
+                ->leftJoin('orders_status','orders_status.id','=','orders.orders_status')
+                ->where(['orders.id'=>$id])
+                ->get();
+        return view('front.order_detail',$result);
+    }
     
+    public function my_account(Request $request, $id='')
+    {
+        $arr = DB::table('customers')
+        ->where(['id'=>$id])
+        ->where(['status'=>1])
+        ->get();
+        $result['name'] = $arr['0']->name;
+        $result['email'] = $arr['0']->email;
+        $result['mobile'] = $arr['0']->mobile;
+        $result['address'] = $arr['0']->address;
+        $result['id'] = $arr['0']->id; 
+
+        return view('front.my_account',$result);
+    }
+
+    public function profile_process(Request $request)
+    {       
+        $userUpdate = [
+            'name' => $request->name,
+            'mobile' => $request->mobile,
+            'address' => $request->address
+        ];
+        DB::table('customers')->where('id',$request->id)->update($userUpdate);
+        $message = "Profile updated !";
+        $request->session()->flash('success', $message);
+        return redirect('/');
+    }
+    
+    public function change_password(Request $request, $id='')
+    {
+        $arr = DB::table('customers')
+        ->where(['id'=>$id])
+        ->where(['status'=>1])
+        ->get();
+        $result['id'] = $arr['0']->id; 
+
+        return view('front.change_password', $result);
+    }
+
+    public function change_password_process(Request $request)
+    {
+        $password = $request->post('current_password');
+
+        $result = DB::table('customers')->where(['id'=>session('FRONT_USER_ID')])->first();
+
+        if ($result) {
+            if ($password == $result->password) {
+                // if (Hash::check($password, $result->password)) {
+                // $model = DB::table('customers')->find($request->post('id'));
+                // $model->password = Hash::make($request->post('new_password'));
+                // $model->save();
+
+                // $request->session()->flash('success', 'Password Changed Successfully');
+                // session()->forget('FRONT_USER_LOGIN');
+                // session()->forget('FRONT_USER_ID');
+                // session()->forget('FRONT_USER_NAME');
+                // session()->forget('USER_TEMP_ID');
+                // return redirect('/login');
+                echo 'Đúng';
+            } else {
+                $request->session()->flash('error','Please enter correct password !!!');
+                return redirect('change_password/'.session('FRONT_USER_ID'));
+            }
+        }     
+    }
 }

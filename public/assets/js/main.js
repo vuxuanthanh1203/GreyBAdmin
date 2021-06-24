@@ -427,15 +427,15 @@
      ***********************************************/
     $("#slider-range").slider({
         range: true,
-        min: 0,
-        max: 500,
-        values: [75, 300],
+        min: 500000,
+        max: 2500000,
+        values: [1000000, 2000000],
         slide: function(event, ui) {
-            $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            $("#amount").val(ui.values[0] + "VND - " + ui.values[1] + " VND" );
         }
     });
-    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-        " - $" + $("#slider-range").slider("values", 1));
+    $("#amount").val($("#slider-range").slider("values", formatNumber(0)) + "VND - "
+        + $("#slider-range").slider("values", formatNumber(1)) + " VND" );
 
 
 
@@ -464,3 +464,7 @@
 })(jQuery);
 
 
+function formatNumber (num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+  }
+  

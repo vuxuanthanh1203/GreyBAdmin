@@ -63,7 +63,7 @@ class AdminController extends Controller
         $result['phone'] = $arr['0']->phone;
         $result['address'] = $arr['0']->address;
         $result['id'] = $arr['0']->id; 
-
+        
         return view('admin/profile', $result);
     }
 

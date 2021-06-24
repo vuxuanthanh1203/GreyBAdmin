@@ -1,5 +1,5 @@
 @extends('front/layout')
-
+@section('page_title', 'Home')
 @section('container')
 <div class="hero-slider-section">
     <!-- Slider main container -->
@@ -38,7 +38,7 @@
     <!-- End Hero Slider Section-->
 
     <!-- Start Service Section -->
-    <div class="service-promo-section section-top-gap-100">
+    <div class="service-promo-section section-top-gap-100" style="margin: 70px 0">
         <div class="service-wrapper">
             <div class="container">
                 <div class="row">
@@ -183,7 +183,7 @@
     <!-- End Product Default Slider Section -->
 
     <!-- Start Banner Section -->
-    <div class="banner-section section-top-gap-100">
+    <div class="banner-section section-top-gap-100" style="margin: 70px 0">
         <div class="banner-wrapper">
             <div class="container">
                 <div class="row d-flex align-items-center mb-n6">

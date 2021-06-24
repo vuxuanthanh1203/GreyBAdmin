@@ -7,14 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>HONO - Multi Purpose HTML Template</title>
+    <title>GREY.B - @yield('page_title')</title>
 
     <!-- ::::::::::::::Favicon icon::::::::::::::-->
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/png">
+    <link rel="shortcut icon" href="{{asset('admin_assets/images/greyb.png')}}">
 
     <!-- ::::::::::::::All CSS Files here :::::::::::::: -->
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/all.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/ionicons.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/simple-line-icons.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/jquery-ui.min.css')}}">
@@ -37,10 +37,11 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins/plugins.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
-
+    {{-- <link rel="stylesheet" href="{{asset('assets/css/nouislider.css')}}"> --}}
+    
 </head>
 
-<body>
+<body class="productPage">
     <!-- Start Header Area -->
     <header class="header-section d-none d-xl-block">
         <div class="header-wrapper">
@@ -104,11 +105,19 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
+                                @if(session()->has('FRONT_USER_LOGIN') != null)
                                 <li style="margin-left:5px;">
-                                    <a href="#">
+                                    <a href="{{url('/my_account')}}/{{session('FRONT_USER_ID')}}">
                                         <i class="icon-user"></i>
                                     </a>
                                 </li>
+                                @else
+                                <li style="margin-left:5px;">
+                                    <a href="{{url('/login')}}">
+                                        <i class="icon-user"></i>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                             <!-- End Header Action Link -->
                         </div>
@@ -163,11 +172,19 @@
                                     <span class="item-count">{{$totalCartItem}}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-user"></i>
-                                </a>
-                            </li>
+                            @if(session()->has('FRONT_USER_LOGIN') != null)
+                                <li style="margin-left:5px;">
+                                    <a href="{{url('/my_account')}}/{{session('FRONT_USER_ID')}}">
+                                        <i class="icon-user"></i>
+                                    </a>
+                                </li>
+                                @else
+                                <li style="margin-left:5px;">
+                                    <a href="{{url('/login')}}">
+                                        <i class="icon-user"></i>
+                                    </a>
+                                </li>
+                                @endif
                             <li>
                                 <a href="#mobile-menu-offcanvas" class="offcanvas-toggle offside-menu">
                                     <i class="icon-menu"></i>
@@ -271,9 +288,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="offcanvas-cart-item-delete text-right">
-                        <a href="#" class="offcanvas-cart-item-delete"><i class="fa fa-trash-o"></i></a>
-                    </div> --}}
                 </li>                
                 @endforeach   
             </ul>
@@ -285,7 +299,19 @@
                 <li><a href="{{url('/cart')}}" class="btn btn-block btn-golden">View Cart</a></li>
                 <li><a href="{{url('/checkout')}}" class=" btn btn-block btn-golden mt-5">Checkout</a></li>
             </ul>
-        </div> 
+        </div>
+        @else
+        <div class="emptycart-wrapper">
+            <div class="container">
+                <div class="emptycart-content text-center">
+                    <div class="image">
+                        <img class="img-fluid" src="assets/images/emprt-cart/empty-cart.png" alt="">
+                    </div>
+                    <h4 class="title" style="font-size:24px">Your Cart is Empty</h4>
+                    <h6 class="sub-title" style="font-size:18px">Sorry Mate... No item Found inside your cart!</h6>
+                </div>
+            </div>
+        </div>
         @endif
         <!-- End  Offcanvas Addcart Wrapper -->
 
@@ -436,10 +462,10 @@
                                         <div class="footer-social">
                                             <h4 class="title">FOLLOW US</h4>
                                             <ul class="footer-social-link">
-                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -465,8 +491,6 @@
             </div>
             <!-- End Footer Top -->
             
-           
-
             <!-- Start Footer Bottom -->
             <div class="footer-bottom">
                 <div class="container">
@@ -475,7 +499,7 @@
                         <div class="col-auto mb-6">
                             <div class="footer-copyright">
                                 <p class="copyright-text">&copy; 2021 <a href="{{url('/')}}">VTC Academy</a>. Made with <i
-                                        class="fa fa-heart text-danger"></i> by <a href="#">WD06 - Group 3</a> </p>
+                                        class="fa fa-heart text-danger"></i> by <a href="{{url('/')}}">WD06 - Group 4</a> </p>
 
                             </div>
                         </div>
@@ -525,11 +549,24 @@
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <script src="{{asset('assets/js/vendor/vendor.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/all.js')}}"></script>
     <script src="{{asset('assets/js/plugins/plugins.min.js')}}"></script>
 
     <!-- Main JS -->
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/nouislider.js')}}"></script> --}}
+
+    @if(Session::has('success'))
+      <script>
+         toastr.success("{!!Session::get('success')!!}");
+      </script>
+    @endif
+    @if(Session::has('error'))
+    <script>
+        toastr.error("{!!Session::get('error')!!}");
+    </script>
+    @endif
 </body>
 
 </html>

@@ -2,3 +2,37 @@
 #toast-container > .toast-error { background-color: #BD362F; }
 
 #toast-container > .toast-success { background-color: #51a351; }
+
+.aa-sidebar-price-range {
+    display: inline;
+    text-align: center;
+    width: 100%;
+}
+.aa-sidebar-price-range .noUi-connect {
+    box-shadow: none;
+  }
+.aa-sidebar-price-range span {
+    border: 1px solid #e8e7e6;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 20px;
+    padding: 4px 10px;
+}
+.aa-filter-btn {
+    color: #b19361;
+    font-size: 15px;
+    height: 30px;
+    width: 80px;
+    border: 1px solid;
+    margin-top: 10px;
+  }
+
+#sort_by_value {
+  display: block !important;
+}
+
+.nice-select {
+  display: none !important;
+}

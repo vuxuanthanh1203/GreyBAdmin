@@ -1,5 +1,5 @@
 @extends('front/layout')
-
+@section('page_title', 'Checkout')
 @section('container')
 
     <!-- ...:::: Start Breadcrumb Section:::... -->
@@ -33,7 +33,7 @@
                 <div class="col-12">
                     <div class="user-actions accordion" data-aos="fade-up" data-aos-delay="0">
                         <h3>
-                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                            <i class="fas fa-flag" aria-hidden="true"></i>
                             Do you already have an account?
                             <a class="Returning" href="{{url('/login')}}" >Click here to login</a>
                         </h3>

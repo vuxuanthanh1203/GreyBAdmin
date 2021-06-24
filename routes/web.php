@@ -38,7 +38,16 @@ Route::get('/checkout', [FrontController::class, 'checkout']);
 Route::post('/apply_coupon_code', [FrontController::class, 'apply_coupon_code']);
 Route::post('place_order', [FrontController::class, 'place_order']);
 Route::get('/order_placed', [FrontController::class, 'order_placed']);
-Route::post('/gateway', [PaypalController::class, 'index']);
+
+Route::group(['middleware'=>'user_auth'],function(){
+    Route::get('/order',[FrontController::class,'order']);
+    Route::get('/order_detail/{id}',[FrontController::class,'order_detail']);
+    Route::get('/my_account/{id}', [FrontController::class, 'my_account']);
+    Route::post('/profile_process', [FrontController::class, 'profile_process'])->name('profile_process');
+    Route::get('change_password/{id}', [FrontController::class, 'change_password']);
+    Route::post('/change_password_process', [FrontController::class, 'change_password_process'])->name('change_password_process');
+});
+
 
 
 
@@ -47,7 +56,7 @@ Route::get('logout', function () {
     session()->forget('FRONT_USER_ID');
     session()->forget('FRONT_USER_NAME');
     session()->forget('USER_TEMP_ID');
-    return redirect('/');
+    return redirect('/login');
 });
 
 

@@ -1,6 +1,10 @@
 @extends('front/layout')
-
+@section('page_title', 'Cart')
 @section('container')
+
+@php
+    $totalPrice = 0;
+@endphp
 <!-- ...:::: Start Breadcrumb Section:::... -->
 <div class="breadcrumb-section breadcrumb-bg-color--golden">
     <div class="breadcrumb-wrapper">
@@ -47,9 +51,6 @@
                                         <th class="product_total">Total</th>
                                     </tr>
                                 </thead> <!-- End Cart Table Head -->
-                                @php
-                                    $totalPrice = 0;
-                                @endphp
                                 @foreach($list as $data)
                                 @php
                                     $totalPrice += ($data->price * $data->qty)
@@ -58,7 +59,7 @@
                                     <!-- Start Cart Single Item-->
                                     <tr class="idProduct" id="cart_box{{$data->attr_id}}">
                                         <td class="product_remove">
-                                            <a href="javascript:void(0)" onclick="deleteCartProduct('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}')"><i class="fa fa-trash-o"></i></a>
+                                            <a href="javascript:void(0)" onclick="deleteCartProduct('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}')"><i class="fas fa-trash"></i></a>
                                         </td>
                                         <td class="product_thumb">
                                             <a href="/product/{{$data->slug}}">
@@ -92,27 +93,6 @@
     </div>
 </div> <!-- End Cart Table -->
 </form>
-@else
- <!-- ...::::Start About Us Center Section:::... -->
-<div class="empty-cart-section section-fluid">
-    <div class="emptycart-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-3">
-                    <div class="emptycart-content text-center">
-                        <div class="image">
-                            <img class="img-fluid" src="assets/images/emprt-cart/empty-cart.png" alt="">
-                        </div>
-                        <h4 class="title">Your Cart is Empty</h4>
-                        <h6 class="sub-title">Sorry Mate... No item Found inside your cart!</h6>
-                        <a href="shop-grid-sidebar-left.html" class="btn btn-lg btn-golden">Continue Shopping</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- ...::::End  About Us Center Section:::... -->
-@endif
     <!-- Start Coupon Start -->
     <div class="coupon_area" >
         <div class="container">
@@ -156,6 +136,27 @@
     </div> <!-- End Coupon Start -->
 </div> <!-- ...:::: End Cart Section:::... -->
 
+@else
+ <!-- ...::::Start About Us Center Section:::... -->
+<div class="empty-cart-section section-fluid" style="margin-bottom: 50px">
+    <div class="emptycart-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-3">
+                    <div class="emptycart-content text-center">
+                        <div class="image">
+                            <img class="img-fluid" src="assets/images/emprt-cart/empty-cart.png" alt="">
+                        </div>
+                        <h4 class="title">Your Cart is Empty</h4>
+                        <h6 class="sub-title">Sorry Mate... No item Found inside your cart!</h6>
+                        <a href="{{url('/')}}" class="btn btn-lg btn-golden">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- ...::::End  About Us Center Section:::... -->
+@endif
 
 <input type="hidden" id="qty" value="1"/>
 <form id="frmAddToCart">
