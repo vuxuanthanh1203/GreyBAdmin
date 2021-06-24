@@ -46,6 +46,8 @@ Route::group(['middleware'=>'user_auth'],function(){
     Route::post('/profile_process', [FrontController::class, 'profile_process'])->name('profile_process');
     Route::get('change_password/{id}', [FrontController::class, 'change_password']);
     Route::post('/change_password_process', [FrontController::class, 'change_password_process'])->name('change_password_process');
+    Route::get('status/{status}/{id}', [FrontController::class, 'status']);
+    Route::get('cancel/{status}/{id}', [BrandController::class, 'cancel']);
 });
 
 
@@ -139,8 +141,6 @@ Route::group(['middleware'=>'admin_auth'],function(){
     // Order
     Route::get('admin/order', [OrdersController::class, 'index']);
     Route::get('admin/order_detail/{id}', [OrdersController::class, 'order_detail']);
-    Route::get('admin/success', [OrdersController::class, 'success']);
-    Route::get('admin/cancel', [OrdersController::class, 'cancel']);
     Route::get('admin/order/status/{status}/{id}', [OrdersController::class, 'status']);
 
 

@@ -268,3 +268,16 @@ input[type="file"] {
     object-fit: cover;
     height: 100%;
 }
+
+.slimScrollBar {
+    background: rgb(158, 165, 171);
+    width: 5px;
+    position: absolute;
+    top: 26px;
+    opacity: 0.4;
+    display: none;
+    border-radius: 7px;
+    z-index: 99;
+    right: 1px;
+    height: 30px;
+}

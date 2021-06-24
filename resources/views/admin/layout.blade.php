@@ -100,29 +100,64 @@
                            </a>
                         </li>
                         <li>
+                           <a href="{{url('admin/order')}}" class="waves-effect">
+                              <i class="fas fa-shopping-cart"></i>
+                           <span> Order </span>
+                           </a>
+                        </li>
+                        <li>
                            <a href="javascript: void(0);" class="waves-effect">
-                           <i class="fas fa-shopping-cart"></i>
-                           <span> Order</span>
+                           <i class="fab fa-product-hunt"></i>
+                           <span> Product</span>
                            <span class="menu-arrow"></span>
                            </a>
                            <ul class="nav-second-level" aria-expanded="false">
-                              <li><a href="{{url('admin/order')}}">Pending</a></li>
-                              <li><a href="{{url('admin/success')}}">Success</a></li>
-                              <li><a href="{{url('admin/cancel')}}">Cancel</a></li>
+                              <li><a href="{{url('admin/product')}}">Product List</a></li>
+                              <li><a href="{{url('admin/product/manage_product')}}">Add New Product</a></li>
                            </ul>
                         </li>
                         <li>
                            <a href="javascript: void(0);" class="waves-effect">
-                           <i class="ion-ios-list"></i>
-                           <span> Product Management</span>
+                           <i class="fas fa-bold"></i>
+                           <span> Brand</span>
                            <span class="menu-arrow"></span>
                            </a>
                            <ul class="nav-second-level" aria-expanded="false">
-                              <li><a href="{{url('admin/brand')}}">Brand</a></li>
-                              <li><a href="{{url('admin/category')}}">Category</a></li>
-                              <li><a href="{{url('admin/coupon')}}">Coupon</a></li>
-                              <li><a href="{{url('admin/product')}}">Product</a></li>
-                              <li><a href="{{url('admin/size')}}">Size</a></li>
+                              <li><a href="{{url('admin/brand')}}">Brand List</a></li>
+                              <li><a href="{{url('admin/brand/manage_brand')}}">Add New Brand</a></li>
+                           </ul>
+                        </li>
+                        <li>
+                           <a href="javascript: void(0);" class="waves-effect">
+                           <i class="fas fa-list"></i>
+                           <span> Category</span>
+                           <span class="menu-arrow"></span>
+                           </a>
+                           <ul class="nav-second-level" aria-expanded="false">
+                              <li><a href="{{url('admin/category')}}">Category List</a></li>
+                              <li><a href="{{url('admin/category/manage_category')}}">Add New Category</a></li>
+                           </ul>
+                        </li>
+                        <li>
+                           <a href="javascript: void(0);" class="waves-effect">
+                              <i class="fas fa-tags"></i>
+                           <span> Coupon</span>
+                           <span class="menu-arrow"></span>
+                           </a>
+                           <ul class="nav-second-level" aria-expanded="false">
+                              <li><a href="{{url('admin/category')}}">Coupon List</a></li>
+                              <li><a href="{{url('admin/coupon/manage_coupon')}}">Add New Coupon</a></li>
+                           </ul>
+                        </li>
+                        <li>
+                           <a href="javascript: void(0);" class="waves-effect">
+                           <i class="fas fa-window-maximize"></i>
+                           <span> Size</span>
+                           <span class="menu-arrow"></span>
+                           </a>
+                           <ul class="nav-second-level" aria-expanded="false">
+                              <li><a href="{{url('admin/size')}}">Size List</a></li>
+                              <li><a href="{{url('admin/size/manage_size')}}">Add New Size</a></li>
                            </ul>
                         </li>
                         <li>
@@ -172,6 +207,7 @@
          <!-- End Page content -->
          <!-- ============================================================== -->
       </div>
+      
       <!-- END wrapper -->
       <!-- Vendor js -->
       <script src="{{asset('admin_assets\js\vendor.min.js')}}"></script>
@@ -196,6 +232,7 @@
       <script src="{{asset('admin_assets\libs\datatables\dataTables.select.min.js')}}"></script>
       <!-- Datatables init -->
       <script src="{{asset('admin_assets\js\pages\datatables.init.js')}}"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       <!-- Toastr init -->
       <script src="{{asset('admin_assets/libs/toastr/toastr.min.js')}}"></script>
       <script src="{{asset('admin_assets/js/pages/toastr.init.js')}}"></script>

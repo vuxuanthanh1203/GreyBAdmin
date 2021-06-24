@@ -11,29 +11,37 @@ class OrdersController extends Controller
     
     public function index()
     {
-        $result['orders'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
+        $countP = 0;
+        $countS = 0;
+        $countR = 0;
+        $countF = 0;
+
+        $result['pending'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
         ->leftJoin('orders_status', 'orders_status.id', '=', 'orders.orders_status')
         ->where(['orders.orders_status'=>1])->get();
+        $countP = count($result['pending']);
 
-        return view('admin/order', $result);
-    }
-
-    public function success()
-    {
-        $result['orders'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
+        $result['shipping'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
         ->leftJoin('orders_status', 'orders_status.id', '=', 'orders.orders_status')
         ->where(['orders.orders_status'=>2])->get();
+        $countS = count($result['shipping']);
 
-        return view('admin/success', $result);
-    }
-
-    public function cancel()
-    {
-        $result['orders'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
+        $result['received'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
         ->leftJoin('orders_status', 'orders_status.id', '=', 'orders.orders_status')
         ->where(['orders.orders_status'=>3])->get();
+        $countR = count($result['received']);
 
-        return view('admin/cancel', $result);
+        $result['failed'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
+        ->leftJoin('orders_status', 'orders_status.id', '=', 'orders.orders_status')
+        ->where(['orders.orders_status'=>4])->get();
+        $countF = count($result['failed']);
+
+        $result['countP'] = $countP;
+        $result['countS'] = $countS;
+        $result['countR'] = $countR;
+        $result['countF'] = $countF;
+        return view('admin/order', $result);
+
     }
 
     public function order_detail(Request $request, $id)

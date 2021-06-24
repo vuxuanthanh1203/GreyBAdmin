@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\orders;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -774,5 +775,22 @@ class FrontController extends Controller
                 return redirect('change_password/'.session('FRONT_USER_ID'));
             }
         }     
+    }
+
+    public function status(Request $request, $status, $id)
+    {
+        $model = orders::find($id);
+        $model->orders_status=$status;
+        $model->save();
+        return response()->json(['status'=>'success','msg'=>'Thank you for choosing us !']);
+    }
+
+    public function cancel(Request $request, $status, $id)
+    {
+        $model = orders::find($id);
+        $model->orders_status=$status;
+        $model->save();
+
+        return response()->json(['status'=>'success','msg'=>'Order Cancel Successfully']);
     }
 }

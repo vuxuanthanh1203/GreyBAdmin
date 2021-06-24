@@ -59,6 +59,7 @@
                                 <tbody>
                                     @foreach($orders as $item)
                                     <tr>
+                                        <input type="hidden" class="updateStatusbtn" value="{{$item->id}}">
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->updated_at}}</td>
                                         <td><span class="success">{{$item->orders_status}}</span></td>
@@ -66,30 +67,30 @@
                                         <td> 
                                             @if($item->orders_status == 'Pending')
                                             <div class="order-action row">
-                                                <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important;">
-                                                    <a href="#" class="btn btn-md btn-black-default-hover mt-7"
-                                                    style="margin-top: 0 !important; width: 40px;"><i class="fas fa-trash"></i></a>
-                                                </div>
+                                                <button type="button" class="btn btn-md btn-black-default-hover mt-7 cancelbtn" style="margin-top: 0 !important; width: 40px;" data-toggle="tooltip" data-placement="top" title="Cancel Order">
+                                                    <i class="fas fa-trash" style="margin: 0 auto"></i>
+                                                </button>
                                                 <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important">
-                                                    <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7"
+                                                    <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7" data-toggle="tooltip" data-placement="top" title="Order Detail"
                                                         style="margin-top: 0 !important; width: 40px;"><i class="fas fa-clipboard"></i></a>
                                                 </div>
                                             </div>
                                             @elseif($item->orders_status == 'Shipping')
                                             <div class="order-action row">
                                                 <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important;">
-                                                    <a href="#" class="btn btn-md btn-black-default-hover mt-7"
-                                                     style="margin-top: 0 !important; width: 40px;"><i class="fas fa-box-open" style="margin: 0 auto"></i></a>
+                                                    <button type="button" class="btn btn-md btn-black-default-hover mt-7 confirmbtn" style="margin-top: 0 !important; width: 40px;" data-toggle="tooltip" data-placement="top" title="Received">
+                                                        <i class="fas fa-box-open" style="margin: 0 auto"></i>
+                                                    </button>
                                                 </div>
                                                 <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important">
-                                                    <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7"
+                                                    <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7" data-toggle="tooltip" data-placement="top" title="Order Detail"
                                                          style="margin-top: 0 !important; width: 40px;"><i class="fas fa-clipboard"></i></a>
                                                 </div>
                                             </div>
                                             @elseif($item->orders_status == 'Fail' || $item->orders_status == 'Received')
                                             <div class="order-action row">
                                                 <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important">
-                                                    <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7"
+                                                    <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7" data-toggle="tooltip" data-placement="top" title="Order Detail"
                                                         style="margin-top: 0 !important; width: 40px;"><i class="fas fa-clipboard"></i></a>
                                                 </div>
                                             </div>

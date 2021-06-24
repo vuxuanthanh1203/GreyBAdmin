@@ -62,15 +62,15 @@
                               <td>{{$list->pname}}</td>
                               <td><img width="200px" src='{{asset('storage/media/Products/'.$list->pimage)}}'/></td>
                               <td>{{$list->size}}</td>
-                              <td>{{$list->price}}</td>
+                              <td>{{number_format($list->price)}} VND</td>
                               <td>{{$list->qty}}</td>
-                              <td>{{$list->price*$list->qty}}</td>
+                              <td>{{number_format($list->price*$list->qty)}} VND</td>
                            </tr>
                            @endforeach
                            <tr>
                               <td colspan="4">&nbsp;</td>
                               <td><b>Total</b></td>
-                              <td><b>{{$totalAmt}}</b></td>
+                              <td><b>{{number_format($totalAmt)}} VND</b></td>
                            </tr>
                            <?php
                               if($orders_details[0]->coupon_value>0){
@@ -83,7 +83,7 @@
                                 echo '<tr>
                                   <td colspan="4">&nbsp;</td>
                                   <td><b>Final Total</b></td>
-                                  <td>'.$totalAmt.'</td>
+                                  <td>'.number_format($totalAmt).' VND</td>
                                 </tr>';
                               }
                               ?>

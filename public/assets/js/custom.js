@@ -51,6 +51,9 @@ function add_to_cart(id, size_str_id){
           type:'post',
           success:function(result){
             toastr.success(result.msg);
+            setTimeout(function() {
+              location.reload()
+          }, 1500);
           }
         });
     }
@@ -258,3 +261,74 @@ function sort_price_filter(){
   jQuery('#categoryFilter').submit();
 }
 */
+
+
+$(document).ready(function(){
+  $('.confirmbtn').on('click',function(e) {
+    e.preventDefault();
+    var update_id = $(this).closest("tr").find('.updateStatusbtn').val();
+    swal({
+      title: "Are you sure?",
+      text: "Confirmation of receipt of goods",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        var data = {
+          "_token": $('input[name=_token]').val(),
+          "id": update_id,
+        };
+        $.ajax({
+          type: "GET",
+          url: 'status/4/'+update_id,
+          data: data,
+          success:function(result) {
+            if(result.status=="success"){
+              toastr.success(result.msg);
+              setTimeout(function() {
+                location.reload()
+            }, 1500);
+            }
+          }
+        });
+      }
+    });
+  });
+});
+
+$(document).ready(function(){
+  $('.cancelbtn').on('click',function(e) {
+    e.preventDefault();
+    var update_id = $(this).closest("tr").find('.updateStatusbtn').val();
+    swal({
+      title: "Are you sure?",
+      text: "Confirm cancellation of this order",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        var data = {
+          "_token": $('input[name=_token]').val(),
+          "id": update_id,
+        };
+        $.ajax({
+          type: "GET",
+          url: 'status/3/'+update_id,
+          data: data,
+          success:function(result) {
+            if(result.status=="success"){
+              toastr.success(result.msg);
+              setTimeout(function() {
+                location.reload()
+            }, 1500);
+            }
+          }
+        });
+      }
+    });
+  });
+});

@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-8">
                             <div class="text-right">
-                                <h3 class="my-0 font-weight-bold"><span data-plugin="counterup">15852</span></h3>
+                                <h3 class="my-0 font-weight-bold"><span data-plugin="counterup">{{number_format($countS)}}</span></h3>
                                 <p class="mb-0 mt-1 text-truncate">Total Sales</p>
                             </div>
                         </div>
@@ -56,8 +56,8 @@
                         </div>
                         <div class="col-8">
                             <div class="text-right">
-                                <h3 class="my-0 font-weight-bold"><span data-plugin="counterup">956</span></h3>
-                                <p class="mb-0 mt-1 text-truncate">New Orders</p>
+                                <h3 class="my-0 font-weight-bold"><span data-plugin="counterup">{{$countO}}</span></h3>
+                                <p class="mb-0 mt-1 text-truncate">Total Orders</p>
                             </div>
                         </div>
                     </div>
@@ -75,8 +75,8 @@
                         </div>
                         <div class="col-8">
                             <div class="text-right">
-                                <h3 class="my-0 font-weight-bold"><span data-plugin="counterup">5210</span></h3>
-                                <p class="mb-0 mt-1 text-truncate">New Users</p>
+                                <h3 class="my-0 font-weight-bold"><span data-plugin="counterup">{{$countC}}</span></h3>
+                                <p class="mb-0 mt-1 text-truncate">Total Users</p>
                             </div>
                         </div>
                     </div>
@@ -89,13 +89,13 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="avatar-md bg-primary rounded-circle">
-                                <i class="ion-md-eye avatar-title font-26 text-white"></i>
+                                <i class=" ion ion-md-jet avatar-title font-26 text-white"></i>
                             </div>
                         </div>
                         <div class="col-8">
                             <div class="text-right">
-                                <h3 class="my-0 font-weight-bold"><span data-plugin="counterup">20544</span></h3>
-                                <p class="mb-0 mt-1 text-truncate">Unique Visitors</p>
+                                <h3 class="my-0 font-weight-bold"><span data-plugin="counterup">{{$countP}}</span></h3>
+                                <p class="mb-0 mt-1 text-truncate">Total Product</p>
                             </div>
                         </div>
                     </div>
@@ -160,6 +160,42 @@
     </div>
 
     <!-- End Charts -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <h4 class="m-t-0 header-title mb-4"><b>Customer Statistics</b></h4>
+
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;>
+
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Addresss</th>
+                                <th>Order Number</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Vũ Xuân Thành</td>
+                                <td>vuxuanthanh1203@gmail.com</td>
+                                <td>0965301752</td>
+                                <td>Hà Nội</td>
+                                <td>6</td>
+                                <td>7,830,000 VND</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
 
 </div>
 <!-- end content -->

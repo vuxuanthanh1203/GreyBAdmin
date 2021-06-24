@@ -78,6 +78,7 @@
                                                             <tbody>
                                                                 @foreach($data as $item)
                                                                 <tr role="row" class="odd product_content text-center">
+                                                                    <input type="hidden" class="updateStatusbtn" value="{{$item->id}}">
                                                                     <td>{{$item->id}}</td>
                                                                     <td>{{$item->name}}</td>
                                                                     <td>{{$item->email}}</td>
@@ -86,23 +87,19 @@
                                                                     <td>{{$item->created_at}}</td>
                                                                     <td>
                                                                         <a href="{{url('admin/customer/show')}}/{{$item->id}}">
-                                                                            <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View">
+                                                                            <button type="button" class="btn btn-primary " data-toggle="tooltip" data-placement="top" title="View">
                                                                                 <i class="ion ion-md-color-filter"></i>
                                                                             </button>
                                                                         </a>
 
                                                                         @if ($item->status==0)
-                                                                            <a href="{{url('admin/customer/status/1')}}/{{$item->id}}">
-                                                                                <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Deactive">
-                                                                                    <i class="ion ion-md-eye-off"></i>
-                                                                                </button>
-                                                                            </a>
+                                                                            <button type="button" class="btn btn-warning activebtn" data-toggle="tooltip" data-placement="top" title="Deactive">
+                                                                                <i class="ion ion-md-eye-off"></i>
+                                                                            </button>
                                                                         @elseif ($item->status==1)
-                                                                            <a href="{{url('admin/customer/status/0')}}/{{$item->id}}">
-                                                                                <button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Active">
-                                                                                    <i class="ion ion-md-eye"></i>
-                                                                                </button>
-                                                                            </a>
+                                                                            <button type="button" class="btn btn-info deactivebtn" data-toggle="tooltip" data-placement="top" title="Active">
+                                                                                <i class="ion ion-md-eye"></i>
+                                                                            </button>
                                                                         @endif
                                                                     </td>
                                                                 </tr>
@@ -124,3 +121,4 @@
             </div>
 
 @endsection
+

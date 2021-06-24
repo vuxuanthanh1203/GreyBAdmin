@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -50,7 +51,33 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $countS = 0;
+        $countO = 0;
+        $countC = 0;
+        $countP = 0;
+
+        $result['sale'] = DB::table('orders')->get();
+        $countO = count($result['sale']);
+
+        $countS = 7830000;
+
+        $result['cus'] = DB::table('customers')
+        ->where('customers.status', '=', 1)
+        ->get();
+        $countC = count($result['cus']);
+
+        $result['pro'] = DB::table('products')
+        ->where('products.status', '=', 1)
+        ->get();
+        $countP = count($result['pro']);        
+
+        
+        
+        $result['countS'] = $countS;
+        $result['countO'] = $countO;
+        $result['countC'] = $countC;
+        $result['countP'] = $countP;
+        return view('admin/dashboard', $result);
     }
 
     public function manage_profile(Request $request, $id='')

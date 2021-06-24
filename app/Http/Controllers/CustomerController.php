@@ -27,7 +27,6 @@ class CustomerController extends Controller
         $model = Customer::find($id);
         $model->status=$status;
         $model->save();
-        $request->session()->flash('message', 'Customer Status Updated !');
-        return redirect('admin/customer');
+        return response()->json(['status'=>'success','msg'=>'Customer Status Updated !']);
     }
 }
