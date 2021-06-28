@@ -72,10 +72,11 @@ class FrontController extends Controller
     }
     
     public function product(Request $request,$slug) {
-        $result['product']= DB::table('products')
-            ->leftJoin('categories','categories.id','=','products.category_id')
-            ->where(['products.status'=>1])
-            ->where(['products.slug'=>$slug])
+        $result['product']=
+            DB::table('products')
+            // ->leftJoin('categories','categories.id','=','products.category_id')
+            ->where(['status'=>1])
+            ->where(['slug'=>$slug])
             ->get();
 
         foreach($result['product'] as $list1){
@@ -87,21 +88,24 @@ class FrontController extends Controller
         }
 
         foreach($result['product'] as $list1){
-            $result['product_img'][$list1->id]=
+            $result['product_images'][$list1->id]=
                 DB::table('product_images')
                 ->where(['product_images.products_id'=>$list1->id])
                 ->get();
         }
-
-        $result['related_product']= DB::table('products')
-            ->where(['products.category_id'=>$result['product'][0]->category_id])
-            ->orderBy('id', 'DESC')
-            ->limit(4)
+        $result['related_product']=
+            DB::table('products')
+            ->where(['status'=>1])
+            ->where('slug','!=',$slug)
+            ->where(['category_id'=>$result['product'][0]->category_id])
             ->get();
-
-        // echo "<pre>";
-        // print_r($result['product_attr'][$list1->id]);
-        // die();
+        foreach($result['related_product'] as $list1){
+            $result['related_product_attr'][$list1->id]=
+                DB::table('products_attr')
+                ->leftJoin('sizes','sizes.id','=','products_attr.size_id')
+                ->where(['products_attr.products_id'=>$list1->id])
+                ->get();
+        }
         
         return view('front.product',$result);
     }
@@ -235,7 +239,7 @@ class FrontController extends Controller
     
     public function add_to_cart(Request $request) {
         if($request->session()->has('FRONT_USER_LOGIN')){
-            $uid = $request->session()->get('FRONT_USER_LOGIN');
+            $uid = $request->session()->get('FRONT_USER_ID');
             $user_type = "Reg";
         }else{
             $uid = getUserTempId();
@@ -290,7 +294,7 @@ class FrontController extends Controller
     public function cart(Request $request)
     {
         if($request->session()->has('FRONT_USER_LOGIN')){
-            $uid=$request->session()->get('FRONT_USER_LOGIN');
+            $uid=$request->session()->get('FRONT_USER_ID');
             $user_type="Reg";
         }else{
             $uid=getUserTempId();
@@ -686,12 +690,55 @@ class FrontController extends Controller
     
     public function order(Request $request)
     {
-        $result['orders']=DB::table('orders')
+        $countP = 0;
+        $countS = 0;
+        $countR = 0;
+        $countF = 0;
+
+        $result['ordersP']=DB::table('orders')
         ->select('orders.*','orders_status.orders_status')
         ->leftJoin('orders_status','orders_status.id','=','orders.orders_status')
+        ->where(['orders.orders_status'=>1])
         ->where(['orders.customers_id'=>$request->session()->get('FRONT_USER_ID')])
         ->orderBy('orders.created_at')
         ->get();    
+
+        $countP = count($result['ordersP']);
+
+        $result['ordersS']=DB::table('orders')
+        ->select('orders.*','orders_status.orders_status')
+        ->leftJoin('orders_status','orders_status.id','=','orders.orders_status')
+        ->where(['orders.orders_status'=>2])
+        ->where(['orders.customers_id'=>$request->session()->get('FRONT_USER_ID')])
+        ->orderBy('orders.created_at')
+        ->get();    
+
+        $countS = count($result['ordersS']);
+
+        $result['ordersR']=DB::table('orders')
+        ->select('orders.*','orders_status.orders_status')
+        ->leftJoin('orders_status','orders_status.id','=','orders.orders_status')
+        ->where(['orders.orders_status'=>4])
+        ->where(['orders.customers_id'=>$request->session()->get('FRONT_USER_ID')])
+        ->orderBy('orders.created_at')
+        ->get();    
+
+        $countR = count($result['ordersR']);
+
+        $result['ordersF']=DB::table('orders')
+        ->select('orders.*','orders_status.orders_status')
+        ->leftJoin('orders_status','orders_status.id','=','orders.orders_status')
+        ->where(['orders.orders_status'=>3])
+        ->where(['orders.customers_id'=>$request->session()->get('FRONT_USER_ID')])
+        ->orderBy('orders.created_at')
+        ->get();    
+
+        $countF = count($result['ordersR']);
+
+        $result['countP'] = $countP;
+        $result['countS'] = $countS;
+        $result['countR'] = $countR;
+        $result['countF'] = $countF;
         return view('front.order',$result);
 
     }

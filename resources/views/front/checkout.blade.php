@@ -160,7 +160,7 @@
 
                                     <div id="methodCod" class="collapse" data-parent="#methodCod">
                                         <div class="card-body1">
-                                            <p>Free shipping for all orders over 2,000,000 VND</p>
+                                            <p>Free shipping for all orders over 1,000,000 VND</p>
                                         </div>
                                     </div>
                                 </div>

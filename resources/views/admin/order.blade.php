@@ -106,7 +106,7 @@
                                                                             <tr role="row" class="odd product_content text-center">
                                                                                 <td>{{$item->id}}</td>
                                                                                 <td>{{$item->name}}</td>
-                                                                                <td>{{$item->address}}</td>
+                                                                                <td style="text-transform: capitalize">{{$item->address}}</td>
                                                                                 <td>{{$item->orders_status}}</td>
                                                                                 <td>{{$item->created_at}}</td>
                                                                                 <td>
@@ -185,13 +185,23 @@
                                                                             <tr role="row" class="odd product_content text-center">
                                                                                 <td>{{$item->id}}</td>
                                                                                 <td>{{$item->name}}</td>
-                                                                                <td>{{$item->address}}</td>
+                                                                                <td style="text-transform: capitalize">{{$item->address}}</td>
                                                                                 <td>{{$item->orders_status}}</td>
                                                                                 <td>{{$item->created_at}}</td>
                                                                                 <td>
                                                                                     <a href="{{url('admin/order_detail')}}/{{$item->id}}">
                                                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Order Detail">
                                                                                             <i class="fas fa-clipboard-list"></i>
+                                                                                        </button>
+                                                                                    </a>
+                                                                                    <a href="{{url('admin/order/status/4')}}/{{$item->id}}">
+                                                                                        <button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Confirm">
+                                                                                            <i class="fas fa-check"></i>
+                                                                                        </button>
+                                                                                    </a>
+                                                                                    <a href="{{url('admin/order/status/3')}}/{{$item->id}}">
+                                                                                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancel">
+                                                                                            <i class="fas fa-times"></i>
                                                                                         </button>
                                                                                     </a>
                                                                                 </td>
@@ -254,7 +264,7 @@
                                                                             <tr role="row" class="odd product_content text-center">
                                                                                 <td>{{$item->id}}</td>
                                                                                 <td>{{$item->name}}</td>
-                                                                                <td>{{$item->address}}</td>
+                                                                                <td style="text-transform: capitalize">{{$item->address}}</td>
                                                                                 <td>{{$item->orders_status}}</td>
                                                                                 <td>{{$item->created_at}}</td>
                                                                                 <td>
@@ -323,7 +333,7 @@
                                                                             <tr role="row" class="odd product_content text-center">
                                                                                 <td>{{$item->id}}</td>
                                                                                 <td>{{$item->name}}</td>
-                                                                                <td>{{$item->address}}</td>
+                                                                                <td style="text-transform: capitalize">{{$item->address}}</td>
                                                                                 <td>{{$item->orders_status}}</td>
                                                                                 <td>{{$item->created_at}}</td>
                                                                                 <td>

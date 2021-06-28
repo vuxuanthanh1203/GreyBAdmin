@@ -24,15 +24,15 @@
       <div class="row card">
          <div class="col-md-6">
             <div class="customer_info">
-               <p><strong>Name</strong>: <span style="font-style: italic; text-transform: capitalize">{{$orders_details[0]->name}}</span></p>
-               <p><strong>Email</strong>: <span style="font-style: italic">{{$orders_details[0]->email}}</span></p>
-               <p><strong>Mobile</strong>: <span style="font-style: italic">{{$orders_details[0]->mobile}}</span></p>
-               <p><strong>Address</strong>: <span style="font-style: italic; text-transform: capitalize">{{$orders_details[0]->address}}</span></p>
+               <p><strong>Name</strong>: <span style="text-transform: capitalize">{{$orders_details[0]->name}}</span></p>
+               <p><strong>Email</strong>: <span style="">{{$orders_details[0]->email}}</span></p>
+               <p><strong>Mobile</strong>: <span style="">{{$orders_details[0]->mobile}}</span></p>
+               <p><strong>Address</strong>: <span style="text-transform: capitalize">{{$orders_details[0]->address}}</span></p>
             </div>
          </div>
          <div class="col-md-6">
             <div class="order_detail">
-               <p><strong>Order Status</strong>: <span style="font-style: italic">{{$orders_details[0]->orders_status}}</span></p>
+               <p><strong>Order Status</strong>: <span style="color: #b19361">{{$orders_details[0]->orders_status}}</span></p>
             </div>
          </div>
          <div class="col-md-12">

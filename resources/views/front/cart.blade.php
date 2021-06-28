@@ -97,16 +97,7 @@
     <div class="coupon_area" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    {{-- <div class="coupon_code left" data-aos="fade-up" data-aos-delay="200">
-                        <h3>Coupon</h3>
-                        <div class="coupon_inner">
-                            <p>Enter your coupon code if you have one.</p>
-                            <input class="mb-2" placeholder="Coupon code" type="text">
-                            <button type="submit" class="btn btn-md btn-golden">Apply coupon</button>
-                        </div>
-                    </div> --}}
-                </div>
+                <div class="col-lg-6 col-md-6"></div>
                 <div class="col-lg-6 col-md-6">
                     <div class="coupon_code right" data-aos="fade-up" data-aos-delay="400">
                         <h3>Cart Totals</h3>
@@ -115,16 +106,7 @@
                                 <p>Subtotal</p>
                                 <p class="cart_amount">{{number_format($totalPrice)}} VND</p>
                             </div>
-                            <div class="cart_subtotal ">
-                                <p>Shipping</p>
-                                <p class="cart_amount">0 VND</p>
-                            </div>
-                            <a href="#">Free Ship</a>
 
-                            <div class="cart_subtotal">
-                                <p>Total</p>
-                                <p class="cart_amount">{{number_format($totalPrice)}} VND</p>
-                            </div>
                             <div class="checkout_btn">
                                 <a href="{{url('/checkout')}}" class="btn btn-md btn-golden">Proceed to Checkout</a>
                             </div>

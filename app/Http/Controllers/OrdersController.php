@@ -25,16 +25,16 @@ class OrdersController extends Controller
         ->leftJoin('orders_status', 'orders_status.id', '=', 'orders.orders_status')
         ->where(['orders.orders_status'=>2])->get();
         $countS = count($result['shipping']);
-
-        $result['received'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
-        ->leftJoin('orders_status', 'orders_status.id', '=', 'orders.orders_status')
-        ->where(['orders.orders_status'=>3])->get();
-        $countR = count($result['received']);
-
+        
         $result['failed'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
         ->leftJoin('orders_status', 'orders_status.id', '=', 'orders.orders_status')
-        ->where(['orders.orders_status'=>4])->get();
+        ->where(['orders.orders_status'=>3])->get();
         $countF = count($result['failed']);
+        
+        $result['received'] = DB::table('orders')->select('orders.*', 'orders_status.orders_status')
+        ->leftJoin('orders_status', 'orders_status.id', '=', 'orders.orders_status')
+        ->where(['orders.orders_status'=>4])->get();
+        $countR = count($result['received']);
 
         $result['countP'] = $countP;
         $result['countS'] = $countS;

@@ -34,8 +34,8 @@
                     <!-- Start Large Image -->
                     <div class="product-large-image product-large-image-horaizontal swiper-container">
                         <div class="swiper-wrapper">
-                            @if(isset($product_img[$product[0]->id][0]))
-                                @foreach($product_img[$product[0]->id] as $list)
+                            @if(isset($product_images[$product[0]->id][0]))
+                                @foreach($product_images[$product[0]->id] as $list)
                                 <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive">
                                     <img src="{{asset('storage/media/Products/'. $list->images)}}" alt="">
                                 </div>
@@ -48,8 +48,8 @@
                     <div
                         class="product-image-thumb product-image-thumb-horizontal swiper-container pos-relative mt-5">
                         <div class="swiper-wrapper">
-                            @if(isset($product_img[$product[0]->id][0]))
-                                @foreach($product_img[$product[0]->id] as $list)
+                            @if(isset($product_images[$product[0]->id][0]))
+                                @foreach($product_images[$product[0]->id] as $list)
                                     <div class="product-image-thumb-single swiper-slide">
                                         <img class="img-fluid" src="{{asset('storage/media/Products/'. $list->images)}}"
                                             alt="">
@@ -130,23 +130,24 @@
                     </div> <!-- End Product Variable Area -->
 
                     <!-- Start  Product Details Catagories Area-->
-                    <div class="product-details-catagory mb-2">
+                    {{-- <div class="product-details-catagory mb-2">
                         <span class="title">CATEGORIES:</span>
                         <ul>
                             <li><a href="{{url('category/'.$item->category_slug)}}" style="text-transform:uppercase">{{$item->category_name}}</a></li>
                         </ul>
-                    </div> <!-- End  Product Details Catagories Area-->
+                    </div>  --}}
+                    <!-- End  Product Details Catagories Area-->
 
 
                     <!-- Start  Product Details Social Area-->
                     <div class="product-details-social">
                         <span class="title">SHARE THIS PRODUCT:</span>
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                            <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
+                            <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                         </ul>
                     </div> <!-- End  Product Details Social Area-->
                 </div>
@@ -158,7 +159,7 @@
 <!-- End Product Details Section -->
 
 <!-- Start Product Content Tab Section -->
-<div class="product-details-content-tab-section section-top-gap-100">
+<div class="product-details-content-tab-section section-top-gap-100" style="margin-top: 40px">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -190,7 +191,7 @@
 
 
 <!-- Start Product Default Slider Section -->
-<div class="product-default-slider-section section-top-gap-100 section-fluid">
+<div class="product-default-slider-section section-top-gap-100 section-fluid" style="margin: 40px 0">
     <!-- Start Section Content Text Area -->
     <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
         <div class="container">

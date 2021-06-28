@@ -1,5 +1,5 @@
 @extends('front/layout')
-
+@section('page_title', 'Password Recovery')
 @section('container')
 <!-- ...:::: Start Breadcrumb Section:::... -->
 <div class="breadcrumb-section breadcrumb-bg-color--golden">

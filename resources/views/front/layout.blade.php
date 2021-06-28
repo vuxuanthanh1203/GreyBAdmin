@@ -418,10 +418,9 @@
                             <div class="footer-widget-single-item footer-widget-color--golden">
                                 <h5 class="title">INFORMATION</h5>
                                 <ul class="footer-nav">
-                                    <li><a href="#">Delivery Information</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Introduce</a></li>
+                                    <li><a href="#">Recruitment</a></li>
+                                    <li><a href="#">News about GREYB</a></li>
                                 </ul>
                             </div>
                             <!-- End Footer Single Item -->
@@ -433,8 +432,6 @@
                                 <ul class="footer-nav">
                                     <li><a href="#">My account</a></li>
                                     <li><a href="#">Wishlist</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Frequently Questions</a></li>
                                     <li><a href="#">Order History</a></li>
                                 </ul>
                             </div>
@@ -443,13 +440,12 @@
                         <div class="col-lg-3 col-sm-6 mb-6">
                             <!-- Start Footer Single Item -->
                             <div class="footer-widget-single-item footer-widget-color--golden">
-                                <h5 class="title">CATEGORIES</h5>
+                                <h5 class="title">POLICIES</h5>
                                 <ul class="footer-nav">
-                                    <li><a href="#">Decorative</a></li>
-                                    <li><a href="#">Kitchen utensils</a></li>
-                                    <li><a href="#">Chair & Bar stools</a></li>
-                                    <li><a href="#">Sofas and Armchairs</a></li>
-                                    <li><a href="#">Interior lighting</a></li>
+                                    <li><a href="#">Shipping Policy</a></li>
+                                    <li><a href="#">Return Policy</a></li>
+                                    <li><a href="#">Payment policy</a></li>
+                                    <li><a href="#">Usage rules</a></li>
                                 </ul>
                             </div>
                             <!-- End Footer Single Item -->
