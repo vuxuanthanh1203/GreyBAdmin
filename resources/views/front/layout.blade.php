@@ -84,9 +84,10 @@
                             <!-- Start Header Action Link -->
                             <ul class="header-action-link action-color--black action-hover-color--golden">
                                 <li>
-                                    <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                                    {{-- <a href="#offcanvas-wishlish" class="offcanvas-toggle"> --}}
+                                    <a href="#" class="">
                                         <i class="icon-heart"></i>
-                                        <span class="item-count">3</span>
+                                        <span class="item-count">0</span>
                                     </a>
                                 </li>
                                 @php

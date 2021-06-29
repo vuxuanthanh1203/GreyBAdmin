@@ -145,7 +145,7 @@
                            <span class="menu-arrow"></span>
                            </a>
                            <ul class="nav-second-level" aria-expanded="false">
-                              <li><a href="{{url('admin/category')}}">Coupon List</a></li>
+                              <li><a href="{{url('admin/coupon')}}">Coupon List</a></li>
                               <li><a href="{{url('admin/coupon/manage_coupon')}}">Add New Coupon</a></li>
                            </ul>
                         </li>
