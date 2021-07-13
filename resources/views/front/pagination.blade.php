@@ -42,7 +42,7 @@
 
 <body>
     <!-- Start Pagination -->
-    <div class="page-pagination text-center" data-aos="fade-up" data-aos-delay="0">
+    <div class="page-pagination text-center">
         @if($paginator->hasPages())
         <ul class="pagination">
         <!-- Prevoius Page Link -->
@@ -53,7 +53,7 @@
             @endif
 
             <!-- Pagination Elements Here -->
-            @foreach($elements as $element)
+            {{-- @foreach($elements as $element)
                 <!-- Make three dots -->
                 @if(is_string($element))
                     <li><a><span>{{$element}}</span></a></li>
@@ -68,7 +68,28 @@
                         @endif
                     @endforeach
                 @endif
-            @endforeach
+            @endforeach --}}
+            @if($paginator->currentPage() > 3)
+                <li class="hidden-xs"><a href="{{ $paginator->url(1) }}">1</a></li>
+                @endif
+                @if($paginator->currentPage() > 4)
+                    <li><a>...</a></li>
+                @endif
+                @foreach(range(1, $paginator->lastPage()) as $i)
+                    @if($i >= $paginator->currentPage() - 2 && $i <= $paginator->currentPage() + 2)
+                        @if ($i == $paginator->currentPage())
+                            <li class="active"><a class="active">{{ $i }}</a></li>
+                        @else
+                            <li><a href="{{ $paginator->url($i) }}">{{ $i }}</a></li>
+                        @endif
+                    @endif
+                @endforeach
+                @if($paginator->currentPage() < $paginator->lastPage() - 3)
+                    <li><a>...</a></li>
+                @endif
+                @if($paginator->currentPage() < $paginator->lastPage() - 2)
+                    <li class="hidden-xs"><a href="{{ $paginator->url($paginator->lastPage()) }}">{{ $paginator->lastPage() }}</a></li>
+            @endif
 
             <!-- Next Page Link -->
             @if($paginator->hasMorePages())

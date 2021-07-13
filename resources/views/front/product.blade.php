@@ -177,7 +177,7 @@
                             <!-- Start Product Details Tab Content Singel -->
                             <div class="tab-pane active show" id="description">
                                 <div class="single-tab-content-item">
-                                    {{$item->desc}}
+                                    {!! $item->desc !!}
                                 </div>
                             </div> <!-- End Product Details Tab Content Singel -->
                         </div>

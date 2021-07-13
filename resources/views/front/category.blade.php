@@ -97,14 +97,13 @@
 
                 </div> <!-- End Sidebar Area -->
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-9" data-aos="fade-up" data-aos-delay="0">
                 <!-- Start Shop Product Sorting Section -->
                 <div class="shop-sort-section">
                     <div class="container">
                         <div class="row">
                             <!-- Start Sort Wrapper Box -->
-                            <div class="sort-box d-flex justify-content-between align-items-md-center align-items-start flex-md-row flex-column"
-                                data-aos="fade-up" data-aos-delay="0">
+                            <div class="sort-box d-flex justify-content-between align-items-md-center align-items-start flex-md-row flex-column">
                                 <!-- Start Sort tab Button -->
                                 <div class="sort-tablist d-flex align-items-center"></div>
                                 <!-- End Sort tab Button -->
@@ -200,12 +199,13 @@
     </div>
 </div> <!-- ...:::: End Shop Section:::... -->
 
-<form>
-    <input type="hidden" id="size_id" name="size_id">
+<input type="hidden" id="qty" value="1"/>
+  <form id="frmAddToCart">
+    <input type="hidden" id="size_id" name="size_id"/>
     <input type="hidden" id="pqty" name="pqty"/>
     <input type="hidden" id="product_id" name="product_id"/>           
     @csrf
-</form>
+  </form>  
 
  {{-- <form id="categoryFilter">
     <input type="hidden" id="sort" name="sort" value="{{$sort}}"/>
