@@ -480,7 +480,8 @@ class FrontController extends Controller
 
     public function forgot_password_change_process(Request $request)
     {
-        DB::table('customers')  
+        if($request->password == $request->c_password){
+            DB::table('customers')  
             ->where(['id'=>$request->session()->get('FORGOT_PASSWORD_USER_ID')])
             ->update(
                 [
@@ -489,7 +490,14 @@ class FrontController extends Controller
                     'rand_id'=>''
                 ]
             ); 
-        return response()->json(['status'=>'success','msg'=>'Change password successfully']);     
+            $status="success";
+            $msg="Change password successfully !";
+              
+        } else {
+            $status="error";
+            $msg="Must be the same as the password !";
+        }
+        return response()->json(['status'=>$status,'msg'=>$msg]); 
     }
 
     public function checkout(Request $request)

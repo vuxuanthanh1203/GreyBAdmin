@@ -2,32 +2,22 @@
 @section('page_title', 'Checkout')
 @section('container')
 
-    <!-- ...:::: Start Breadcrumb Section:::... -->
-    <div class="breadcrumb-section breadcrumb-bg-color--golden">
-        <div class="breadcrumb-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h3 class="breadcrumb-title">Checkout</h3>
-                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                            <nav aria-label="breadcrumb">
-                                <ul>
-                                    <li><a href="{{url('/')}}">Home</a></li>
-                                    <li><a href="{{url('category/sneakers')}}">Shop</a></li>
-                                    <li class="active" aria-current="page">Checkout</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- ...:::: End Breadcrumb Section:::... -->
-
     <!-- ...:::: Start Checkout Section:::... -->
     <div class="checkout-section">
         <div class="container">
             <div class="row">
+                <div class="col-12" style="margin: 70px 0">
+                    <h3 class="breadcrumb-title text-center"> Checkout </h3>
+                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                        <nav aria-label="breadcrumb">
+                            <ul>
+                                <li><a href="{{url('/')}}">Home</a></li>
+                                <li><a href="{{url('category/sneakers')}}">Shop</a></li>
+                                <li class="active" aria-current="page">Checkout</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
                 @if(session()->has('FRONT_USER_LOGIN') == null)
                 <!-- User Quick Action Form -->
                 <div class="col-12">
@@ -138,7 +128,7 @@
                                         <tr>
                                             <th>Coupon</th>
                                             <td class="coupon-info">
-                                                <p id="coupon_code_str"> {{number_format($value)}}</p>
+                                                <p id="coupon_code_str">- {{number_format($value)}} VND</p>
                                                 <span id="coupon_type"></span>
                                             </td>
                                             

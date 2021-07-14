@@ -201,10 +201,14 @@ jQuery('#frmUpdatePassword').submit(function(e){
     success:function(result){
       jQuery('#frmUpdatePassword')[0].reset();
       if(result.status=="success"){
+        jQuery('#password_error').html("");
         toastr.success(result.msg);
         setTimeout(function() {
           window.location.href='/login'
-      }, 2000);
+        }, 2000);
+      }
+      if(result.status=="error"){
+        jQuery('#password_error').html(result.msg);
       }
     }
   });
@@ -338,4 +342,9 @@ function funSearch(){
   if(search_str!='' && search_str.length>3){
     window.location.href='/search/'+search_str;
   }
+}
+
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
 }

@@ -18,7 +18,7 @@
                                         <ul>
                                             <li><a href="{{url('/')}}">Home</a></li>
                                             <li><a href="#">Search</a></li>
-                                            <li class="active" aria-current="page">{{$key}}</li>
+                                            <li class="active" aria-current="page">"{{$key}}"</li>
                                         </ul>
                                     </nav>
                                 </div>

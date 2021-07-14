@@ -1,33 +1,24 @@
 @extends('front/layout')
-@section('page_title', 'Category')
+@section('page_title', 'Brand')
 @section('container')
-<!-- ...:::: Start Breadcrumb Section:::... -->
-<div class="breadcrumb-section breadcrumb-bg-color--golden">
-    <div class="breadcrumb-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="breadcrumb-title">List Product</h3>
-                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                        <nav aria-label="breadcrumb">
-                            <ul>
-                                <li><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="{{url('category/sneakers')}}">Shop</a></li>
-                                <li class="active" aria-current="page">List Product</li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- ...:::: End Breadcrumb Section:::... -->
 
 <!-- ...:::: Start Shop Section:::... -->
 <div class="shop-section">
     <div class="container">
         <div class="row flex-column-reverse flex-lg-row">
-            <div class="col-lg-3 order-1">
+            <div class="col-12" style="margin: 70px 0">
+                <h3 class="breadcrumb-title text-center"> List Product </h3>
+                <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                    <nav aria-label="breadcrumb">
+                        <ul>
+                            <li><a href="{{url('/')}}">Home</a></li>
+                            <li><a href="{{url('category/sneakers')}}">Shop</a></li>
+                            <li class="active" aria-current="page">List Product</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-3">
                 <!-- Start Sidebar Area -->
                 <div class="siderbar-section" data-aos="fade-up" data-aos-delay="0">
 
@@ -107,12 +98,12 @@
                                 <div class="sort-select-list d-flex align-items-center">
                                     <label class="mr-2">Sort By:</label>
                                     <form action="#">
-                                        <select onchange="sort_by()" id="sort_by_value">
-                                            <option selected>Sort by default</option>
-                                            <option value="date">Sort by newness</option>
-                                            <option value="name">Sort by name</option>
-                                            <option value="price_asc">Sort by price: low to high</option>
-                                            <option value="price_desc">Sort by price: high to low</option>
+                                        <select onchange="sort_by()" id="sort_by_value" class="select_sort">
+                                            <option class="select_value" selected>Sort by default</option>
+                                            <option class="select_value" value="date">Sort by newness</option>
+                                            <option class="select_value" value="name">Sort by name</option>
+                                            <option class="select_value" value="price_asc">Sort by price: low to high</option>
+                                            <option class="select_value" value="price_desc">Sort by price: high to low</option>
                                         </select>
                                     </form>
                                     {{$sort_txt}}

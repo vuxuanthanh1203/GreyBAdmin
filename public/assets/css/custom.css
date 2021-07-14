@@ -36,3 +36,31 @@
 .nice-select {
   display: none !important;
 }
+
+.select_sort {
+  padding: 8px 12px;
+  color: #333333;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.select_sort:focus, .select_sort:hover {
+  outline: none;
+  border: 1px solid #bbbbbb;
+}
+
+.select_value {
+  padding: 8px 12px;
+  color: #333333;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+  cursor: pointer !important;
+  border-radius: 5px;
+}
+
+.select_value:focus, .select_value:hover {
+  outline: none;
+  border: 1px solid #bbbbbb;
+}

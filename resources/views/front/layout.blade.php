@@ -66,10 +66,11 @@
                                             <a href="{{url('category/sneakers')}}" class="desktop-link">Sneakers <i class="fa fa-angle-down"></i></a>
                                             <!-- Sub Menu -->
                                             <ul class="sub-menu">
-                                                <li><a href="{{url('brand/converse')}}">Converse</a></li>
-                                                <li><a href="{{url('brand/vans')}}">Vans</a></li>
-                                                <li><a href="{{url('brand/puma')}}">Puma</a></li>
-                                                <li><a href="{{url('brand/fila')}}">Fila</a></li>
+                                                <li><a href="{{url('brand/Converse')}}">Converse</a></li>
+                                                <li><a href="{{url('brand/Vans')}}">Vans</a></li>
+                                                <li><a href="{{url('brand/Puma')}}">Puma</a></li>
+                                                <li><a href="{{url('brand/Fila')}}">Fila</a></li>
+                                                <li><a href="{{url('brand/GreyB')}}">GreyB</a></li>
                                             </ul>
                                         </li>
                                         

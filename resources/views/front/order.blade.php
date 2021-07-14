@@ -1,32 +1,23 @@
 @extends('front/layout')
 @section('page_title', 'My Order')
 @section('container')
-<!-- ...:::: Start Breadcrumb Section:::... -->
-<div class="breadcrumb-section breadcrumb-bg-color--golden">
-    <div class="breadcrumb-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="breadcrumb-title">My Order</h3>
-                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                        <nav aria-label="breadcrumb">
-                            <ul>
-                                <li><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="{{url('category/sneakers')}}">Shop</a></li>
-                                <li class="active" aria-current="page">My Order</li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- ...:::: End Breadcrumb Section:::... -->
 
- <!-- ...:::: Start Account Dashboard Section:::... -->
+<!-- ...:::: Start Account Dashboard Section:::... -->
  <div class="account-dashboard">
     <div class="container">
         <div class="row">
+            <div class="col-12" style="margin: 70px 0">
+                <h3 class="breadcrumb-title text-center"> My Order </h3>
+                <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                    <nav aria-label="breadcrumb">
+                        <ul>
+                            <li><a href="{{url('/')}}">Home</a></li>
+                            <li><a href="{{url('/my_account')}}">My Account</a></li>
+                            <li class="active" aria-current="page">My Order</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
             <div class="col-sm-12 col-md-4 col-lg-3">
                 <!-- Nav tabs -->
                 <div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
@@ -51,10 +42,10 @@
                             Shipping ({{$countS}})
                         </a></li>
                     <li><a class="nav-link" data-bs-toggle="tab" href="#related">
-                           Related ({{$countR}})
+                            Successful ({{$countR}})
                         </a></li>
                     <li><a class="nav-link" data-bs-toggle="tab" href="#failed">
-                            Failed ({{$countF}})
+                            Cancelled ({{$countF}})
                     </a></li>
                 </ul> <!-- End Product Details Tab Button -->
 

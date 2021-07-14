@@ -2,32 +2,23 @@
 @section('page_title', 'Order Details')
 @section('container')
 
-<!-- ...:::: Start Breadcrumb Section:::... -->
-<div class="breadcrumb-section breadcrumb-bg-color--golden">
-    <div class="breadcrumb-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="breadcrumb-title">Order Details</h3>
-                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                        <nav aria-label="breadcrumb">
-                            <ul>
-                                <li><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="{{url('category/sneakers')}}">Shop</a></li>
-                                <li class="active" aria-current="page">Order Details</li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- ...:::: End Breadcrumb Section:::... -->
-
  <!-- ...:::: Start Account Dashboard Section:::... -->
  <div class="account-dashboard">
     <div class="container">
         <div class="row">
+            <div class="col-12" style="margin: 70px 0">
+                <h3 class="breadcrumb-title text-center"> Order Details </h3>
+                <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                    <nav aria-label="breadcrumb">
+                        <ul>
+                            <li><a href="{{url('/')}}">Home</a></li>
+                            <li><a href="{{url('/my_account')}}">My Account</a></li>
+                            <li><a href="{{url('/order')}}">My Order</a></li>
+                            <li class="active" aria-current="page">Order Details</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
             <div class="col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                 <!-- Start Contact Details -->
                 <div class="contact-details-wrapper section-top-gap-100 aos-init aos-animate" style="margin-bottom: 30px;" >

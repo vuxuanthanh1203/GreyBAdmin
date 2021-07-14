@@ -1,31 +1,9 @@
 @extends('front/layout')
 @section('page_title', 'Order Successfully')
 @section('container')
-<!-- ...:::: Start Breadcrumb Section:::... -->
-<div class="breadcrumb-section breadcrumb-bg-color--golden">
-    <div class="breadcrumb-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="breadcrumb-title">Order Page</h3>
-                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                        <nav aria-label="breadcrumb">
-                            <ul>
-                                <li><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="{{url('category/sneakers')}}">Page</a></li>
-                                <li class="active" aria-current="page">Order Page</li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div> <!-- ...:::: End Breadcrumb Section:::... -->
-
   
 <!-- ...:::: Start Error Section :::... -->
-<div class="error-section">
+<div class="error-section" style="margin-top: 70px">
     <div class="container">
         <div class="row">
             <div class="error-form">

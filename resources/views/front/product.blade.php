@@ -2,33 +2,23 @@
 @section('page_title', 'Product Details')
 
 @section('container')
-<!-- ...:::: Start Breadcrumb Section:::... -->
-<div class="breadcrumb-section breadcrumb-bg-color--golden">
-    <div class="breadcrumb-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="breadcrumb-title">Product Details</h3>
-                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                        <nav aria-label="breadcrumb">
-                            <ul>
-                                <li><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="{{url('category/sneakers')}}">Shop</a></li>
-                                <li class="active" aria-current="page">Product Details</li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ...:::: End Breadcrumb Section:::... -->
 
 <!-- Start Product Details Section -->
 <div class="product-details-section">
     <div class="container">
         <div class="row">
+            <div class="col-12" style="margin: 70px 0">
+                <h3 class="breadcrumb-title text-center"> Product Details </h3>
+                <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                    <nav aria-label="breadcrumb">
+                        <ul>
+                            <li><a href="{{url('/')}}">Home</a></li>
+                            <li><a href="{{url('category/sneakers')}}">Shop</a></li>
+                            <li class="active" aria-current="page">Product Details</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
             <div class="col-xl-5 col-lg-6">
                 <div class="product-details-gallery-area" data-aos="fade-up" data-aos-delay="0">
                     <!-- Start Large Image -->

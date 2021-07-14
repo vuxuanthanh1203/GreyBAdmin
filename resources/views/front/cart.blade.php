@@ -5,27 +5,6 @@
 @php
     $totalPrice = 0;
 @endphp
-<!-- ...:::: Start Breadcrumb Section:::... -->
-<div class="breadcrumb-section breadcrumb-bg-color--golden">
-    <div class="breadcrumb-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="breadcrumb-title">Cart</h3>
-                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                        <nav aria-label="breadcrumb">
-                            <ul>
-                                <li><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="{{url('category/sneakers')}}">Shop</a></li>
-                                <li class="active" aria-current="page">Cart</li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- ...:::: End Breadcrumb Section:::... -->
 
 <!-- ...:::: Start Cart Section:::... -->
 @if(isset($list[0]))
@@ -35,6 +14,17 @@
     <div class="cart-table-wrapper" data-aos="fade-up" data-aos-delay="0">
         <div class="container">
             <div class="row">
+                <div class="col-12" style="margin: 70px 0">
+                    <h3 class="breadcrumb-title text-center"> Cart </h3>
+                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                        <nav aria-label="breadcrumb">
+                            <ul>
+                                <li><a href="{{url('/')}}">Home</a></li>
+                                <li class="active" aria-current="page">Cart </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="table_desc">
                         <div class="table_page table-responsive">
@@ -42,13 +32,13 @@
                                 <!-- Start Cart Table Head -->
                                 <thead>
                                     <tr>
-                                        <th class="product_remove">Delete</th>
                                         <th class="product_thumb">Image</th>
                                         <th class="product_name">Product</th>
                                         <th class="product_name">Size</th>
                                         <th class="product-price">Price</th>
                                         <th class="product_quantity">Quantity</th>
                                         <th class="product_total">Total</th>
+                                        <th class="product_remove">Action</th>
                                     </tr>
                                 </thead> <!-- End Cart Table Head -->
                                 @foreach($list as $data)
@@ -58,9 +48,6 @@
                                 <tbody>
                                     <!-- Start Cart Single Item-->
                                     <tr class="idProduct" id="cart_box{{$data->attr_id}}">
-                                        <td class="product_remove">
-                                            <a href="javascript:void(0)" onclick="deleteCartProduct('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}')"><i class="fas fa-trash"></i></a>
-                                        </td>
                                         <td class="product_thumb">
                                             <a href="/product/{{$data->slug}}">
                                                 <img src="{{asset('storage/media/Products/'. $data->image)}}" alt="">
@@ -75,10 +62,14 @@
                                         <td class="product_name">{{number_format($data->price)}} VND</td>
                                         <td class="product_quantity">
                                             <label>Quantity</label> 
-                                            <input id="qty{{$data->attr_id}}" min="1" max="100" value="{{$data->qty}}" type="number" onchange="updateQty('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}','{{$data->price}}')">
+                                            <input id="qty{{$data->attr_id}}" min="1" max="100" value="{{$data->qty}}" onkeypress="return isNumberKey(event)" type="number" onchange="updateQty('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}','{{$data->price}}')">
                                         </td>
                                         <td class="product_total" id="total_price_{{$data->attr_id}}">{{number_format($data->price * $data->qty)}} VND</td>
-                                    </tr> <!-- End Cart Single Item-->
+                                        <td class="product_remove">
+                                            <a href="javascript:void(0)" onclick="deleteCartProduct('{{$data->pid}}','{{$data->size}}','{{$data->attr_id}}')"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr> 
+                                    <!-- End Cart Single Item-->
                                 </tbody>
                                 @endforeach  
                             </table>
@@ -120,14 +111,14 @@
 
 @else
  <!-- ...::::Start About Us Center Section:::... -->
-<div class="empty-cart-section section-fluid" style="margin-bottom: 50px">
+<div class="empty-cart-section section-fluid" style="margin: 50px 0">
     <div class="emptycart-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-3">
                     <div class="emptycart-content text-center">
                         <div class="image">
-                            <img class="img-fluid" {{asset('assets/images/emprt-cart/empty-cart.png')}} alt="">
+                            <img class="img-fluid" src="{{asset('assets/images/emprt-cart/empty-cart.png')}}" alt="">
                         </div>
                         <h4 class="title">Your Cart is Empty</h4>
                         <h6 class="sub-title">Sorry Mate... No item Found inside your cart!</h6>
