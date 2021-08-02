@@ -129,29 +129,33 @@
                                 <div class="swiper-wrapper">
                                     <!-- End Product Default Single Item -->
                                     <!-- Start Product Default Single Item -->
-                                    @foreach ($home_products_new as $item)
+                                    @foreach ($home_products_new as $new)
                                     <div class="product-default-single-item product-color--golden swiper-slide">
                                         <div class="image-box">
-                                            <a href="{{url('product/'.$item->slug)}}" class="image-link">
-                                                <img src="{{asset('storage/media/Products/'.$item->image)}}">
+                                            <a href="{{url('product/'.$new->slug)}}" class="image-link">
+                                                <img src="{{asset('storage/media/Products/'.$new->image)}}">
                                             </a>
-                                            <div class="action-link">
+                                            <a href="{{url('product/'.$new->slug)}}" class="product-short_desc">
+                                                <h5 class="short_desc-title">desc</h5>
+                                                <p class="short_desc-content">{!!$new->short_desc!!}</p>
+                                            </a>
+                                            {{-- <div class="action-link">
                                                 <div class="action-link-left">
-                                                    <a href="{{url('product/'.$item->slug)}}" data-bs-toggle="modal"
+                                                    <a href="{{url('product/'.$new->slug)}}" data-bs-toggle="modal"
                                                         data-bs-target="#modalAddcart">Add to Cart</a>
                                                 </div>
                                                 <div class="action-link-right">
-                                                    <a href="{{url('product/'.$item->slug)}}" data-bs-toggle="modal"
+                                                    <a href="{{url('product/'.$new->slug)}}" data-bs-toggle="modal"
                                                         data-bs-target="#modalQuickview"><i
                                                             class="icon-magnifier"></i></a>
                                                     <a href="#"><i class="icon-heart"></i></a>
                                                     <a href="#"><i class="icon-shuffle"></i></a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="content">
                                             <div class="content-left">
-                                                <h6 class="title"><a href="{{url('product/'.$item->slug)}}">{{$item->name}}</a></h6>
+                                                <h6 class="title"><a href="{{url('product/'.$new->slug)}}">{{$new->name}}</a></h6>
                                                 
                                             </div>
                                             <div class="content-right">
@@ -162,7 +166,7 @@
                                                     <li class="fill"><i class="ion-android-star"></i></li>
                                                     <li class="empty"><i class="ion-android-star"></i></li>
                                                 </ul>
-                                                <span class="price">{{number_format($item->price)}} VND</span>
+                                                <span class="price">{{number_format($new->price)}} VND</span>
                                             </div>
 
                                         </div>
@@ -260,29 +264,34 @@
                                 <div class="swiper-wrapper">
                                     <!-- End Product Default Single Item -->
                                     <!-- Start Product Default Single Item -->
-                                    @foreach ($home_products_hot as $item)
+                                    @foreach ($home_products_hot as $hot)
                                     <div class="product-default-single-item product-color--golden swiper-slide">
                                         <div class="image-box">
-                                            <a href="{{url('product/'.$item->slug)}}" class="image-link">
-                                                <img src="{{asset('storage/media/Products/'.$item->image)}}">
+                                            <a href="{{url('product/'.$hot->slug)}}" class="image-link">
+                                                <img src="{{asset('storage/media/Products/'.$hot->image)}}">
                                             </a>
-                                            <div class="action-link">
+                                            {{-- <div class="action-link">
                                                 <div class="action-link-left">
                                                     <a href="{{url('product/'.$item->slug)}}" data-bs-toggle="modal"
                                                         data-bs-target="#modalAddcart">Add to Cart</a>
+                                                    <a href="#modalAddcart{{$hot->id}}" data-bs-toggle="modal">Add to Cart</a>
                                                 </div>
                                                 <div class="action-link-right">
-                                                    <a href="{{url('product/'.$item->slug)}}" data-bs-toggle="modal"
+                                                    <a href="{{url('product/'.$hot->slug)}}" data-bs-toggle="modal"
                                                         data-bs-target="#modalQuickview"><i
                                                             class="icon-magnifier"></i></a>
                                                     <a href="#"><i class="icon-heart"></i></a>
                                                     <a href="#"><i class="icon-shuffle"></i></a>
                                                 </div>
+                                            </div> --}}
+                                            <div class="product-short_desc">
+                                                <h5 class="short_desc-title">desc</h5>
+                                                <p>{!!$new->short_desc!!}</p>
                                             </div>
                                         </div>
                                         <div class="content">
                                             <div class="content-left">
-                                                <h6 class="title"><a href="{{url('product/'.$item->slug)}}">{{$item->name}}</a></h6>
+                                                <h6 class="title"><a href="{{url('product/'.$hot->slug)}}">{{$hot->name}}</a></h6>
                                                 
                                             </div>
                                             <div class="content-right">
@@ -293,7 +302,7 @@
                                                     <li class="fill"><i class="ion-android-star"></i></li>
                                                     <li class="empty"><i class="ion-android-star"></i></li>
                                                 </ul>
-                                                <span class="price">{{number_format($item->price)}} VND</span>
+                                                <span class="price">{{number_format($hot->price)}} VND</span>
                                             </div>
 
                                         </div>
@@ -422,6 +431,121 @@
     </div>
 </div>
 <!-- End Instagramr Section -->
+
+<!-- Start Modal Quickview cart -->
+<div class="modal fade" id="modalAddcart{{$hot->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col text-right">
+                            <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                aria-label="Close">
+                                <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="product-details-gallery-area mb-7">
+                                <!-- Start Large Image -->
+                                <div class="product-large-image modal-product-image-large swiper-container">
+                                    <div class="swiper-wrapper">
+                                        <div class="product-image-large-image swiper-slide img-responsive">
+                                            @foreach($product_hot_images[$hot->id] as $list)
+                                                <div class="product-image-thumb-single swiper-slide">
+                                                    <img class="img-fluid" src="{{asset('storage/media/Products/'. $list->images)}}"
+                                                        alt="">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Large Image -->
+                                <!-- Start Thumbnail Image -->
+                                <div
+                                    class="product-image-thumb modal-product-image-thumb swiper-container pos-relative mt-5">
+                                    <div class="swiper-wrapper">
+                                        @foreach($product_hot_images[$hot->id] as $list)
+                                            <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive">
+                                                <img src="{{asset('storage/media/Products/'. $list->images)}}" alt="">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Add Arrows -->
+                                    <div class="gallery-thumb-arrow swiper-button-next"></div>
+                                    <div class="gallery-thumb-arrow swiper-button-prev"></div>
+                                </div>
+                                <!-- End Thumbnail Image -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="modal-product-details-content-area">
+                                <!-- Start  Product Details Text Area-->
+                                <div class="product-details-text">
+                                    <h4 class="title"> {{$hot->name}}</h4>
+                                    <div class="price"><span>Price: </span>{{number_format($hot->price)}} VND</div>
+                                </div> <!-- End  Product Details Text Area-->
+                                <div class="product-details-catagory mb-2">
+                                    <span class="code" style="text-transform:uppercase">Code: </span>
+                                    <ul>
+                                        <li><a href="#" style="color: #b19361">{{$hot->code}}</a></li>
+                                    </ul>
+                                </div> <!-- End  Product Details Catagories Area-->
+                                <!-- Start Product Variable Area -->
+                                <div class="product-details-variable">
+                                    <!-- Product Variable Single Item -->
+                                    <div class="variable-single-item">
+                                        <span>Size</span>
+                                        <div class="sizes_wrap">
+                                            <div class="size-details" onclick="showColor('37')">37</div>
+                                            <div class="size-details" onclick="showColor('38')">38</div>
+                                            <div class="size-details" onclick="showColor('39')">39</div>
+                                            <div class="size-details" onclick="showColor('40')">40</div>
+                                        </div>
+                                    </div>
+                                    <!-- Product Variable Single Item -->
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <div class="variable-single-item ">
+                                            <span>Quantity</span>
+                                            <div class="product-variable-quantity">
+                                                <input min="1" max="100" value="1" type="number" onkeypress="return isNumberKey(event)">
+                                            </div>
+                                        </div>
+
+                                        <div class="product-add-to-cart-btn add2cartIndex">
+                                            <p>Add To Cart</p>
+                                        </div>
+                                    </div>
+                                </div> <!-- End Product Variable Area -->
+                                <div class="modal-product-about-text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste
+                                        laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam
+                                        in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel
+                                        recusandae</p>
+                                </div>
+                                <!-- Start  Product Details Social Area-->
+                                <div class="modal-product-details-social">
+                                    <span class="title">SHARE THIS PRODUCT</span>
+                                    <ul>
+                                        <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                    </ul>
+
+                                </div> <!-- End  Product Details Social Area-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End Modal Quickview cart -->
+
 </div>
     <input type="hidden" id="qty" value="1"/>
     <form id="frmAddToCart">

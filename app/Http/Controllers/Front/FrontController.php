@@ -50,6 +50,15 @@ class FrontController extends Controller
                 ->get();
         }
 
+        foreach($result['home_products_hot'] as $list){
+            $result['product_hot_images'][$list->id]=
+                DB::table('product_images')
+                ->where(['product_images.products_id'=>$list->id])
+                ->get();
+        }
+        // $home_products_hot_attr[$hot->id]->size_id
+        // prx($result['home_products_hot_attr'][$list->id][0]->size_id);
+
         // Sale products
         $result['home_products_sale']=DB::table('products')
                 ->where(['status'=>1])
@@ -552,7 +561,7 @@ class FrontController extends Controller
             if($result[0]->status==1){
                 if($result[0]->is_one_time==1){
                     $status="error";
-                    $msg="Coupon code already used";    
+                    $msg="Coupon code already used !";    
                 }else{
                     $min_order_amt=$result[0]->min_order_amt;
                     if($min_order_amt>0){

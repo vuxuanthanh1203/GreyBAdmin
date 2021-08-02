@@ -102,15 +102,15 @@
                                 <div class="sort-select-list d-flex align-items-center">
                                     <label class="mr-2">Sort By:</label>
                                     <form action="#">
-                                        <select onchange="sort_by()" id="sort_by_value" class="select_sort">
-                                            <option class="select_value" selected>Sort by default</option>
+                                        <select name="" onchange="sort_by()" id="sort_by_value" class="select_sort">
+                                            <option class="select_value" value="" selected="Default">Sort by default</option>
                                             <option class="select_value" value="date">Sort by newness</option>
                                             <option class="select_value" value="name">Sort by name</option>
                                             <option class="select_value" value="price_asc">Sort by price: low to high</option>
                                             <option class="select_value" value="price_desc">Sort by price: high to low</option>
                                         </select>
                                     </form>
-                                    {{$sort_txt}}
+                                    {{-- {{$sort_txt}} --}}
                                 </div> <!-- End Sort Select Option -->
                             </div> <!-- Start Sort Wrapper Box -->
                         </div>
@@ -198,9 +198,9 @@
     @csrf
   </form>  
 
- {{-- <form id="categoryFilter">
+ <form id="categoryFilter">
     <input type="hidden" id="sort" name="sort" value="{{$sort}}"/>
-    <input type="hidden" id="filter_price_start" name="filter_price_start" value="{{$filter_price_start}}"/>
-    <input type="hidden" id="filter_price_end" name="filter_price_end" value="{{$filter_price_end}}"/>
-</form>  --}}
+    {{-- <input type="hidden" id="filter_price_start" name="filter_price_start" value="{{$filter_price_start}}"/>
+    <input type="hidden" id="filter_price_end" name="filter_price_end" value="{{$filter_price_end}}"/> --}}
+</form> 
 @endsection

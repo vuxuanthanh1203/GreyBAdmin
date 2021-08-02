@@ -193,9 +193,9 @@
     @csrf
 </form>
 
- {{-- <form id="categoryFilter">
+ <form id="categoryFilter">
     <input type="hidden" id="sort" name="sort" value="{{$sort}}"/>
-    <input type="hidden" id="filter_price_start" name="filter_price_start" value="{{$filter_price_start}}"/>
-    <input type="hidden" id="filter_price_end" name="filter_price_end" value="{{$filter_price_end}}"/>
-</form>  --}}
+    {{-- <input type="hidden" id="filter_price_start" name="filter_price_start" value="{{$filter_price_start}}"/>
+    <input type="hidden" id="filter_price_end" name="filter_price_end" value="{{$filter_price_end}}"/> --}}
+</form> 
 @endsection

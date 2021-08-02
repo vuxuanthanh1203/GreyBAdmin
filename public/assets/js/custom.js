@@ -134,10 +134,10 @@ jQuery('#frmPlaceOrder').submit(function(e){
     type:'post',
     success:function(result){
       if(result.status=="success"){
-        toastr.success(result.msg);
+        // toastr.success(result.msg);
         setTimeout(function() {
           window.location.href='/order_placed'
-        }, 2000);
+        }, 500);
       }
       if(result.status=="error"){
         setTimeout(() => {
@@ -348,3 +348,15 @@ function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode;
     return !(charCode > 31 && (charCode < 48 || charCode > 57));
 }
+
+var counter = 11;
+setInterval(function(){
+  counter--;
+  if(counter >= 0) {
+    id = document.getElementById("count_to_home");
+    id.innerHTML = counter;
+  }
+  if(counter === 0) {
+    window.location.href='/';
+  }
+}, 1000)
