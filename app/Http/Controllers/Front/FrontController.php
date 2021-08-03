@@ -741,7 +741,7 @@ class FrontController extends Controller
         $result['ordersR']=DB::table('orders')
         ->select('orders.*','orders_status.orders_status')
         ->leftJoin('orders_status','orders_status.id','=','orders.orders_status')
-        ->where(['orders.orders_status'=>4])
+        ->where(['orders.orders_status'=>3])
         ->where(['orders.customers_id'=>$request->session()->get('FRONT_USER_ID')])
         ->orderBy('orders.created_at')
         ->get();    
@@ -751,12 +751,12 @@ class FrontController extends Controller
         $result['ordersF']=DB::table('orders')
         ->select('orders.*','orders_status.orders_status')
         ->leftJoin('orders_status','orders_status.id','=','orders.orders_status')
-        ->where(['orders.orders_status'=>3])
+        ->where(['orders.orders_status'=>4])
         ->where(['orders.customers_id'=>$request->session()->get('FRONT_USER_ID')])
         ->orderBy('orders.created_at')
         ->get();    
 
-        $countF = count($result['ordersR']);
+        $countF = count($result['ordersF']);
 
         $result['countP'] = $countP;
         $result['countS'] = $countS;
@@ -855,14 +855,16 @@ class FrontController extends Controller
         return response()->json(['status'=>'success','msg'=>'Thank you for choosing us !']);
     }
 
-    public function cancel(Request $request, $status, $id)
+    public function cancel(Request $request, $id)
     {
         $model = orders::find($id);
-        $model->orders_status=$status;
+        $model->orders_status=4;
+        $model->note = $request->input('message');
         $model->save();
 
         return response()->json(['status'=>'success','msg'=>'Order Cancel Successfully']);
     }
+
 
     public function search(Request $request,$str)
     {
@@ -890,4 +892,6 @@ class FrontController extends Controller
             $result['key'] = $str;
         return view('front.search',$result);
     }
+
+    
 }

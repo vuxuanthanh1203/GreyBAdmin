@@ -286,41 +286,6 @@ $(document).ready(function(){
         };
         $.ajax({
           type: "GET",
-          url: 'status/4/'+update_id,
-          data: data,
-          success:function(result) {
-            if(result.status=="success"){
-              toastr.success(result.msg);
-              setTimeout(function() {
-                location.reload()
-            }, 1500);
-            }
-          }
-        });
-      }
-    });
-  });
-});
-
-$(document).ready(function(){
-  $('.cancelbtn').on('click',function(e) {
-    e.preventDefault();
-    var update_id = $(this).closest("tr").find('.updateStatusbtn').val();
-    swal({
-      title: "Are you sure?",
-      text: "Confirm cancellation of this order",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        var data = {
-          "_token": $('input[name=_token]').val(),
-          "id": update_id,
-        };
-        $.ajax({
-          type: "GET",
           url: 'status/3/'+update_id,
           data: data,
           success:function(result) {
@@ -337,6 +302,7 @@ $(document).ready(function(){
   });
 });
 
+
 function funSearch(){
   var search_str=jQuery('#search_str').val();
   if(search_str!='' && search_str.length>3){
@@ -349,14 +315,47 @@ function isNumberKey(evt){
     return !(charCode > 31 && (charCode < 48 || charCode > 57));
 }
 
-var counter = 11;
-setInterval(function(){
-  counter--;
-  if(counter >= 0) {
-    id = document.getElementById("count_to_home");
-    id.innerHTML = counter;
-  }
-  if(counter === 0) {
-    window.location.href='/';
-  }
-}, 1000)
+// var counter = 11;
+// setInterval(function(){
+//   counter--;
+//   if(counter >= 0) {
+//     id = document.getElementById("count_to_home");
+//     id.innerHTML = counter;
+//   }
+//   if(counter === 0) {
+//     window.location.href='/';
+//   }
+// }, 1000)
+
+
+$(document).ready(function() {
+  $('.cancelbtn').on('click', function() {
+    $('#ModalCancel').modal('show');
+    $tr = $(this).closest('tr');
+    var data = $tr.children("td").map(function() {
+      return $(this).text();
+    }).get();
+    // console.log(data);
+    $('#id').val(data[0])
+  });
+
+  $('#cancelForm').on('submit', function(e) {
+    e.preventDefault();
+    var id = $('#id').val();
+    $.ajax({
+      type: 'POST',
+      url: "/cancelorder/"+id,
+      data: $('#cancelForm').serialize(),
+      success: function(result) {
+        console.log(result);
+        $('#ModalCancel').modal('hide');
+        if(result.status=="success"){
+          toastr.success(result.msg);
+          setTimeout(function() {
+            location.reload()
+        }, 1500);
+        }
+      }
+    });
+  });
+});

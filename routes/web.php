@@ -48,7 +48,7 @@ Route::group(['middleware'=>'user_auth'],function(){
     Route::get('change_password/{id}', [FrontController::class, 'change_password']);
     Route::post('/change_password_process', [FrontController::class, 'change_password_process'])->name('change_password_process');
     Route::get('status/{status}/{id}', [FrontController::class, 'status']);
-    Route::get('cancel/{status}/{id}', [BrandController::class, 'cancel']);
+    Route::post('cancelorder/{id}', [FrontController::class, 'cancel']);
 });
 
 

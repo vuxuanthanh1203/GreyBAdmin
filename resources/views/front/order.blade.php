@@ -74,11 +74,12 @@
                                             <td>{{number_format($item->total_amt)}} VND</td>
                                             <td> 
                                                 <div class="order-action row">
-                                                    <button type="button" class="btn btn-md btn-black-default-hover mt-7 cancelbtn" style="margin-top: 0 !important; width: 40px;" data-toggle="tooltip" data-placement="top" title="Cancel Order">
-                                                        <i class="fas fa-trash" style="margin: 0 auto"></i>
-                                                    </button>
                                                     <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important">
-                                                        <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7" data-toggle="tooltip" data-placement="top" title="Order Detail"
+                                                        <a href="#" class="btn btn-md btn-black-default-hover mt-7 cancelbtn" data-bs-toggle="modal" data-bs-target="#ModalCancel"
+                                                            style="margin-top: 0 !important; width: 40px;"><i class="fas fa-trash"></i></a>
+                                                    </div>
+                                                    <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important">
+                                                        <a href="{{url('order_detail')}}/{{$item->id}}" class="btn btn-md btn-black-default-hover mt-7" data-toggle="tooltip" data-placement="top" title="Order Detail"
                                                             style="margin-top: 0 !important; width: 40px;"><i class="fas fa-clipboard"></i></a>
                                                     </div>
                                                 </div>
@@ -141,7 +142,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($ordersS as $item)
+                                        @foreach($ordersR as $item)
                                         <tr>
                                             <input type="hidden" class="updateStatusbtn" value="{{$item->id}}">
                                             <td>{{$item->id}}</td>
@@ -169,24 +170,28 @@
                                         <tr>
                                             <th>Order</th>
                                             <th>Date</th>
-                                            <th>Status</th>
+                                            {{-- <th>Status</th> --}}
                                             <th>Total</th>
+                                            <th>Message</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($ordersS as $item)
-                                        <tr>
-                                            <input type="hidden" class="updateStatusbtn" value="{{$item->id}}">
+                                        @foreach($ordersF as $item)
+                                        <tr id="oid{{$item->id}}">
+                                            {{-- <input type="hidden" class="updateStatusbtn" value="{{$item->id}}"> --}}
                                             <td>{{$item->id}}</td>
                                             <td>{{$item->updated_at}}</td>
-                                            <td><span class="success">{{$item->orders_status}}</span></td>
+                                            {{-- <td><span class="success">{{$item->orders_status}}</span></td> --}}
                                             <td>{{number_format($item->total_amt)}} VND</td>
+                                            <td style="text-transform: none">{!!$item->note!!}</td>
                                             <td> 
                                                 <div class="order-action row">
                                                     <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important">
-                                                        <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7" data-toggle="tooltip" data-placement="top" title="Order Detail"
-                                                            style="margin-top: 0 !important; width: 40px;"><i class="fas fa-clipboard"></i></a>
+                                                        <a href="{{url('order_detail')}}/{{$item->id}}" class="btn btn-md btn-black-default-hover mt-7" data-toggle="tooltip" data-placement="top" title="Order Detail"
+                                                            style="margin-top: 0 !important; width: 40px;">
+                                                            <i class="fas fa-clipboard"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -223,5 +228,42 @@
         </div>
     </div>
 </div> <!-- ...:::: End Account Dashboard Section:::... -->
+
+<div class="modal fade" id="ModalCancel" tabindex="-1" aria-modal="true" role="dialog" style="display: block; padding-right: 17px;">
+    <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col text-right">
+                            <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cancel-modal">
+                        <h3 style="margin-bottom: 20px;font-weight: 700;">Cancel Order</h3>
+                        <form id="cancelForm">
+                            @csrf
+                            <input type="hidden" name="id" id="id">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="default-form-box mb-20">
+                                        <label for="contact-message">Your Message</label>
+                                        <textarea name="message" id="cancel-message" cols="30" rows="10" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button class="btn btn-lg btn-black-default-hover" type="submit">SEND</button>
+                                </div>
+                                <p class="form-messege"></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
