@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins/jquery.lineProgressbar.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/aos.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/toastr.min.css')}}">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{asset('assets/sass/style.css')}}">
@@ -550,9 +550,11 @@
     <script src="{{asset('assets/js/vendor/all.js')}}"></script>
     <script src="{{asset('assets/js/plugins/plugins.min.js')}}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- Main JS -->
     <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="{{asset('assets/js/simple.money.format.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
     {{-- <script src="{{asset('assets/js/nouislider.js')}}"></script> --}}
 
@@ -566,6 +568,32 @@
         toastr.error("{!!Session::get('error')!!}");
     </script>
     @endif
+
+    <script>
+        $(document).ready(function() {
+          $( "#skipstep" ).slider({
+            orientation: "horizontal",
+            range: true,
+        
+            min: {{$min_price_range}},
+            max: {{$max_price_range}},
+            
+            values: [ {{$min_price}}, {{$max_price}} ],
+            step: 10000,
+            slide: function( event, ui ) {
+              $( "#amount-start" ).val( ui.values[ 0 ]).simpleMoneyFormat();
+              $( "#amount-end" ).val( ui.values[ 1 ]).simpleMoneyFormat();
+
+              $( "#start-price" ).val( ui.values[ 0 ]);
+              $( "#end-price" ).val( ui.values[ 1 ]);
+            }
+          });
+          $( "#amount-start" ).val( $( "#skipstep" ).slider( "values", 0 )).simpleMoneyFormat();
+          $( "#amount-end" ).val( $( "#skipstep" ).slider( "values", 1 )).simpleMoneyFormat();
+
+        });
+
+    </script>
 </body>
 
 </html>

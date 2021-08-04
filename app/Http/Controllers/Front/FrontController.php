@@ -121,11 +121,10 @@ class FrontController extends Controller
 
     public function category(Request $request, $slug)
     {
-        $sort="";
-        $sort_txt="";
-        if($request->get('sort')!==null){
-            $sort=$request->get('sort');
-        }    
+        $min_price = DB::table('products')->min('price');
+        $max_price = DB::table('products')->max('price');
+        $max_price_range = $max_price + 1502000;
+        $min_price_range = $min_price - 38000;
 
         $query=DB::table('products');
         $query=$query->leftJoin('categories','categories.id','=','products.category_id');
@@ -133,29 +132,33 @@ class FrontController extends Controller
         $query=$query->where(['products.status'=>1]);
         $query=$query->where(['categories.category_slug'=>$slug]);
         
-        if($sort=='name'){
-            $query=$query->orderBy('products.name','asc');
-            $sort_txt="Product Name";
-        }
-        if($sort=='date'){
-            $query=$query->orderBy('products.id','desc');
-            $sort_txt="Date";
-        }
-        if($sort=='price_desc'){
-            $query=$query->orderBy('products.price','desc');
-            $sort_txt="Price - DESC";
-        }if($sort=='price_asc'){
-            $query=$query->orderBy('products.price','asc');
-            $sort_txt="Price - ASC";
-        }
-        // if($request->get('filter_price_start')!==null && $request->get('filter_price_end')!==null){
-        //     $filter_price_start=$request->get('filter_price_start');
-        //     $filter_price_end=$request->get('filter_price_end');
+        if (isset($_GET['sort_by'])) {
+            $sort_by = $_GET['sort_by'];
+            
+            if($sort_by=='az'){
+                $query=$query->orderBy('products.name','asc');
+            }
+            elseif($sort_by=='za'){
+                $query=$query->orderBy('products.name','desc');
+                
+            }
+            elseif($sort_by=='dec'){
+                $query=$query->orderBy('products.price','desc');
+            }
+            elseif($sort_by=='asc'){
+                $query=$query->orderBy('products.price','asc');
+            }
 
-        //     if($filter_price_start>0 && $filter_price_end>0){
-        //         $query=$query->whereBetween('products_attr.price',[$filter_price_start,$filter_price_end]);
-        //     }
-        // }  
+        }
+        elseif (isset($_GET['start-price']) && $_GET['end-price']) {
+            $minPrice = $_GET['start-price'];
+            $maxPrice = $_GET['end-price'];
+
+            $query = $query->whereBetween('price', [$minPrice, $maxPrice])->orderBy('products.price','asc');;
+        }
+        else {
+            $query=$query->orderBy('products.id','desc');
+        }
 
         // $query=$query->distinct()->select('products.*');
         // $query=$query->get();
@@ -181,44 +184,51 @@ class FrontController extends Controller
         ->where(['status'=>1])
         ->get();
 
-        $result['slug']=$slug;
-        $result['sort']=$sort;
-        $result['sort_txt']=$sort_txt;
-        // $result['filter_price_start']=$filter_price_start;
-        // $result['filter_price_end']=$filter_price_end;
+        $result['slug'] = $slug;        
         
-        
-        return view('front.category',$result);
+        return view('front.category',$result)->with('min_price',$min_price)->with('max_price',$max_price)
+        ->with('max_price_range',$max_price_range)->with('min_price_range',$min_price_range);
     }
 
     public function brand(Request $request, $slug)
     {
-        $sort="";
-        $sort_txt="";
-        if($request->get('sort')!==null){
-            $sort=$request->get('sort');
-        }    
-
+        $min_price = DB::table('products')->min('price');
+        $max_price = DB::table('products')->max('price');
+        $max_price_range = $max_price + 1502000;
+        $min_price_range = $min_price - 38000;
+        
         $query=DB::table('products');
         $query=$query->leftJoin('brands','brands.id','=','products.brand_id');
         $query=$query->leftJoin('products_attr','products.id','=','products_attr.products_id');
         $query=$query->where(['products.status'=>1]);
         $query=$query->where(['brands.brand_name'=>$slug]);
         
-        if($sort=='name'){
-            $query=$query->orderBy('products.name','asc');
-            $sort_txt="Product Name";
+        if (isset($_GET['sort_by'])) {
+            $sort_by = $_GET['sort_by'];
+            
+            if($sort_by=='az'){
+                $query=$query->orderBy('products.name','asc');
+            }
+            elseif($sort_by=='za'){
+                $query=$query->orderBy('products.name','desc');
+                
+            }
+            elseif($sort_by=='dec'){
+                $query=$query->orderBy('products.price','desc');
+            }
+            elseif($sort_by=='asc'){
+                $query=$query->orderBy('products.price','asc');
+            }
+
         }
-        if($sort=='date'){
+        elseif (isset($_GET['start-price']) && $_GET['end-price']) {
+            $minPrice = $_GET['start-price'];
+            $maxPrice = $_GET['end-price'];
+
+            $query = $query->whereBetween('price', [$minPrice, $maxPrice])->orderBy('products.price','asc');;
+        }
+        else {
             $query=$query->orderBy('products.id','desc');
-            $sort_txt="Date";
-        }
-        if($sort=='price_desc'){
-            $query=$query->orderBy('products.price','desc');
-            $sort_txt="Price - DESC";
-        }if($sort=='price_asc'){
-            $query=$query->orderBy('products.price','asc');
-            $sort_txt="Price - ASC";
         }
 
         // $query=$query->distinct()->select('products.*');
@@ -246,10 +256,9 @@ class FrontController extends Controller
         ->get();
 
         $result['slug']=$slug;
-        $result['sort']=$sort;
-        $result['sort_txt']=$sort_txt;
         
-        return view('front.brand',$result);
+        return view('front.brand',$result)->with('min_price',$min_price)->with('max_price',$max_price)
+        ->with('max_price_range',$max_price_range)->with('min_price_range',$min_price_range);
     }
     
     public function add_to_cart(Request $request) {

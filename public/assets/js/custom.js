@@ -148,11 +148,18 @@ jQuery('#frmPlaceOrder').submit(function(e){
   });
 });
 
-function sort_by(){
-  var sort_by_value=jQuery('#sort_by_value').val();
-  jQuery('#sort').val(sort_by_value);
-  jQuery('#categoryFilter').submit();
-}
+
+$(document).ready(function(){
+  $('#sort_by_value').on('change', function(){
+    var url = $(this).val();
+    if (url) {
+      window.location = url;
+    }
+    return false;
+  });
+});
+
+
 
 jQuery('#frmRegistration').submit(function(e){
   e.preventDefault();
@@ -213,58 +220,6 @@ jQuery('#frmUpdatePassword').submit(function(e){
     }
   });
 });
-/**
-
-jQuery(function(){
-  if($('body').is('.productPage')){
-   var skipSlider = document.getElementById('skipstep');
-
-   var filter_price_start=jQuery('#filter_price_start').val();
-   var filter_price_end=jQuery('#filter_price_end').val();
-   
-   if(filter_price_start=='' || filter_price_end==''){
-    var filter_price_start=1100000;
-    var filter_price_end=2100000;
-   }
-
-    noUiSlider.create(skipSlider, {
-        range: {
-            'min': 500000,
-            '10%': 700000,
-            '20%': 900000,
-            '30%': 1100000,
-            '40%': 1300000,
-            '50%': 1500000,
-            '60%': 1700000,
-            '70%': 1900000,
-            '80%': 2100000,
-            '90%': 2300000,
-            'max': 2500000
-        },
-        snap: true,
-        connect: true,
-        start: [filter_price_start, filter_price_end]
-    });
-    // for value print
-    var skipValues = [
-      document.getElementById('skip-value-lower'),
-      document.getElementById('skip-value-upper')
-    ];
-
-    skipSlider.noUiSlider.on('update', function( values, handle ) {
-      skipValues[handle].innerHTML = values[handle];
-    });
-  }
-});
-
-function sort_price_filter(){
-  var start = jQuery('#skip-value-lower').html();
-  var end = jQuery('#skip-value-upper').html();
-  jQuery('#filter_price_start').val(jQuery('#skip-value-lower').html());
-  jQuery('#filter_price_end').val(jQuery('#skip-value-upper').html());
-  jQuery('#categoryFilter').submit();
-}
-*/
 
 
 $(document).ready(function(){
@@ -315,17 +270,17 @@ function isNumberKey(evt){
     return !(charCode > 31 && (charCode < 48 || charCode > 57));
 }
 
-// var counter = 11;
-// setInterval(function(){
-//   counter--;
-//   if(counter >= 0) {
-//     id = document.getElementById("count_to_home");
-//     id.innerHTML = counter;
-//   }
-//   if(counter === 0) {
-//     window.location.href='/';
-//   }
-// }, 1000)
+var counter = 11;
+setInterval(function(){
+  counter--;
+  if(counter >= 0) {
+    id = document.getElementById("count_to_home");
+    id.innerHTML = counter;
+  }
+  if(counter === 0) {
+    window.location.href='/';
+  }
+}, 1000)
 
 
 $(document).ready(function() {
@@ -359,3 +314,4 @@ $(document).ready(function() {
     });
   });
 });
+

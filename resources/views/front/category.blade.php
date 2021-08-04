@@ -62,23 +62,35 @@
                     </div> <!-- End Single Sidebar Widget -->
 
                     <!-- Start Single Sidebar Widget -->
-                    {{-- <div class="sidebar-single-widget">
+                    <div class="sidebar-single-widget">
                         <h6 class="sidebar-title">FILTER BY PRICE</h6>
                         <div class="aa-sidebar-price-range">
                             <form action="">
-                               <div id="skipstep" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
-                               </div>
-                               <span id="skip-value-lower" class="example-val"></span>
-                               <span id="skip-value-upper" class="example-val"></span>
-                               <br>
-                               <button class="aa-filter-btn" type="button" onclick="sort_price_filter()">Filter</button>
+                                <div id="skipstep" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
+                                </div>
+                                <div class="range-amount">
+                                    <div class="range-input">
+                                        <div class="input-start">
+                                            <input type="text" id="amount-start" readonly style="font-size:13px; color:#f6931f; font-weight:bold;">
+                                            <span  style="font-size:13px; color:#f6931f; font-weight:bold;"> VND</span>
+                                        </div>
+                                        <div class="gach-noi">-</div>
+                                        <div class="input-start">
+                                            <input type="text" id="amount-end" readonly style="font-size:13px; color:#f6931f; font-weight:bold;">
+                                            <span  style="font-size:13px; color:#f6931f; font-weight:bold;"> VND</span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="start-price" id="start-price">
+                                    <input type="hidden" name="end-price" id="end-price">
+                                    <input class="aa-filter-btn" type="submit" value="Filter">
+                                </div>
                             </form>
                          </div>
-                    </div>  --}}
+                    </div> 
                     <!-- End Single Sidebar Widget -->
 
                     <!-- Start Single Sidebar Widget -->
-                    <div class="sidebar-single-widget d-md-none">
+                    <div class="sidebar-single-widget">
                         <div class="sidebar-content">
                             <a href="{{url('/')}}" class="sidebar-banner img-hover-zoom">
                                 <img class="img-fluid" src="{{asset('assets/images/banner/side-banner.jpg')}}" alt="">
@@ -101,16 +113,16 @@
                                 <!-- Start Sort Select Option -->
                                 <div class="sort-select-list d-flex align-items-center">
                                     <label class="mr-2">Sort By:</label>
-                                    <form action="#">
-                                        <select name="" onchange="sort_by()" id="sort_by_value" class="select_sort">
-                                            <option class="select_value" value="" selected="Default">Sort by default</option>
-                                            <option class="select_value" value="date">Sort by newness</option>
-                                            <option class="select_value" value="name">Sort by name</option>
-                                            <option class="select_value" value="price_asc">Sort by price: low to high</option>
-                                            <option class="select_value" value="price_desc">Sort by price: high to low</option>
+                                    <form>
+                                        @csrf
+                                        <select name="sort" id="sort_by_value" class="select_sort">
+                                            <option class="select_value" value="{{Request::url()}}?sort_by=default">     --- Filter ---      </option>
+                                            <option class="select_value" value="{{Request::url()}}?sort_by=asc">Price: low to high</option>
+                                            <option class="select_value" value="{{Request::url()}}?sort_by=dec">Price: high to low</option>
+                                            <option class="select_value" value="{{Request::url()}}?sort_by=az">Name: A - Z</option>
+                                            <option class="select_value" value="{{Request::url()}}?sort_by=za">Name: Z - A</option>
                                         </select>
                                     </form>
-                                    {{-- {{$sort_txt}} --}}
                                 </div> <!-- End Sort Select Option -->
                             </div> <!-- Start Sort Wrapper Box -->
                         </div>
@@ -190,17 +202,4 @@
     </div>
 </div> <!-- ...:::: End Shop Section:::... -->
 
-<input type="hidden" id="qty" value="1"/>
-  <form id="frmAddToCart">
-    <input type="hidden" id="size_id" name="size_id"/>
-    <input type="hidden" id="pqty" name="pqty"/>
-    <input type="hidden" id="product_id" name="product_id"/>           
-    @csrf
-  </form>  
-
- <form id="categoryFilter">
-    <input type="hidden" id="sort" name="sort" value="{{$sort}}"/>
-    {{-- <input type="hidden" id="filter_price_start" name="filter_price_start" value="{{$filter_price_start}}"/>
-    <input type="hidden" id="filter_price_end" name="filter_price_end" value="{{$filter_price_end}}"/> --}}
-</form> 
 @endsection

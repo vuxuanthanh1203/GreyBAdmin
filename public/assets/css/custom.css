@@ -1,5 +1,11 @@
 *{margin: 0;padding: 0;}
 
+.range-amount {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
 .product-short_desc {
     width: 100%;
     height: 100%;
@@ -29,13 +35,7 @@
     box-shadow: none;
   }
 .aa-sidebar-price-range span {
-    border: 1px solid #e8e7e6;
-    display: inline-block;
-    font-size: 14px;
-    height: 30px;
-    margin-right: 10px;
-    margin-top: 20px;
-    padding: 4px 10px;
+  margin-left: 5px;
 }
 .aa-filter-btn {
     color: #b19361;
@@ -43,7 +43,6 @@
     height: 30px;
     width: 80px;
     border: 1px solid;
-    margin-top: 10px;
   }
 
 #sort_by_value {
@@ -103,4 +102,28 @@
   left: 10px;
   top: 35px;
   position: absolute;
+}
+
+.range-input {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+#amount-start, #amount-end {
+  text-align: right;
+}
+
+.input-start {
+  display: flex;
+  width: 110px;
+  align-items: center;
+}
+
+.gach-noi {
+  font-size:13px; 
+  color:#f6931f; 
+  font-weight:bold;
+  margin: 0 30px;
+  /* flex: 1; */
 }
