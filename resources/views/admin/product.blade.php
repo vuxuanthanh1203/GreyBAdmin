@@ -105,10 +105,6 @@
                                                                                 <i class="ion ion-md-eye"></i>
                                                                             </button>
                                                                         @endif
-
-                                                                        <button class="btn btn-danger deletebtn" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                                            <i class=" ion ion-md-close"></i>
-                                                                        </button>
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach

@@ -82,8 +82,12 @@ Route::post('admin/change_password_process', [AdminController::class, 'change_pa
 
 
 Route::group(['middleware'=>'admin_auth'],function(){
-    // Category
     Route::get('admin/dashboard', [AdminController::class, 'dashboard']);
+    Route::post('admin/dashboard-filter-by-date', [AdminController::class, 'filterByDate']);
+    Route::post('admin/dashboard-filter', [AdminController::class, 'dashboard_filter']);
+    Route::post('admin/days-order', [AdminController::class, 'days_order']);
+
+    // Category
     Route::get('admin/category', [CategoryController::class, 'index']);
     Route::get('admin/category/manage_category', [CategoryController::class, 'manage_category']);
     Route::post('admin/category/manage_category_process', [CategoryController::class, 'manage_category_process'])->name('category.manage_category_process');

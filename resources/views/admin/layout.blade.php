@@ -12,6 +12,8 @@
       <link href="{{asset('admin_assets\libs\datatables\responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
       <link href="{{asset('admin_assets\libs\datatables\select.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
       <!-- App css -->
       <link rel="stylesheet" href="{{asset('admin_assets/css/custom.css')}}">
       <link href="{{asset('admin_assets\css\bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
@@ -212,9 +214,6 @@
       <!-- Vendor js -->
       <script src="{{asset('admin_assets\js\vendor.min.js')}}"></script>
       <script src="{{asset('admin_assets\js\app.min.js')}}"></script>
-      <!-- App js -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
-      <script src="{{asset('admin_assets/js/charts.js')}}"></script>
       <!-- JQuery -->
       <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
       <!-- Required datatable js -->
@@ -234,9 +233,12 @@
       <script src="{{asset('admin_assets\js\pages\datatables.init.js')}}"></script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       <!-- Toastr init -->
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       <script src="{{asset('admin_assets/libs/toastr/toastr.min.js')}}"></script>
       <script src="{{asset('admin_assets/js/pages/toastr.init.js')}}"></script>
       <script src="{{asset('admin_assets/js/main.js')}}"></script>    
+      <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
       @if(Session::has('message'))
       <script>
          toastr.success("{!!Session::get('message')!!}");

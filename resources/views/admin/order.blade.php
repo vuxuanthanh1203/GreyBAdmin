@@ -17,8 +17,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb p-0 m-0">
                                         <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Order</a></li>
-                                        <li class="breadcrumb-item active"><a href="{{url('admin/order')}}">Order Pending</a></li>
+                                        <li class="breadcrumb-item active"><a href="{{url('admin/order')}}">Order</a></li>
                                     </ol>
                                 </div>
                                 <div class="clearfix"></div>

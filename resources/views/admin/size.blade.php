@@ -17,7 +17,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb p-0 m-0">
                                         <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Product Management</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Size Management</a></li>
                                         <li class="breadcrumb-item active">Size</li>
                                     </ol>
                                 </div>
@@ -94,11 +94,11 @@
                                                                             </a>
                                                                         @endif
 
-                                                                        <a href="{{url('admin/size/delete')}}/{{$item->id}}">
+                                                                        {{-- <a href="{{url('admin/size/delete')}}/{{$item->id}}">
                                                                             <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                                                 <i class=" ion ion-md-close"></i>
                                                                             </button>
-                                                                        </a>
+                                                                        </a> --}}
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach

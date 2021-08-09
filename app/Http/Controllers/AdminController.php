@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Statistic;
+use App\Models\Product;
+use App\Models\Customer;
+use App\Models\orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -51,33 +57,12 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $countS = 0;
-        $countO = 0;
-        $countC = 0;
-        $countP = 0;
-
-        $result['sale'] = DB::table('orders')->get();
-        $countO = count($result['sale']);
-
-        $countS = 7830000;
-
-        $result['cus'] = DB::table('customers')
-        ->where('customers.status', '=', 1)
-        ->get();
-        $countC = count($result['cus']);
-
-        $result['pro'] = DB::table('products')
-        ->where('products.status', '=', 1)
-        ->get();
-        $countP = count($result['pro']);        
-
+        $product = Product::all()->count();
+        $customer = Customer::all()->count();
+        $order = orders::all()->count();
         
         
-        $result['countS'] = $countS;
-        $result['countO'] = $countO;
-        $result['countC'] = $countC;
-        $result['countP'] = $countP;
-        return view('admin/dashboard', $result);
+        return view('admin/dashboard')->with(compact('product', 'customer', 'order'));
     }
 
     public function manage_profile(Request $request, $id='')
@@ -157,5 +142,75 @@ class AdminController extends Controller
             }
         }     
     }
+
+    public function filterByDate(Request $request) {
+        $data = $request->all();
+        $from_date = $data['from_date'];
+        $to_date = $data['to_date'];
+
+        $result = Statistic::whereBetween('order_date', [$from_date, $to_date])->orderBy('order_date', 'ASC')->get();
+
+        foreach( $result as $key => $value) {
+            $chart_data[] = array(
+                'period' => $value->order_date,
+                'order' => $value->total_order,
+                'sales' => $value->sales,
+                'profit' => $value->profit,
+                'quantity' => $value->quantity,
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
+
+    public function dashboard_filter(Request $request) {
+        $data = $request->all();
+
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $dauthangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $cuoithangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+
+        $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(7)->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(365)->toDateString();
+
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        if ($data['dashboard_value'] == 'week') {
+            $result = Statistic::whereBetween('order_date', [$sub7days, $now])->orderBy('order_date', 'asc')->get();
+        } elseif ($data['dashboard_value'] == 'lastMonth') {
+            $result = Statistic::whereBetween('order_date', [$dauthangtruoc, $cuoithangtruoc])->orderBy('order_date', 'asc')->get();
+        } elseif ($data['dashboard_value'] == 'thisMonth') {
+            $result = Statistic::whereBetween('order_date', [$dauthangnay, $now])->orderBy('order_date', 'asc')->get();
+        } else {
+            $result = Statistic::whereBetween('order_date', [$sub365days, $now])->orderBy('order_date', 'asc')->get();
+        }
+
+        foreach($result as $key => $value) {
+            $chart_data[] = array(
+                'period' => $value->order_date,
+                'order' => $value->total_order,
+                'sales' => $value->sales,
+                'profit' => $value->profit,
+                'quantity' => $value->quantity,
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
     
+    public function days_order(Request $request) {
+        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $result = Statistic::whereBetween('order_date', [$sub30days, $now])->orderBy('order_date', 'asc')->get();
+
+        foreach($result as $key => $value) {
+            $chart_data[] = array(
+                'period' => $value->order_date,
+                'order' => $value->total_order,
+                'sales' => $value->sales,
+                'profit' => $value->profit,
+                'quantity' => $value->quantity,
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
 }

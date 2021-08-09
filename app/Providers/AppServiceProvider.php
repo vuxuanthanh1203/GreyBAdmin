@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use App\Models\Customer;
+use App\Models\orders;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -29,8 +32,14 @@ class AppServiceProvider extends ServiceProvider
             $max_price_range = $max_price + 1502000;
             $min_price_range = $min_price - 38000;
 
+            $product = Product::all()->count();
+            $customer = Customer::all()->count();
+            $order = orders::all()->count();
+
             $view->with('min_price',$min_price)->with('max_price',$max_price)
-            ->with('max_price_range',$max_price_range)->with('min_price_range',$min_price_range);
+            ->with('max_price_range',$max_price_range)->with('min_price_range',$min_price_range)
+            ->with('product',$product)->with('customer',$customer)
+            ->with('order',$order);
         });
     }
 }

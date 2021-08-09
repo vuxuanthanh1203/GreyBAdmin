@@ -86,3 +86,77 @@ $(document).ready(function(){
     });
   });
 });
+
+
+$(function() {
+  $( "#datepicker" ).datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+  $( "#datepicker2" ).datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+});
+
+$(document).ready(function() {
+  chart30daysorder();
+
+  var chart = new Morris.Bar({
+    element: 'myfirstchart',
+    lineColors: ['#819C79', '#fc8710', '#FF6541', '#A4ADD3', '#766B56'],
+    hideHover: 'auto',
+    parseTime: false,
+    xkey: 'period',
+    ykeys: ['order', 'sales', 'profit', 'quantity'],
+    labels: ['order', 'sales', 'profit', 'quantity'],
+  });
+
+
+  $('.dashboard-filter').change(function() {
+    var dashboard_value = $(this).val();
+    var _token = $('input[name="_token"]').val();
+    
+    $.ajax({
+      url: 'dashboard-filter',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        dashboard_value: dashboard_value,
+        _token: _token
+      },
+      success: function(data) {
+        chart.setData(data);
+      }
+    });
+  });
+
+
+  function chart30daysorder() {
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url: 'days-order',
+      method: 'POST',
+      dataType: 'json',
+      data: {_token: _token},
+      success: function(data) {
+        chart.setData(data);
+      }
+    });
+  }
+
+
+  $('#btn-dashboard-filter').click(function() {
+    var _token = $('input[name="_token"]').val();
+    var from_date = $( "#datepicker" ).val();
+    var to_date = $( "#datepicker2" ).val();
+    
+    $.ajax({
+      url: 'dashboard-filter-by-date',
+      method: 'POST',
+      dataType: 'json',
+      data: {from_date: from_date, to_date: to_date, _token: _token},
+      success: function(data) {
+        chart.setData(data);
+      }
+    });
+  });
+});

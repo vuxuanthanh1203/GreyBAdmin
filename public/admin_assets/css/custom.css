@@ -1,5 +1,11 @@
 *{margin: 0; padding: 0;}
 
+.count-total {
+    padding: 0 !important;
+}
+
+.filter-form {padding: 20px;}
+
 .name-store {
     color: white;
     margin-left: 10px;

@@ -17,8 +17,8 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb p-0 m-0">
                                         <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Website</a></li>
-                                        <li class="breadcrumb-item active">Website Infomation</li>
+                                        <li class="breadcrumb-item"><a href="#">Website Management</a></li>
+                                        <li class="breadcrumb-item active">Website</li>
                                     </ol>
                                 </div>
                                 <div class="clearfix"></div>
