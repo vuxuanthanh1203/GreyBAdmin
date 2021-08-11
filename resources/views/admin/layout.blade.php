@@ -115,7 +115,7 @@
                            </a>
                            <ul class="nav-second-level" aria-expanded="false">
                               <li><a href="{{url('admin/product')}}">Product List</a></li>
-                              <li><a href="{{url('admin/product/manage_product')}}">Add New Product</a></li>
+                              <li><a href="{{url('admin/product/select_type')}}">Add New Product</a></li>
                            </ul>
                         </li>
                         <li>

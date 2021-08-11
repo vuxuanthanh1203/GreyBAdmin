@@ -1,12 +1,3 @@
-// const sizes = document.querySelectorAll('.size');
-
-// function changeSize(){
-// 	sizes.forEach(size => size.classList.remove('active'));
-// 	this.classList.add('active');
-// }
-
-// sizes.forEach(size => size.addEventListener('click',changeSize));
-
 toastr.options = {
   "closeButton": false,
   "debug": false,
@@ -30,6 +21,7 @@ function showColor(size){
     jQuery('#size_id').val(size);
     jQuery('.size_'+size).show();
     jQuery('.size-details').css('border','1px solid #ccc');
+    jQuery('.non-size').css('border','1px solid #ccc');
     jQuery('#size_'+size).css('border','2px solid #b19361');
   }
 
@@ -302,7 +294,6 @@ $(document).ready(function() {
       url: "/cancelorder/"+id,
       data: $('#cancelForm').serialize(),
       success: function(result) {
-        console.log(result);
         $('#ModalCancel').modal('hide');
         if(result.status=="success"){
           toastr.success(result.msg);

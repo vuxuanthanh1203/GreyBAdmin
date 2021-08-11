@@ -33,9 +33,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                                <a href="{{url('admin/product/manage_product')}}" class="add-new">
+                                {{-- <a href="{{url('admin/product/manage_product')}}" class="add-new">
                                     <button class="btn btn-success col-md-2">Add New</button>
-                                </a>
+                                </a> --}}
                             <div class="card-body table-responsive">
                                 <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                                     <div class="row">
@@ -50,6 +50,10 @@
                                                             role="grid" aria-describedby="datatable_info">
                                                             <thead class="thead-dark">
                                                                 <tr role="row">
+                                                                    <th class="sorting" tabindex="0"
+                                                                        aria-controls="datatable" rowspan="1"
+                                                                        colspan="1" style="width: 50px;">ID
+                                                                    </th>
                                                                     <th class="sorting" tabindex="0"
                                                                         aria-controls="datatable" rowspan="1"
                                                                         colspan="1" style="width: 50px;">Code
@@ -80,6 +84,7 @@
                                                                 @foreach($data as $item)
                                                                 <tr role="row" class="odd product_content text-center">
                                                                     <input type="hidden" class="updateStatusbtn" value="{{$item->id}}">
+                                                                    <td>{{$item->id}}</td>
                                                                     <td style="text-transform: uppercase">{{$item->code}}</td>
                                                                     <td>
                                                                         @if($item->image!="")
@@ -97,11 +102,11 @@
                                                                         </a>
 
                                                                         @if ($item->status==0)
-                                                                            <button type="button" class="btn btn-warning activebtn" data-toggle="tooltip" data-placement="top" title="Deactive">
+                                                                            <button type="button" class="btn btn-warning activeproduct" data-toggle="tooltip" data-placement="top" title="Deactive">
                                                                                 <i class="ion ion-md-eye-off"></i>
                                                                             </button>
                                                                         @elseif ($item->status==1)
-                                                                            <button type="button" class="btn btn-info deactivebtn" data-toggle="tooltip" data-placement="top" title="Active">
+                                                                            <button type="button" class="btn btn-info deactiveproduct" data-toggle="tooltip" data-placement="top" title="Active">
                                                                                 <i class="ion ion-md-eye"></i>
                                                                             </button>
                                                                         @endif

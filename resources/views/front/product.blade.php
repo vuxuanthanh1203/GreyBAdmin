@@ -69,7 +69,7 @@
                                 <li class="fill"><i class="ion-android-star"></i></li>
                                 <li class="empty"><i class="ion-android-star"></i></li>
                             </ul>
-                            <a href="#" class="customer-review ml-2">(customer review)</a>
+                            {{-- <a href="#" class="customer-review ml-2">(customer review)</a> --}}
                         </div>
                         <div class="price">{{number_format($item->price)}} VND</div>
                         <div class="product-details-catagory mb-2">
@@ -94,7 +94,11 @@
                                 @endphp
                                 @foreach($arrSize as $attr)
                                 @if($attr!='')
+                                @if($attr =='non-size')
+                                <div class="non-size" onclick="showColor('{{$attr}}')" id="size_{{$attr}}">{{$attr}}</div>
+                                @else
                                 <div class="size-details" onclick="showColor('{{$attr}}')" id="size_{{$attr}}">{{$attr}}</div>
+                                @endif
                                 @endif                                
                             @endforeach  
                             </div>
@@ -115,7 +119,7 @@
                         <div class="product-details-meta mb-20">
                             <a href="#" class="icon-space-right"><i class="icon-heart"></i>Add to
                                 wishlist</a>
-                            <a href="#" class="icon-space-right"><i class="icon-refresh"></i>Compare</a>
+                            {{-- <a href="#" class="icon-space-right"><i class="icon-refresh"></i>Compare</a> --}}
                         </div> <!-- End  Product Details Meta Area-->
                     </div> <!-- End Product Variable Area -->
 

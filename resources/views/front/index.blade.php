@@ -139,19 +139,6 @@
                                                 <h5 class="short_desc-title">desc</h5>
                                                 <p class="short_desc-content">{!!$new->short_desc!!}</p>
                                             </a>
-                                            {{-- <div class="action-link">
-                                                <div class="action-link-left">
-                                                    <a href="{{url('product/'.$new->slug)}}" data-bs-toggle="modal"
-                                                        data-bs-target="#modalAddcart">Add to Cart</a>
-                                                </div>
-                                                <div class="action-link-right">
-                                                    <a href="{{url('product/'.$new->slug)}}" data-bs-toggle="modal"
-                                                        data-bs-target="#modalQuickview"><i
-                                                            class="icon-magnifier"></i></a>
-                                                    <a href="#"><i class="icon-heart"></i></a>
-                                                    <a href="#"><i class="icon-shuffle"></i></a>
-                                                </div>
-                                            </div> --}}
                                         </div>
                                         <div class="content">
                                             <div class="content-left">
@@ -270,24 +257,10 @@
                                             <a href="{{url('product/'.$hot->slug)}}" class="image-link">
                                                 <img src="{{asset('storage/media/Products/'.$hot->image)}}">
                                             </a>
-                                            {{-- <div class="action-link">
-                                                <div class="action-link-left">
-                                                    <a href="{{url('product/'.$item->slug)}}" data-bs-toggle="modal"
-                                                        data-bs-target="#modalAddcart">Add to Cart</a>
-                                                    <a href="#modalAddcart{{$hot->id}}" data-bs-toggle="modal">Add to Cart</a>
-                                                </div>
-                                                <div class="action-link-right">
-                                                    <a href="{{url('product/'.$hot->slug)}}" data-bs-toggle="modal"
-                                                        data-bs-target="#modalQuickview"><i
-                                                            class="icon-magnifier"></i></a>
-                                                    <a href="#"><i class="icon-heart"></i></a>
-                                                    <a href="#"><i class="icon-shuffle"></i></a>
-                                                </div>
-                                            </div> --}}
-                                            <div class="product-short_desc">
+                                            <a href="{{url('product/'.$hot->slug)}}" class="product-short_desc">
                                                 <h5 class="short_desc-title">desc</h5>
-                                                <p>{!!$new->short_desc!!}</p>
-                                            </div>
+                                                <p class="short_desc-content">{!!$hot->short_desc!!}</p>
+                                            </a>
                                         </div>
                                         <div class="content">
                                             <div class="content-left">

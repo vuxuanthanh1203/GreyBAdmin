@@ -113,13 +113,28 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     // Product
     Route::get('admin/product', [ProductController::class, 'index']);
+    Route::get('admin/product/select_type', [ProductController::class, 'select_type']);
+
     Route::get('admin/product/manage_product', [ProductController::class, 'manage_product']);
     Route::post('admin/product/manage_product_process', [ProductController::class, 'manage_product_process'])->name('product.manage_product_process');
+
+    Route::get('admin/product/manage_shoes', [ProductController::class, 'manage_shoes']);
+    Route::post('admin/product/manage_shoes_process', [ProductController::class, 'manage_shoes_process'])->name('product.manage_shoes_process');
+
+    Route::get('admin/product/manage_shirt', [ProductController::class, 'manage_shirt']);
+    Route::post('admin/product/manage_shirt_process', [ProductController::class, 'manage_shirt_process'])->name('product.manage_shirt_process');
+
+    Route::get('admin/product/manage_accessory', [ProductController::class, 'manage_accessory']);
+    Route::post('admin/product/manage_accessory_process', [ProductController::class, 'manage_accessory_process'])->name('product.manage_accessory_process');
+
     Route::get('admin/product/delete/{id}', [ProductController::class, 'delete']);
     Route::get('admin/product/product_attr_delete/{paid}/{pid}', [ProductController::class, 'product_attr_delete']);
     Route::get('admin/product/product_images_delete/{paid}/{pid}', [ProductController::class, 'product_images_delete']);
     Route::get('admin/product/manage_product/{id}', [ProductController::class, 'manage_product']);
-    Route::get('admin/product/status/{status}/{id}', [ProductController::class, 'status']);
+    // Route::get('admin/product/status/{status}/{id}', [ProductController::class, 'status']);
+    Route::get('admin/product/active-product/{id}', [ProductController::class, 'active_product']);
+    Route::get('admin/product/deactive-product/{id}', [ProductController::class, 'deactive_product']);
+
 
     // Brand
     Route::get('admin/brand', [BrandController::class, 'index']);
@@ -132,7 +147,9 @@ Route::group(['middleware'=>'admin_auth'],function(){
     // Customer
     Route::get('admin/customer', [CustomerController::class, 'index']);
     Route::get('admin/customer/show/{id}', [CustomerController::class, 'show']);
-    Route::get('admin/customer/status/{status}/{id}', [CustomerController::class, 'status']);
+    // Route::get('admin/customer/status/{status}/{id}', [CustomerController::class, 'status']);
+    Route::get('admin/customer/active-customer/{id}', [CustomerController::class, 'active_customer']);
+    Route::get('admin/customer/deactive-customer/{id}', [CustomerController::class, 'deactive_customer']);
 
     // Website
     Route::get('admin/website', [WebsiteController::class, 'index']);
@@ -147,6 +164,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/order', [OrdersController::class, 'index']);
     Route::get('admin/order_detail/{id}', [OrdersController::class, 'order_detail']);
     Route::get('admin/order/status/{status}/{id}', [OrdersController::class, 'status']);
+    Route::post('admin/cancelorder/{id}', [OrdersController::class, 'cancel']);
 
 
     // Logout

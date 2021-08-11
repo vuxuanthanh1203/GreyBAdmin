@@ -112,11 +112,11 @@
                                             <td>{{number_format($item->total_amt)}} VND</td>
                                             <td> 
                                                 <div class="order-action row">
-                                                    <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important;">
+                                                    {{-- <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important;">
                                                         <button type="button" class="btn btn-md btn-black-default-hover mt-7 confirmbtn" style="margin-top: 0 !important; width: 40px;" data-toggle="tooltip" data-placement="top" title="Received">
                                                             <i class="fas fa-box-open" style="margin: 0 auto"></i>
                                                         </button>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-6 col-md-4 offset-md-4" style="margin-left: 0 !important">
                                                         <a href="{{url('order_detail')}}/{{$item->id}}"" class="btn btn-md btn-black-default-hover mt-7" data-toggle="tooltip" data-placement="top" title="Order Detail"
                                                              style="margin-top: 0 !important; width: 40px;"><i class="fas fa-clipboard"></i></a>

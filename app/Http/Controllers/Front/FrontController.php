@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Crypt;
 use Mail;
+use Carbon\Carbon;
 
 class FrontController extends Controller
 {
@@ -612,6 +613,7 @@ class FrontController extends Controller
     public function place_order(Request $request)
     {
         $rand_id=rand(111111111,999999999);
+        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         if($request->session()->has('FRONT_USER_LOGIN')){
 
         } else {
@@ -633,6 +635,7 @@ class FrontController extends Controller
                     "status"=>1,
                     "is_verify"=>1,
                     "rand_id"=>$rand_id,
+                    "order_date"=>$order_date,
                     "created_at"=>date('Y-m-d h:i:s'),
                     "updated_at"=>date('Y-m-d h:i:s'),
                     "is_forgot_password"=>0
@@ -677,6 +680,7 @@ class FrontController extends Controller
             "payment_type"=>$request->payment_type,
             "total_amt"=>$totalPrice,
             "orders_status"=>1,
+            "order_date"=>$order_date,
             "created_at"=>date('Y-m-d h:i:s'),
             "updated_at"=>date('Y-m-d h:i:s')
         ];

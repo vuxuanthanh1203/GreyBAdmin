@@ -39,6 +39,10 @@
                             <label for="new_password">New Password<span class="text-danger">*</span></label>
                             <input type="password" name="new_password" aria-required="true" class="form-control" id="new_password">
                         </div>
+                        <div class="form-group">
+                            <label for="renew_password">Retype New Password<span class="text-danger">*</span></label>
+                            <input type="password" name="renew_password" aria-required="true" class="form-control" id="renew_password">
+                        </div>
                         <div class="form-group text-right mb-0">
                             <a href="{{url('admin/category')}}">
                                 <button type="button" class="btn btn-primary waves-effect waves-light">

@@ -59,7 +59,7 @@
                                                                         colspan="1" style="width: 50px;">Size
                                                                     </th>
                                                                     <th rowspan="1" colspan="1" style="width: 50px;">
-                                                                        Created At
+                                                                        Sub Category
                                                                     </th>
                                                                     <th rowspan="1" colspan="1" style="width: 50px;">
                                                                         Action
@@ -72,7 +72,7 @@
                                                                 <tr role="row" class="odd product_content text-center">
                                                                     <td>{{$item->id}}</td>
                                                                     <td>{{$item->size}}</td>
-                                                                    <td>{{$item->created_at}}</td>
+                                                                    <td style="text-transform:capitalize">{{$item->sub_category_name}}</td>
                                                                     <td>
                                                                         <a href="{{url('admin/size/manage_size')}}/{{$item->id}}">
                                                                             <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">

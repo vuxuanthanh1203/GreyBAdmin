@@ -88,16 +88,16 @@
                                                                     <td>
                                                                         <a href="{{url('admin/customer/show')}}/{{$item->id}}">
                                                                             <button type="button" class="btn btn-primary " data-toggle="tooltip" data-placement="top" title="View">
-                                                                                <i class="ion ion-md-color-filter"></i>
+                                                                                <i class="fas fa-address-card"></i>
                                                                             </button>
                                                                         </a>
 
                                                                         @if ($item->status==0)
-                                                                            <button type="button" class="btn btn-warning activebtn" data-toggle="tooltip" data-placement="top" title="Deactive">
+                                                                            <button type="button" class="btn btn-warning activecustomer" data-toggle="tooltip" data-placement="top" title="Deactive">
                                                                                 <i class="ion ion-md-eye-off"></i>
                                                                             </button>
                                                                         @elseif ($item->status==1)
-                                                                            <button type="button" class="btn btn-info deactivebtn" data-toggle="tooltip" data-placement="top" title="Active">
+                                                                            <button type="button" class="btn btn-info deactivecustomer" data-toggle="tooltip" data-placement="top" title="Active">
                                                                                 <i class="ion ion-md-eye"></i>
                                                                             </button>
                                                                         @endif

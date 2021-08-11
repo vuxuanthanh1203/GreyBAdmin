@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SizeController extends Controller
 {
     public function index()
     {
-        $result['data'] = Size::all();
+        $result['data'] = Size::leftJoin('sub_category','sub_category.id','=','sizes.sub_category_id')
+        ->get(['sizes.*', 'sub_category.sub_category_name']);
         return view('admin/size', $result);
     }
 
@@ -21,11 +23,14 @@ class SizeController extends Controller
             $result['size'] = $arr['0']->size;
             $result['status'] = $arr['0']->status;
             $result['id'] = $arr['0']->id; 
+            $result['sub_category_id'] = $arr['0']->sub_category_id;
         } else {
             $result['size'] = '';
             $result['status'] = '';
             $result['id'] = '';
+            $result['sub_category_id'] = '';
         }
+        $result['sub_category'] = DB::table('sub_category')->where(['status'=>1])->get();
         return view('admin/manage_size', $result);
     }
 
@@ -44,6 +49,7 @@ class SizeController extends Controller
         }
 
         $model->size=$request->post('size');
+        $model->sub_category_id=$request->post('sub_category');
         $model->status=1;
         $model->save();
 

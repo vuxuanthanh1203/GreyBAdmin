@@ -125,7 +125,12 @@ class AdminController extends Controller
     public function change_password_process(Request $request)
     {
         $password = $request->post('current_password');
-
+        $new_password = $request->post('new_password');
+        $renew_password = $request->post('renew_password');
+        if ($new_password != $renew_password) {
+            $request->session()->flash('error', 'The new password is not the same');
+            return redirect('admin/change_password/'.session('ADMIN_ID'));
+        }
         $result = Admin::where(['id'=>session('ADMIN_ID')])->first();
 
         if ($result) {
@@ -156,7 +161,6 @@ class AdminController extends Controller
                 'order' => $value->total_order,
                 'sales' => $value->sales,
                 'profit' => $value->profit,
-                'quantity' => $value->quantity,
             );
         }
         echo $data = json_encode($chart_data);
@@ -190,7 +194,6 @@ class AdminController extends Controller
                 'order' => $value->total_order,
                 'sales' => $value->sales,
                 'profit' => $value->profit,
-                'quantity' => $value->quantity,
             );
         }
         echo $data = json_encode($chart_data);
@@ -208,7 +211,6 @@ class AdminController extends Controller
                 'order' => $value->total_order,
                 'sales' => $value->sales,
                 'profit' => $value->profit,
-                'quantity' => $value->quantity,
             );
         }
         echo $data = json_encode($chart_data);

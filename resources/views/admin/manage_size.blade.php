@@ -33,9 +33,25 @@
                     <form class="parsley-examples" action="{{route('size.manage_size_process')}}" method="POST">
                         @csrf
                         <input type="hidden" name="id" value="{{$id}}">
-                        <div class="form-group">
-                            <label for="size">Size<span class="text-danger">*</span></label>
-                            <input type="text" name="size" value="{{$size}}" aria-required="true" required="" class="form-control" id="size">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="sub_category">Category<span class="text-danger">*</span></label>
+                                <select name="sub_category" aria-required="true" class="form-control" id="sub_category" required>
+                                    <option value="">Select Sub Category</option>
+                                    @foreach($sub_category as $item)
+                                        @if($sub_category_id==$item->id)
+                                            <option selected value="{{$item->id}}">
+                                        @else
+                                            <option value="{{$item->id}}">
+                                        @endif
+                                        {{$item->sub_category_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="size">Size<span class="text-danger">*</span></label>
+                                <input type="text" name="size" value="{{$size}}" aria-required="true" required="" class="form-control" id="size">
+                            </div>
                         </div>
                         <div class="form-group text-right mb-0">
                             <a href="{{url('admin/size')}}">
